@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Enterprise Premium Sales Leaderboard</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Premium Google Fonts: Inter and Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -23,24 +20,24 @@
                     },
                     colors: {
                         brand: {
-                            bg: '#030303',         /* Deepest black/grey */
+                            bg: '#030305',
                             cardBg: 'rgba(20, 20, 22, 0.4)',
                         }
                     },
                     animation: {
                         'float-slow': 'float 8s ease-in-out infinite',
                         'float-med': 'float 6s ease-in-out 1s infinite',
-                        'reveal-up': 'revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'reveal-up': 'revealUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
                         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
                         'light-sweep': 'lightSweep 8s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-6px)' },
                         },
                         revealUp: {
-                            '0%': { opacity: 0, transform: 'translateY(50px) scale(0.95)' },
+                            '0%': { opacity: 0, transform: 'translateY(30px) scale(0.95)' },
                             '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
                         },
                         pulseGlow: {
@@ -58,258 +55,212 @@
     </script>
 
     <style>
+        /* PERFECT 1-PAGE FIT CSS */
         body {
-            background-color: #030303;
+            background-color: #030305;
             color: #ffffff;
-            min-height: 100vh;
+            height: 100dvh; /* Dynamic Viewport Height - Fixes mobile address bar issues */
+            width: 100vw;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow: hidden; /* STRICTLY disables all scrolling */
             margin: 0;
             padding: 0;
+            overscroll-behavior: none; /* Prevents mobile pull-to-refresh bounce */
         }
 
-        /* Matte Noise Texture - Adds an ultra-premium subtle grain */
         .noise-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 3;
-            opacity: 0.06;
+            opacity: 0.05;
             pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             mix-blend-mode: overlay;
         }
 
-        /* ULTRA-PREMIUM BACKGROUND SYSTEM */
         .premium-bg-wrapper {
             position: fixed;
             inset: 0;
             z-index: 0;
-            background-color: #030305; /* Deepest abyss black */
+            background-color: #030305;
             overflow: hidden;
         }
 
-        /* High-tech fading grid */
         .cyber-grid {
             position: absolute;
             inset: 0;
             z-index: 1;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            /* Fades the grid out at the edges */
-            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
             mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
             pointer-events: none;
         }
 
-        /* Animated Liquid Mesh Orbs */
         .mesh-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.5;
-            animation: orbDrift 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: orbDrift 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .orb-gold {
-            width: 70vw; height: 70vw;
-            background: rgba(184, 134, 11, 0.12); /* Deep Gold */
-            top: -20%; left: -10%;
-        }
-
-        .orb-cyan {
-            width: 60vw; height: 60vw;
-            background: rgba(8, 145, 178, 0.12); /* Deep Cyan */
-            bottom: -10%; right: -10%;
-            animation-delay: -7s;
-            animation-duration: 28s;
-        }
-
-        .orb-emerald {
-            width: 50vw; height: 50vw;
-            background: rgba(16, 185, 129, 0.08); /* Emerald Green */
-            top: 40%; left: 30%;
-            animation-delay: -15s;
-            animation-duration: 32s;
-        }
+        .orb-gold { width: 60vw; height: 60vw; background: rgba(184, 134, 11, 0.12); top: -20%; left: -10%; }
+        .orb-cyan { width: 50vw; height: 50vw; background: rgba(8, 145, 178, 0.12); bottom: -10%; right: -10%; animation-delay: -5s; animation-duration: 25s; }
+        .orb-emerald { width: 40vw; height: 40vw; background: rgba(16, 185, 129, 0.08); top: 30%; left: 30%; animation-delay: -10s; animation-duration: 30s; }
 
         @keyframes orbDrift {
             0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(4%, 6%) scale(1.05); }
-            66% { transform: translate(-3%, 4%) scale(0.95); }
-            100% { transform: translate(2%, -4%) scale(1.1); }
+            100% { transform: translate(3%, 5%) scale(1.05); }
         }
 
-        /* Ultra-Premium Glass Cards */
+        /* Responsive Liquid Glass Cards */
         .architectural-glass {
-            background: linear-gradient(145deg, rgba(30, 30, 35, 0.4) 0%, rgba(15, 15, 18, 0.6) 100%);
-            backdrop-filter: blur(40px) saturate(120%);
-            -webkit-backdrop-filter: blur(40px) saturate(120%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15); /* Light catching the top edge */
-            box-shadow: 
-                0 30px 60px -10px rgba(0, 0, 0, 0.9),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, rgba(30, 30, 35, 0.5) 0%, rgba(15, 15, 18, 0.7) 100%);
+            backdrop-filter: blur(25px) saturate(120%);
+            -webkit-backdrop-filter: blur(25px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.9);
             position: relative;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Flex-shrink allows cards to squash slightly on tiny phones */
+            flex-shrink: 1;
         }
 
-        /* Shimmer overlay for cards */
         .architectural-glass::after {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.03) 25%, transparent 30%);
+            background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.02) 25%, transparent 30%);
             background-size: 200% 200%;
             animation: lightSweep 8s linear infinite;
             pointer-events: none;
         }
 
-        /* Metallic Text Gradients */
-        .text-metallic-gold {
-            background: linear-gradient(to bottom right, #FFDF73, #D4AF37, #997A15);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.3);
-        }
+        /* Metallic Text */
+        .text-metallic-gold { background: linear-gradient(to bottom right, #FFDF73, #D4AF37, #997A15); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .text-metallic-silver { background: linear-gradient(to bottom right, #FFFFFF, #E2E8F0, #94A3B8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .text-metallic-bronze { background: linear-gradient(to bottom right, #FDBA74, #D97706, #92400E); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-        .text-metallic-silver {
-            background: linear-gradient(to bottom right, #FFFFFF, #E2E8F0, #94A3B8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0px 4px 20px rgba(226, 232, 240, 0.2);
-        }
-
-        .text-metallic-bronze {
-            background: linear-gradient(to bottom right, #FDBA74, #D97706, #92400E);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0px 4px 20px rgba(217, 119, 6, 0.2);
-        }
-
-        /* Elegant Watermarks */
+        /* Dynamic Watermarks for Mobile vs Desktop */
         .premium-watermark {
             position: absolute;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 16rem;
+            font-size: 8rem; /* Scaled down for mobile safety */
             font-weight: 800;
             line-height: 1;
             z-index: 0;
-            top: 40%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            opacity: 0.03;
+            opacity: 0.04;
             pointer-events: none;
             user-select: none;
             letter-spacing: -0.05em;
         }
+        @media (min-width: 768px) {
+            .premium-watermark { font-size: 14rem; }
+        }
 
-        /* Hidden Scrollbar */
-        ::-webkit-scrollbar { display: none; }
-        
-        /* Subtle Avatar Glow Ring */
-        .avatar-ring-gold { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.2); border: 2px solid rgba(212, 175, 55, 0.6); }
-        .avatar-ring-silver { box-shadow: 0 0 25px rgba(226, 232, 240, 0.2); border: 2px solid rgba(226, 232, 240, 0.4); }
-        .avatar-ring-bronze { box-shadow: 0 0 25px rgba(217, 119, 6, 0.2); border: 2px solid rgba(217, 119, 6, 0.4); }
+        /* Avatar Rings */
+        .avatar-ring-gold { box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); border: 2px solid rgba(212, 175, 55, 0.7); }
+        .avatar-ring-silver { box-shadow: 0 0 15px rgba(226, 232, 240, 0.2); border: 2px solid rgba(226, 232, 240, 0.5); }
+        .avatar-ring-bronze { box-shadow: 0 0 15px rgba(217, 119, 6, 0.2); border: 2px solid rgba(217, 119, 6, 0.5); }
         .avatar-ring-standard { border: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body class="antialiased selection:bg-slate-700 selection:text-white">
 
-    <!-- The New Premium Background System -->
     <div class="premium-bg-wrapper">
         <div class="mesh-orb orb-gold"></div>
         <div class="mesh-orb orb-cyan"></div>
         <div class="mesh-orb orb-emerald"></div>
         <div class="cyber-grid"></div>
     </div>
-    
     <div class="noise-bg"></div>
 
-    <!-- Main Content Wrapper -->
-    <div class="flex-1 flex flex-col p-4 md:p-8 h-full max-w-[1800px] mx-auto w-full relative z-10">
+    <!-- Full Screen Toggle -->
+    <button id="fullscreen-btn" class="fixed top-2 right-2 md:top-6 md:right-6 z-50 bg-white/5 hover:bg-white/20 border border-white/10 backdrop-blur-xl rounded-full p-2 md:p-3 text-white transition-all duration-300 shadow-xl group" title="Toggle Fullscreen">
+        <svg class="w-4 h-4 md:w-5 md:h-5 opacity-70 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+        </svg>
+    </button>
+
+    <div class="flex flex-col h-full w-full max-w-[1800px] mx-auto relative z-10 px-2 pb-2">
         
-        <header class="text-center mb-10 z-10 pt-6 animate-reveal-up">
-            
-            <!-- Sleek Corporate Logo Badge -->
-            <div class="flex justify-center mb-8">
-                <div class="bg-white/95 backdrop-blur-xl px-10 py-5 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/20 inline-flex items-center justify-center min-w-[240px] min-h-[90px] relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent translate-x-[-100%] animate-light-sweep"></div>
-                    <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w1000" 
-                         alt="Company Logo" 
-                         class="h-14 md:h-16 w-auto object-contain relative z-10"
-                         onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-2xl font-black text-slate-900 tracking-widest uppercase\\'>COMPANY LOGO</h2>';">
-                </div>
+        <!-- Header: Shrinks if needed, takes minimum necessary space -->
+        <header class="flex-none flex flex-col items-center justify-center pt-3 pb-1 md:pt-6 md:pb-3 z-10 animate-reveal-up">
+            <!-- Frosted Glass Logo Badge -->
+            <div class="bg-white/[0.85] backdrop-blur-md px-6 py-2 md:px-8 md:py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-white/30 inline-flex items-center justify-center mb-2 md:mb-4">
+                <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w800" 
+                     alt="Company Logo" 
+                     class="h-6 md:h-10 w-auto object-contain"
+                     onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-lg md:text-xl font-black text-slate-900 tracking-widest uppercase\\'>COMPANY LOGO</h2>';">
             </div>
 
-            <!-- Cinematic Title -->
-            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-3 uppercase">
+            <!-- Title - Scaled for Mobile -->
+            <h1 class="font-display text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-1 md:mb-2 uppercase text-center">
                 Top 5 <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-slate-500">Performers</span>
             </h1>
             
-            <!-- Minimalist Live Indicator -->
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+            <!-- Live Sync Indicator -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
                 <div class="relative flex h-1.5 w-1.5">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                 </div>
-                <span class="text-slate-400 font-sans text-[9px] md:text-[10px] font-semibold tracking-widest uppercase">Live Data Sync</span>
+                <span class="text-slate-400 font-sans text-[8px] md:text-[10px] font-semibold tracking-widest uppercase">Live Data Sync</span>
             </div>
         </header>
 
-        <main class="flex-1 w-full flex flex-col items-center justify-center z-10 pb-16">
+        <!-- Main: Takes remaining height, min-h-0 prevents overflow on tiny phones -->
+        <main class="flex-1 min-h-0 w-full flex flex-col items-center justify-center z-10">
             
-            <!-- Elegant Loading State -->
-            <div id="loader" class="flex flex-col items-center justify-center py-20 transition-opacity duration-700">
-                <div class="relative w-12 h-12 mb-6">
+            <!-- Loader -->
+            <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 transition-opacity duration-500 bg-[#030305]">
+                <div class="relative w-10 h-10 md:w-12 md:h-12 mb-4">
                     <div class="absolute inset-0 border-[1px] border-slate-700 rounded-full"></div>
                     <div class="absolute inset-0 border-[1px] border-slate-300 rounded-full border-t-transparent animate-spin"></div>
                 </div>
-                <p class="text-slate-400 font-sans text-xs font-semibold tracking-[0.2em] uppercase">Authenticating Data...</p>
+                <p id="loader-text" class="text-slate-400 font-sans text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase">Authenticating Data...</p>
             </div>
 
-            <!-- The Architectured Pyramid Layout -->
-            <div id="leaderboard-container" class="w-full flex flex-col items-center opacity-0 transition-opacity duration-1000 gap-6 md:gap-8">
+            <!-- PERFECTED PYRAMID LAYOUT -->
+            <!-- Extremely tight gap on mobile (gap-1 or gap-2), expands on desktop (gap-4 or gap-6) -->
+            <div id="leaderboard-container" class="w-full h-full max-h-full flex flex-col items-center justify-center opacity-0 transition-opacity duration-700 gap-2 md:gap-6 lg:gap-8 overflow-hidden">
                 
                 <!-- ROW 1: APEX (Rank #1) -->
-                <div id="row-1" class="flex justify-center w-full z-30"></div>
+                <div id="row-1" class="flex-none flex justify-center w-full z-30"></div>
 
                 <!-- ROW 2: ELITE (Rank #2 & #3) -->
-                <div id="row-2" class="flex flex-row flex-wrap justify-center items-center gap-6 md:gap-12 w-full z-20"></div>
+                <div id="row-2" class="flex-none flex flex-row justify-center items-center gap-2 md:gap-8 w-full z-20"></div>
 
                 <!-- ROW 3: CONTENDERS (Rank #4 & #5) -->
-                <div id="row-3" class="flex flex-row flex-wrap justify-center items-center gap-6 md:gap-12 w-full z-10 mt-2"></div>
+                <div id="row-3" class="flex-none flex flex-row justify-center items-center gap-2 md:gap-8 w-full z-10"></div>
                 
             </div>
         </main>
     </div>
 
     <script>
-        // Google Sheet Configuration
+        // Data Configuration
         const SHEET_ID = '1zm49yxiWzi8LCrazWa7VMTNQO0f5qPRmY3Sf0ILVyQw';
         const SHEET_NAME_PHOTOS = 'Employee Photo';
         const SHEET_NAME_SALES = 'Sheet2';
-        const REFRESH_INTERVAL_MS = 1500; // Ultra-fast microsecond sync
+        const REFRESH_INTERVAL_MS = 1500; 
         let previousDataHash = "";
 
         const container = document.getElementById('leaderboard-container');
-        const row1 = document.getElementById('row-1');
-        const row2 = document.getElementById('row-2');
-        const row3 = document.getElementById('row-3');
         const loader = document.getElementById('loader');
+        const loaderText = document.getElementById('loader-text');
 
         // Robust CSV Parser
         function parseCSV(text) {
-            const result = [];
-            let row = [];
-            let inQuotes = false;
-            let currentValue = "";
+            const result = []; let row = []; let inQuotes = false; let currentValue = "";
             for (let i = 0; i < text.length; i++) {
                 const char = text[i];
                 if (char === '"') {
@@ -326,7 +277,7 @@
             return result;
         }
 
-        // Image URL formatter
+        // Format Image URL for Drive
         function formatImageUrl(url) {
             if (!url) return '';
             const driveMatch = url.match(/(?:\/d\/|id=)([\w-]+)/);
@@ -336,20 +287,19 @@
             return url;
         }
 
-        // Indian Rupee Formatter
+        // Format INR Currency
         function formatRupees(num) {
             return new Intl.NumberFormat('en-IN', {
                 style: 'currency', currency: 'INR', maximumFractionDigits: 0
             }).format(num);
         }
 
-        // Cinematic ease-out number counter
+        // Animation Counter Engine
         function animateValue(element, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // Expo ease out for dramatic slow down at the end
                 const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
                 const currentVal = Math.floor(easeOut * (end - start) + start);
                 element.innerHTML = formatRupees(currentVal);
@@ -360,22 +310,18 @@
         }
 
         async function fetchAndMergeData() {
-            const cb = Date.now(); // Cache buster
+            const cb = Date.now();
             const photosUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME_PHOTOS)}&z=${cb}`;
             const salesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME_SALES)}&z=${cb}`;
 
             try {
-                const [photosRes, salesRes] = await Promise.all([
-                    fetch(photosUrl, { cache: 'no-store' }),
-                    fetch(salesUrl, { cache: 'no-store' })
-                ]);
-
+                const [photosRes, salesRes] = await Promise.all([ fetch(photosUrl), fetch(salesUrl) ]);
                 if (!photosRes.ok || !salesRes.ok) throw new Error("Data access denied.");
 
                 const photosRaw = parseCSV(await photosRes.text());
                 const salesRaw = parseCSV(await salesRes.text());
 
-                // Map Photos (Col A: Name, Col G (index 6): Photo)
+                // Smart Fuzzy Matching Maps
                 const exactPhotoMap = new Map();
                 const firstNamePhotoMap = new Map();
                 
@@ -383,13 +329,9 @@
                     if (row.length >= 7) {
                         const fullName = (row[0] || '').trim().toLowerCase();
                         const photoUrl = (row[6] || '').trim();
-                        
                         if (fullName && photoUrl) {
                             const formattedUrl = formatImageUrl(photoUrl);
-                            // 1. Store Exact Match
                             exactPhotoMap.set(fullName, formattedUrl);
-                            
-                            // 2. Store First Name Match (for fuzzy fallback)
                             const firstName = fullName.split(/\s+/)[0]; 
                             if (firstName && !firstNamePhotoMap.has(firstName)) {
                                 firstNamePhotoMap.set(firstName, formattedUrl);
@@ -400,35 +342,30 @@
 
                 const mergedData = [];
                 
-                // Process every single row for maximum accuracy
+                // Aggressive Data Cleaning for Sales Data
                 salesRaw.forEach(row => {
                     const name = (row[0] || '').toString().trim();
                     const rawSalesStr = (row[1] || '').toString().trim(); // Column B: Revenue
                     const tl = (row[2] || '').toString().trim() || 'N/A'; // Column C: TL
                     const rm = (row[3] || '').toString().trim() || 'N/A'; // Column D: RM
 
-                    // ULTRA CLEANER: Removes ALL hidden formatting, commas, text. Keeps pure digits.
+                    // ULTRA CLEANER: Destroys all formatting, commas, text, spaces
                     const cleanSalesStr = rawSalesStr.replace(/[^0-9.-]+/g, "");
                     const achieved = parseFloat(cleanSalesStr);
                     
                     if (name && !isNaN(achieved) && achieved > 0 && !name.toLowerCase().includes('employee name')) {
-                        
-                        // SMART MATCHING: Try Exact Name first. If that fails, try matching just the First Name.
                         const searchNameLower = name.toLowerCase();
                         const searchFirstName = searchNameLower.split(/\s+/)[0];
                         const matchedPhoto = exactPhotoMap.get(searchNameLower) || firstNamePhotoMap.get(searchFirstName) || null;
 
-                        mergedData.push({
-                            name: name,
-                            sales: achieved,
-                            tl: tl,
-                            rm: rm,
-                            photo: matchedPhoto
-                        });
+                        mergedData.push({ name, sales: achieved, tl, rm, photo: matchedPhoto });
                     }
                 });
 
-                return mergedData;
+                // Mathematically sort Top 5
+                mergedData.sort((a, b) => b.sales - a.sales);
+                return mergedData.slice(0, 5);
+
             } catch (error) {
                 console.error("Sync Error:", error);
                 throw error;
@@ -436,62 +373,51 @@
         }
 
         function buildCard(employee, rank) {
-            // Base configuration for an ultra-premium aesthetic
+            // Highly responsive base classes (Shrinks dramatically on mobile)
             let config = {
                 textColorClass: 'text-white', 
                 ringClass: 'avatar-ring-standard',
-                avatarSize: 'w-16 h-16 md:w-20 md:h-20', 
+                // Size mapping: Mobile -> Tablet -> Desktop
+                avatarSize: 'w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16', 
                 extraClasses: 'opacity-95', 
                 watermark: `0${rank}`, 
                 crown: '',
-                cardSize: 'w-[260px] md:w-[280px]',
-                numberSize: 'text-2xl md:text-3xl'
+                // Width is bounded by viewport percentage on mobile
+                cardSize: 'w-[46vw] max-w-[200px] md:max-w-none md:w-[240px] lg:w-[280px] p-2 md:p-4 lg:p-5',
+                numberSize: 'text-sm md:text-xl lg:text-3xl',
+                nameSize: 'text-xs md:text-base lg:text-xl'
             };
             
-            // APEX: Rank #1 (GOLD)
+            // #1 APEX Card
             if (rank === 1) {
                 config.textColorClass = 'text-metallic-gold';
                 config.ringClass = 'avatar-ring-gold';
-                config.avatarSize = 'w-28 h-28 md:w-36 md:h-36';
-                config.extraClasses = 'transform scale-105 md:scale-110 z-30 mx-auto animate-float-slow';
-                config.watermark = '01';
-                config.cardSize = 'w-[300px] md:w-[360px] px-8 py-10';
-                config.numberSize = 'text-4xl md:text-5xl lg:text-6xl';
+                config.avatarSize = 'w-14 h-14 md:w-20 md:h-20 lg:w-28 lg:h-28';
+                config.extraClasses = 'transform z-30 mx-auto animate-float-slow';
+                config.cardSize = 'w-[75vw] max-w-[300px] md:max-w-none md:w-[320px] lg:w-[380px] p-3 md:p-5 lg:p-6';
+                config.numberSize = 'text-xl md:text-3xl lg:text-5xl';
+                config.nameSize = 'text-sm md:text-xl lg:text-2xl';
                 config.crown = `
-                    <div class="absolute -top-10 md:-top-12 z-20 animate-pulse-glow">
-                        <svg class="w-12 h-12 md:w-16 md:h-16 text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24" fill="currentColor">
+                    <div class="absolute -top-6 md:-top-10 z-20 animate-pulse-glow">
+                        <svg class="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 text-[#D4AF37] drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
                         </svg>
                     </div>`;
             } 
-            // ELITE: Rank #2 (SILVER)
-            else if (rank === 2) {
-                config.textColorClass = 'text-metallic-silver';
-                config.ringClass = 'avatar-ring-silver';
-                config.avatarSize = 'w-20 h-20 md:w-28 md:h-28';
+            // #2 & #3 ELITE Cards
+            else if (rank === 2 || rank === 3) {
+                config.textColorClass = rank === 2 ? 'text-metallic-silver' : 'text-metallic-bronze';
+                config.ringClass = rank === 2 ? 'avatar-ring-silver' : 'avatar-ring-bronze';
                 config.extraClasses = 'z-20 animate-float-med';
-                config.watermark = '02';
-                config.cardSize = 'w-[280px] md:w-[320px] px-6 py-8';
-                config.numberSize = 'text-3xl md:text-4xl lg:text-5xl';
-            } 
-            // ELITE: Rank #3 (BRONZE)
-            else if (rank === 3) {
-                config.textColorClass = 'text-metallic-bronze';
-                config.ringClass = 'avatar-ring-bronze';
-                config.avatarSize = 'w-20 h-20 md:w-28 md:h-28';
-                config.extraClasses = 'z-20 animate-float-med';
-                config.watermark = '03';
-                config.cardSize = 'w-[280px] md:w-[320px] px-6 py-8';
-                config.numberSize = 'text-3xl md:text-4xl lg:text-5xl';
+                config.numberSize = 'text-base md:text-2xl lg:text-3xl';
             }
 
-            // Fallback Image
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" alt="${employee.name}" onerror="this.onerror=null;this.parentNode.innerHTML='<div class=\\'w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 text-3xl font-display font-black\\'>${initial}</div>';" class="w-full h-full object-cover">`
-                : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 text-2xl md:text-4xl font-display font-black">${initial}</div>`;
+                ? `<img src="${employee.photo}" alt="${employee.name}" onerror="this.onerror=null;this.parentNode.innerHTML='<div class=\\'w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 text-base md:text-2xl font-display font-black\\'>${initial}</div>';" class="w-full h-full object-cover">`
+                : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 text-base md:text-2xl font-display font-black">${initial}</div>`;
 
-            // Apple-style Manager Tags
+            // Smart Manager Tags - Scaled for micro-displays
             let managerTagsHtml = '';
             const tlClean = (employee.tl || '').toLowerCase().trim();
             const rmClean = (employee.rm || '').toLowerCase().trim();
@@ -499,58 +425,47 @@
             if (tlClean === rmClean || tlClean === '' || tlClean === 'n/a') {
                 const displayName = employee.rm !== 'n/a' ? employee.rm : (employee.tl !== 'n/a' ? employee.tl : 'Unassigned');
                 managerTagsHtml = `
-                    <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-xl border border-white/[0.05] px-4 py-2 backdrop-blur-sm">
-                        <span class="text-[8px] md:text-[9px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5">Manager</span>
-                        <span class="text-[11px] md:text-xs text-slate-200 font-display font-medium truncate max-w-[140px]">${displayName}</span>
-                    </div>
-                `;
+                    <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-lg border border-white/[0.05] px-2 py-1 md:px-4 md:py-2 backdrop-blur-sm w-full max-w-[140px]">
+                        <span class="text-[6px] md:text-[8px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5">Manager</span>
+                        <span class="text-[8px] md:text-[11px] text-slate-200 font-display font-medium truncate w-full text-center">${displayName}</span>
+                    </div>`;
             } else {
                 managerTagsHtml = `
-                    <div class="flex flex-row items-center justify-center gap-3 w-full">
-                        <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-xl border border-white/[0.05] px-3 py-1.5 backdrop-blur-sm w-[100px]">
-                            <span class="text-[8px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5">Team Lead</span>
-                            <span class="text-[10px] md:text-[11px] text-slate-200 font-display font-medium w-full text-center truncate">${employee.tl}</span>
+                    <div class="flex flex-row items-center justify-center gap-1 md:gap-2 w-full">
+                        <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-lg border border-white/[0.05] px-1 py-1 md:px-2 md:py-1.5 backdrop-blur-sm flex-1 overflow-hidden">
+                            <span class="text-[5px] md:text-[7px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5 truncate w-full text-center">Lead</span>
+                            <span class="text-[7px] md:text-[10px] text-cyan-200/90 font-display font-medium truncate w-full text-center">${employee.tl}</span>
                         </div>
-                        <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-xl border border-white/[0.05] px-3 py-1.5 backdrop-blur-sm w-[100px]">
-                            <span class="text-[8px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5">Manager</span>
-                            <span class="text-[10px] md:text-[11px] text-slate-200 font-display font-medium w-full text-center truncate">${employee.rm}</span>
+                        <div class="inline-flex flex-col items-center justify-center bg-white/[0.03] rounded-lg border border-white/[0.05] px-1 py-1 md:px-2 md:py-1.5 backdrop-blur-sm flex-1 overflow-hidden">
+                            <span class="text-[5px] md:text-[7px] text-slate-400 font-sans font-bold uppercase tracking-widest mb-0.5 truncate w-full text-center">Mgr</span>
+                            <span class="text-[7px] md:text-[10px] text-emerald-200/90 font-display font-medium truncate w-full text-center">${employee.rm}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             }
 
-            // Return Final Card HTML
             return `
-                <div class="architectural-glass flex flex-col items-center rounded-[2.5rem] ${config.cardSize} ${config.extraClasses} animate-reveal-up" style="animation-delay: ${rank * 0.15}s;">
-                    
-                    <!-- Massive Elegant Watermark -->
+                <div class="architectural-glass flex flex-col items-center rounded-2xl md:rounded-[2rem] ${config.cardSize} ${config.extraClasses} animate-reveal-up" style="animation-delay: ${rank * 0.1}s;">
                     <div class="premium-watermark text-white">${config.watermark}</div>
-                    
                     ${config.crown}
                     
-                    <!-- Avatar Profile -->
-                    <div class="relative z-10 ${config.avatarSize} rounded-full overflow-hidden ${config.ringClass} flex-shrink-0 bg-[#0a0a0c] mb-5 shadow-2xl p-1">
+                    <div class="relative z-10 ${config.avatarSize} rounded-full overflow-hidden ${config.ringClass} flex-shrink-0 bg-[#0a0a0c] mb-1 md:mb-3 shadow-2xl p-0.5 md:p-1">
                         <div class="w-full h-full rounded-full overflow-hidden">
                             ${photoHtml}
                         </div>
                     </div>
                     
-                    <!-- Employee Name -->
-                    <h2 class="relative z-10 font-display text-xl md:text-2xl font-bold text-white text-center w-full tracking-tight truncate mb-4 drop-shadow-md">
+                    <h2 class="relative z-10 font-display ${config.nameSize} font-bold text-white text-center w-full tracking-tight truncate mb-1 md:mb-3 drop-shadow-md">
                         ${employee.name}
                     </h2>
                     
-                    <!-- Manager Tags -->
-                    <div class="relative z-10 w-full mb-6 flex justify-center">
+                    <div class="relative z-10 w-full mb-2 md:mb-4 flex justify-center px-1">
                         ${managerTagsHtml}
                     </div>
                     
-                    <!-- Divider line -->
-                    <div class="w-2/3 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-5 relative z-10"></div>
+                    <div class="w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-1 md:mb-3 relative z-10"></div>
                     
-                    <!-- Revenue Numbers -->
                     <div class="relative z-10 flex flex-col items-center w-full">
-                        <div class="text-[9px] md:text-[10px] text-slate-500 font-sans font-bold mb-1 uppercase tracking-[0.25em]">Revenue Achieved</div>
+                        <div class="text-[6px] md:text-[9px] text-slate-500 font-sans font-bold mb-0.5 md:mb-1 uppercase tracking-[0.2em] md:tracking-[0.25em]">Revenue Achieved</div>
                         <div class="font-display ${config.numberSize} font-extrabold ${config.textColorClass} tracking-tighter numeric-counter" data-target-value="${employee.sales}">
                             ₹0
                         </div>
@@ -560,47 +475,40 @@
         }
 
         function renderLeaderboard(data) {
-            // Sort mathematically: Highest Sales to Lowest
-            data.sort((a, b) => b.sales - a.sales);
-            
-            // Extract strictly Top 5
-            const top5 = data.slice(0, 5);
-            
-            // Compare Hash to prevent screen flashing
-            const newDataHash = JSON.stringify(top5);
+            if (!data || data.length === 0) {
+                loaderText.innerText = "Waiting for data...";
+                return;
+            }
+
+            const newDataHash = JSON.stringify(data);
             if (newDataHash === previousDataHash) return; 
             previousDataHash = newDataHash;
             
-            if (top5.length === 0) return;
+            const r1 = document.getElementById('row-1');
+            const r2 = document.getElementById('row-2');
+            const r3 = document.getElementById('row-3');
 
-            // Clear rows
-            row1.innerHTML = ''; 
-            row2.innerHTML = '';
-            row3.innerHTML = '';
+            r1.innerHTML = ''; r2.innerHTML = ''; r3.innerHTML = '';
 
-            // Inject Cards into Architectural Pyramid
-            if (top5[0]) row1.innerHTML += buildCard(top5[0], 1);
-            if (top5[1]) row2.innerHTML += buildCard(top5[1], 2);
-            if (top5[2]) row2.innerHTML += buildCard(top5[2], 3);
-            if (top5[3]) row3.innerHTML += buildCard(top5[3], 4);
-            if (top5[4]) row3.innerHTML += buildCard(top5[4], 5);
+            if (data[0]) r1.innerHTML += buildCard(data[0], 1);
+            if (data[1]) r2.innerHTML += buildCard(data[1], 2);
+            if (data[2]) r2.innerHTML += buildCard(data[2], 3);
+            if (data[3]) r3.innerHTML += buildCard(data[3], 4);
+            if (data[4]) r3.innerHTML += buildCard(data[4], 5);
 
-            // Animate Numbers rolling up cinematically
             setTimeout(() => {
                 document.querySelectorAll('.numeric-counter').forEach(counter => {
                     const targetValue = parseFloat(counter.getAttribute('data-target-value'));
-                    animateValue(counter, 0, targetValue, 3000); 
+                    animateValue(counter, 0, targetValue, 2500); 
                 });
-            }, 100);
+            }, 50);
 
-            // Reveal Dashboard gracefully
             if (!loader.classList.contains('hidden')) {
                 loader.classList.add('opacity-0');
                 setTimeout(() => {
                     loader.classList.add('hidden');
                     container.classList.remove('opacity-0');
-                    container.classList.add('opacity-100');
-                }, 700);
+                }, 500);
             }
         }
 
@@ -609,15 +517,29 @@
                 const data = await fetchAndMergeData();
                 renderLeaderboard(data);
             } catch (err) {
-                console.warn("Sync Interrupted. Retrying in 1.5s:", err.message);
+                console.warn("Sync Issue:", err.message);
+                if(loaderText && !loader.classList.contains('hidden')) {
+                    loaderText.innerText = "Error syncing data. Retrying...";
+                }
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
-        });
 
+            // Fullscreen Button
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(() => {
+                        console.warn('Fullscreen denied by browser.');
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+        });
     </script>
 </body>
 </html>
