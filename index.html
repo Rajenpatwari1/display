@@ -2,45 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Top 5 Performers - Enterprise Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Enterprise Sales Terminal</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Premium Silicon Valley Typography: Outfit for UI, Space Grotesk for Data/Numbers -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Inter"', 'sans-serif'],
-                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['"Outfit"', 'sans-serif'],
+                        mono: ['"Space Grotesk"', 'monospace'],
                     },
                     colors: {
-                        brand: { bg: '#020617', glass: 'rgba(15, 23, 42, 0.4)' }
+                        'obsidian': '#030303',
+                        'glass-panel': 'rgba(255, 255, 255, 0.03)',
+                        'glass-border': 'rgba(255, 255, 255, 0.08)',
+                        'accent-gold': '#F4D06F',
+                        'accent-blue': '#40C4FF',
+                        'text-muted': '#8A8F98'
                     },
                     animation: {
-                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'pulse-slow': 'pulseSlow 4s ease-in-out infinite',
-                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'slide-left': 'slideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: 0, transform: 'translateY(30px) scale(0.98)' },
-                            '100%': { opacity: 1, transform: 'translateY(0) scale(1)' },
-                        },
-                        pulseSlow: {
-                            '0%, 100%': { opacity: 0.5 },
-                            '50%': { opacity: 1 },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
+                        fadeIn: { '0%': { opacity: 0, transform: 'scale(0.95)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
+                        slideLeft: { '0%': { opacity: 0, transform: 'translateX(40px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } }
                     }
                 }
             }
@@ -48,250 +43,157 @@
     </script>
 
     <style>
-        /* ABSOLUTE 1-PAGE LOCK - Guarantees NO scrolling */
+        /* ABSOLUTE 1-PAGE LOCK - NO SCROLLING */
         body, html {
-            background-color: #020617;
+            background-color: #030303;
             color: #ffffff;
-            height: 100vh; /* Strict viewport height */
-            height: 100dvh; /* Dynamic viewport height for mobile */
+            height: 100vh; height: 100dvh;
             width: 100%;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             overflow: hidden; 
             overscroll-behavior: none;
-            display: flex;
-            flex-direction: column;
         }
 
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: 0;
-            pointer-events: none;
+        /* 7D Animated Aurora Background (Meta/Google Style) */
+        .aurora-bg {
+            position: fixed; inset: 0; z-index: 0; overflow: hidden;
+            background: #030303;
+        }
+        .aurora-blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(100px); opacity: 0.6;
+            animation: float-aurora 25s infinite alternate ease-in-out;
+            will-change: transform;
+        }
+        .blob-1 { top: -15%; left: -10%; width: 55vw; height: 55vw; background: rgba(64, 196, 255, 0.4); animation-delay: 0s; } /* Google Blue */
+        .blob-2 { bottom: -20%; right: -10%; width: 65vw; height: 65vw; background: rgba(144, 97, 255, 0.35); animation-delay: -5s; } /* Meta Purple */
+        .blob-3 { top: 35%; left: 30%; width: 45vw; height: 45vw; background: rgba(244, 208, 111, 0.15); animation-delay: -10s; } /* Accent Gold */
+
+        @keyframes float-aurora {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(8vw, -8vh) scale(1.15) rotate(45deg); }
+            66% { transform: translate(-8vw, 12vh) scale(0.9) rotate(-20deg); }
+            100% { transform: translate(4vw, 4vh) scale(1.1) rotate(10deg); }
         }
 
-        .cinematic-vignette {
-            position: fixed; inset: 0; z-index: 1;
-            background: radial-gradient(circle at center, transparent 0%, rgba(2, 6, 23, 0.9) 100%);
-            pointer-events: none;
+        /* Micro-noise texture for that expensive, matte finish */
+        .noise-overlay {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        /* Premium Glass Panels */
+        .glass-card {
+            background: var(--tw-colors-glass-panel);
+            border: 1px solid var(--tw-colors-glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 24px;
         }
 
-        /* Ambient glows inside the cards */
-        .glass-panel::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
-            pointer-events: none;
+        /* The Hero Avatar Ring */
+        .hero-ring {
+            position: absolute; inset: -4px; border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0%, transparent 40%, var(--tw-colors-accent-gold) 100%);
+            animation: spin-slow 8s linear infinite;
         }
 
-        /* Fluid Typography - Perfectly scales text to fit the box it's in */
-        .hero-name { font-size: clamp(1.2rem, 3.5vh, 3rem); line-height: 1.1; }
-        .hero-num { font-size: clamp(2rem, 6vh, 5rem); line-height: 1; letter-spacing: -0.02em; }
-        .hero-avatar { width: clamp(120px, 28vh, 320px); height: clamp(120px, 28vh, 320px); }
+        /* Fluid Typography strictly locked to Viewport Height to prevent wrapping */
+        .title-text { font-size: clamp(1.2rem, 2.5vh, 2rem); letter-spacing: 0.15em; }
+        .hero-name { font-size: clamp(2.5rem, 5vh, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; }
+        .hero-rev { font-size: clamp(4rem, 8vh, 7rem); line-height: 1; letter-spacing: -0.04em; }
+        
+        .list-name { font-size: clamp(1.2rem, 2.5vh, 1.8rem); line-height: 1.2; letter-spacing: -0.01em; }
+        .list-rev { font-size: clamp(1.8rem, 3.5vh, 2.8rem); line-height: 1; letter-spacing: -0.03em; }
 
-        .contender-name { font-size: clamp(0.9rem, 2vh, 1.5rem); line-height: 1.2; }
-        .contender-num { font-size: clamp(1.2rem, 3.5vh, 2.5rem); line-height: 1; letter-spacing: -0.02em; }
-        .contender-avatar { width: clamp(60px, 14vh, 140px); height: clamp(60px, 14vh, 140px); }
+        .currency-symbol { font-family: 'Outfit', sans-serif; font-weight: 300; opacity: 0.5; margin-right: 4px; font-size: 0.6em; }
+        
+        .avatar-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .fluid-tag { font-size: clamp(0.5rem, 1vh, 0.75rem); }
-
-        /* Metallic Text Gradients */
-        .text-gold { background: linear-gradient(135deg, #FFDF73, #D4AF37, #997A15); -webkit-background-clip: text; color: transparent; text-shadow: 0 2px 10px rgba(212,175,55,0.2); }
-        .text-silver { background: linear-gradient(135deg, #FFFFFF, #E2E8F0, #94A3B8); -webkit-background-clip: text; color: transparent; }
-        .text-bronze { background: linear-gradient(135deg, #FDBA74, #D97706, #92400E); -webkit-background-clip: text; color: transparent; }
-        .text-cyan-glow { background: linear-gradient(135deg, #67E8F9, #06B6D4); -webkit-background-clip: text; color: transparent; }
-
-        /* Background Rank Watermark */
-        .rank-watermark {
-            position: absolute;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 800;
-            line-height: 0.8;
-            z-index: 0;
-            color: rgba(255,255,255,0.03);
-            pointer-events: none;
-            bottom: -5%;
-            right: -5%;
-        }
-        .hero-watermark { font-size: clamp(10rem, 40vh, 30rem); }
-        .contender-watermark { font-size: clamp(5rem, 20vh, 15rem); }
-
-        /* Logo blend override */
-        .logo-container img { filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5)); }
+        /* The thin, sleek progress line */
+        .progress-line { height: 2px; width: 100%; background: rgba(255,255,255,0.05); border-radius: 2px; margin-top: auto; }
+        .progress-line-fill { height: 100%; background: var(--tw-colors-accent-blue); border-radius: 2px; transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 0 10px var(--tw-colors-accent-blue); }
     </style>
 </head>
-<body class="antialiased selection:bg-cyan-900 selection:text-white font-sans">
+<body class="antialiased text-white selection:bg-accent-blue selection:text-black flex flex-col p-4 md:p-6 lg:p-8 gap-4 md:gap-6">
 
-    <!-- 3D Financial Background -->
-    <canvas id="bg-canvas"></canvas>
-    <div class="cinematic-vignette"></div>
-
-    <button id="fullscreen-btn" class="fixed top-4 right-4 z-50 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-xl rounded-full p-2 text-white transition-all duration-300 shadow-xl" title="Toggle Fullscreen">
-        <svg class="w-5 h-5 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
-        </svg>
-    </button>
-
-    <div class="flex flex-col h-full w-full relative z-10 px-4 py-4 md:px-8 md:py-6 max-w-[1920px] mx-auto">
-        
-        <!-- Header Section -->
-        <header class="flex-none flex flex-row items-center justify-between mb-4 md:mb-6 z-10">
-            <!-- Left: Logo -->
-            <div class="bg-white/10 backdrop-blur-2xl px-4 py-2 md:px-6 md:py-3 rounded-2xl border border-white/20 flex items-center justify-center shadow-2xl logo-container">
-                <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w800" 
-                     alt="Company Logo" 
-                     class="h-6 md:h-10 w-auto object-contain"
-                     onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-lg md:text-2xl font-black text-white tracking-widest uppercase\\'>COMPANY LOGO</h2>';">
-            </div>
-
-            <!-- Center: Title -->
-            <div class="flex flex-col items-center">
-                <h1 class="font-display text-[clamp(1.5rem,3.5vh,3.5rem)] font-extrabold tracking-tight text-white uppercase text-center drop-shadow-2xl leading-none">
-                    TOP 5 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">PERFORMERS</span>
-                </h1>
-                <p class="text-slate-400 font-medium tracking-[0.3em] text-[clamp(0.5rem,1.2vh,1rem)] mt-1 uppercase">Market Research Division</p>
-            </div>
-            
-            <!-- Right: Status -->
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg hidden md:flex">
-                <div class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </div>
-                <span class="text-slate-300 font-sans text-xs font-bold tracking-widest uppercase">Live Sync</span>
-            </div>
-        </header>
-
-        <!-- Main Dashboard Grid (Takes remaining height exactly) -->
-        <main class="flex-1 w-full relative z-10 min-h-0"> <!-- min-h-0 is crucial for flex child containing grid to not overflow -->
-            
-            <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#020617]/90 backdrop-blur-xl transition-opacity duration-500 rounded-3xl border border-white/5">
-                <div class="relative w-12 h-12 mb-4">
-                    <div class="absolute inset-0 border-2 border-slate-700 rounded-full"></div>
-                    <div class="absolute inset-0 border-2 border-cyan-400 rounded-full border-t-transparent animate-spin"></div>
-                </div>
-                <p class="text-cyan-400 font-sans text-xs font-bold tracking-[0.2em] uppercase">Connecting to Database...</p>
-            </div>
-
-            <!-- The Asymmetric Grid Layout -->
-            <div id="leaderboard-container" class="w-full h-full flex flex-col md:flex-row gap-4 opacity-0 transition-opacity duration-700 pb-2">
-                
-                <!-- LEFT COLUMN: The Hero (#1) -->
-                <div id="hero-slot" class="flex-none md:flex-[5] h-full">
-                    <!-- Javascript will inject the #1 card here -->
-                </div>
-
-                <!-- RIGHT COLUMN: The Contenders (#2 - #5) -->
-                <div id="contenders-slot" class="flex-none md:flex-[7] h-full grid grid-cols-2 grid-rows-2 gap-4">
-                    <!-- Javascript will inject cards #2 to #5 here -->
-                </div>
-                
-            </div>
-        </main>
+    <!-- 7D Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
     </div>
 
+    <div class="noise-overlay"></div>
+
+    <!-- HEADER -->
+    <header class="flex-none flex justify-between items-center z-10 h-[5vh] min-h-[40px]">
+        <!-- Left: Logo -->
+        <div class="flex items-center">
+            <div class="bg-white/5 border border-white/10 px-5 py-2 rounded-lg flex items-center justify-center backdrop-blur-md">
+                <!-- Using Thumbnail API for reliable Google Drive loading -->
+                <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w400" 
+                     alt="Logo" class="h-6 w-auto object-contain"
+                     onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-xs font-bold text-white tracking-[0.2em] uppercase\\'>COMPANY LOGO</h2>';">
+            </div>
+        </div>
+
+        <!-- Center: Title -->
+        <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
+            <div class="w-2 h-2 rounded-full bg-accent-gold animate-pulse"></div>
+            <h1 class="font-sans title-text font-semibold uppercase text-white/90">Top 5 Performers</h1>
+            <div class="w-2 h-2 rounded-full bg-accent-gold animate-pulse"></div>
+        </div>
+
+        <!-- Right: Time & Fullscreen -->
+        <div class="flex items-center gap-4">
+            <div id="live-clock" class="font-mono text-sm text-text-muted">00:00:00</div>
+            <button id="fullscreen-btn" class="text-text-muted hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5 border border-transparent">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN SPLIT SCREEN -->
+    <main class="flex-1 w-full relative z-10 flex flex-col lg:flex-row gap-6 lg:gap-8 h-[calc(100%-5vh-24px)]">
+        
+        <!-- Loading Overlay -->
+        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-obsidian/90 backdrop-blur-sm transition-opacity duration-500 rounded-3xl border border-white/5">
+            <div class="w-10 h-10 border-2 border-white/10 border-t-accent-gold rounded-full animate-spin mb-4"></div>
+            <p class="font-sans text-xs tracking-widest text-text-muted uppercase">Syncing Live Data...</p>
+        </div>
+
+        <!-- LEFT PANEL: The Hero (#1) -->
+        <div class="w-full lg:w-5/12 h-full glass-card flex flex-col items-center justify-center p-8 text-center" id="hero-slot">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- RIGHT PANEL: The List (#2 to #5) -->
+        <div class="w-full lg:w-7/12 h-full flex flex-col gap-4" id="contenders-slot">
+            <!-- Injected via JS -->
+        </div>
+        
+    </main>
+
     <script>
-        // ==========================================
-        // THREE.JS - PREMIUM DATA WAVE
-        // ==========================================
-        function init3DBackground() {
-            const canvas = document.getElementById('bg-canvas');
-            const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x020617, 0.015);
-            
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.set(0, 10, 30);
-            camera.lookAt(0, 0, 0);
+        // Clock
+        setInterval(() => {
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-IN', { hour12: false });
+        }, 1000);
 
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // Fluid Market Grid
-            const geometry = new THREE.PlaneGeometry(120, 80, 80, 40);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0x06b6d4, // Cyan
-                wireframe: true,
-                transparent: true,
-                opacity: 0.08
-            });
-            const plane = new THREE.Mesh(geometry, material);
-            plane.rotation.x = -Math.PI / 2;
-            plane.position.y = -10;
-            scene.add(plane);
-
-            // Floating Ambient Particles
-            const particlesGeo = new THREE.BufferGeometry();
-            const particlesCount = 400;
-            const posArray = new Float32Array(particlesCount * 3);
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 100; // x,y,z spread
-            }
-            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const particlesMat = new THREE.PointsMaterial({
-                size: 0.2, color: 0x10b981, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending
-            });
-            const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
-            scene.add(particlesMesh);
-
-            let clock = new THREE.Clock();
-            function animate() {
-                requestAnimationFrame(animate);
-                const elapsedTime = clock.getElapsedTime();
-
-                // Gentle wave motion
-                const positions = plane.geometry.attributes.position.array;
-                for(let i = 0; i < positions.length; i += 3) {
-                    const x = positions[i];
-                    const y = positions[i+1];
-                    positions[i+2] = Math.sin(x * 0.1 + elapsedTime * 0.3) * 3 + Math.cos(y * 0.1 + elapsedTime * 0.2) * 3;
-                }
-                plane.geometry.attributes.position.needsUpdate = true;
-                particlesMesh.rotation.y = elapsedTime * 0.015;
-                particlesMesh.position.y = Math.sin(elapsedTime * 0.5) * 2;
-
-                renderer.render(scene, camera);
-            }
-            animate();
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-        window.onload = init3DBackground;
-
-        // ==========================================
-        // CORE DATA ENGINE
-        // ==========================================
         const SHEET_ID = '1zm49yxiWzi8LCrazWa7VMTNQO0f5qPRmY3Sf0ILVyQw';
         const SHEET_NAME_PHOTOS = 'Employee Photo';
         const SHEET_NAME_SALES = 'Sheet2';
         const REFRESH_INTERVAL_MS = 1500; 
         let previousDataHash = "";
+        let maxSalesBenchmark = 1; 
 
-        const container = document.getElementById('leaderboard-container');
         const loader = document.getElementById('loader');
 
+        // Robust CSV Parser
         function parseCSV(text) {
             const result = []; let row = []; let inQuotes = false; let currentValue = "";
             for (let i = 0; i < text.length; i++) {
@@ -310,19 +212,9 @@
             return result;
         }
 
-        function formatImageUrl(url) {
-            if (!url) return '';
-            const driveMatch = url.match(/(?:\/d\/|id=)([\w-]+)/);
-            if (driveMatch && driveMatch[1]) {
-                return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w800`;
-            }
-            return url;
-        }
-
         function formatRupees(num) {
-            return new Intl.NumberFormat('en-IN', {
-                style: 'currency', currency: 'INR', maximumFractionDigits: 0
-            }).format(num);
+            const formatted = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(num);
+            return `<span class="currency-symbol">₹</span>${formatted}`;
         }
 
         function animateValue(element, start, end, duration) {
@@ -330,14 +222,106 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                // Professional ease-out curve
-                const easeOut = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const easeOut = 1 - Math.pow(1 - progress, 5); 
                 const currentVal = Math.floor(easeOut * (end - start) + start);
                 element.innerHTML = formatRupees(currentVal);
                 if (progress < 1) window.requestAnimationFrame(step);
                 else element.innerHTML = formatRupees(end); 
             };
             window.requestAnimationFrame(step);
+        }
+
+        function buildHeroCard(employee) {
+            const initial = employee.name.charAt(0).toUpperCase();
+            const photoHtml = employee.photo 
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10 bg-obsidian">`
+                : `<div class="w-full h-full rounded-full relative z-10 bg-zinc-900 border border-white/10 flex items-center justify-center text-text-muted text-6xl font-sans">${initial}</div>`;
+
+            // Smart Manager Badge
+            let managerTag = '';
+            if (employee.tl === employee.rm) {
+                managerTag = `MANAGER: ${employee.tl}`;
+            } else {
+                managerTag = `TL: ${employee.tl} &nbsp;|&nbsp; RM: ${employee.rm}`;
+            }
+
+            return `
+                <div class="w-full h-full flex flex-col items-center justify-center animate-fade-in relative">
+                    <!-- Subtle Rank Background Watermark -->
+                    <div class="absolute inset-0 flex items-center justify-center z-0 opacity-[0.02] pointer-events-none">
+                        <span class="font-mono text-[40vh] font-bold leading-none">1</span>
+                    </div>
+
+                    <div class="z-10 flex flex-col items-center w-full">
+                        <span class="text-accent-gold font-sans text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-6 md:mb-8 border border-accent-gold/30 bg-accent-gold/5 px-4 py-1.5 rounded-full shadow-[0_0_15px_rgba(244,208,111,0.2)]">Rank One</span>
+                        
+                        <div class="relative w-[20vh] h-[20vh] md:w-[25vh] md:h-[25vh] rounded-full p-1.5 mb-6 md:mb-8 shadow-[0_0_50px_rgba(244,208,111,0.15)]">
+                            <div class="hero-ring"></div>
+                            ${photoHtml}
+                        </div>
+
+                        <h2 class="font-sans font-semibold hero-name text-white mb-3 w-full px-4 truncate">${employee.name}</h2>
+                        <div class="font-mono text-xs md:text-sm text-text-muted tracking-widest uppercase mb-8 md:mb-12 bg-white/5 px-4 py-2 rounded-lg border border-white/5">${managerTag}</div>
+                        
+                        <div class="w-full">
+                            <div class="font-mono font-bold hero-rev text-white numeric-counter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" data-target-value="${employee.sales}">
+                                <span class="currency-symbol">₹</span>0
+                            </div>
+                            <div class="mt-2 text-text-muted font-sans text-sm tracking-widest uppercase">Revenue Achieved</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function buildListCard(employee, rank) {
+            const initial = employee.name.charAt(0).toUpperCase();
+            const photoHtml = employee.photo 
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full">`
+                : `<div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-text-muted text-xl font-sans">${initial}</div>`;
+
+            let managerTag = '';
+            if (employee.tl === employee.rm) {
+                managerTag = `MGR: ${employee.tl}`;
+            } else {
+                managerTag = `TL: ${employee.tl} &nbsp;&bull;&nbsp; RM: ${employee.rm}`;
+            }
+
+            const fillPercentage = Math.max(2, (employee.sales / maxSalesBenchmark) * 100);
+
+            return `
+                <div class="flex-1 w-full glass-card flex flex-col justify-center px-6 md:px-8 relative animate-slide-left" style="animation-delay: ${(rank-1) * 0.1}s;">
+                    <div class="flex items-center justify-between w-full z-10 mb-2">
+                        
+                        <!-- Left Side: Rank, Avatar, Info -->
+                        <div class="flex items-center gap-6 min-w-0 flex-1">
+                            <div class="font-mono text-2xl md:text-3xl font-bold text-white/20 w-8 md:w-12 shrink-0">0${rank}</div>
+                            
+                            <div class="w-[7vh] h-[7vh] min-w-[40px] min-h-[40px] rounded-full border border-white/10 overflow-hidden shrink-0">
+                                ${photoHtml}
+                            </div>
+                            
+                            <div class="flex flex-col min-w-0 pr-4">
+                                <h3 class="font-sans font-semibold list-name text-white/90 truncate">${employee.name}</h3>
+                                <p class="font-mono text-[10px] md:text-xs text-text-muted uppercase tracking-wider truncate mt-1">${managerTag}</p>
+                            </div>
+                        </div>
+
+                        <!-- Right Side: Revenue -->
+                        <div class="flex flex-col items-end shrink-0 pl-4">
+                            <div class="font-mono font-bold list-rev text-white numeric-counter" data-target-value="${employee.sales}">
+                                <span class="currency-symbol">₹</span>0
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Bottom Progress Line -->
+                    <div class="progress-line w-full absolute bottom-0 left-0">
+                        <div class="progress-line-fill" style="width: 0%;" data-target-width="${fillPercentage}%"></div>
+                    </div>
+                </div>
+            `;
         }
 
         async function fetchAndMergeData() {
@@ -352,7 +336,6 @@
                 const photosRaw = parseCSV(await photosRes.text());
                 const salesRaw = parseCSV(await salesRes.text());
 
-                // Smart Photo Mapping Engine
                 const exactPhotoMap = new Map();
                 const firstNamePhotoMap = new Map();
                 
@@ -361,164 +344,44 @@
                         const fullName = (row[0] || '').trim().toLowerCase();
                         const photoUrl = (row[6] || '').trim();
                         if (fullName && photoUrl) {
-                            const formattedUrl = formatImageUrl(photoUrl);
-                            exactPhotoMap.set(fullName, formattedUrl);
+                            let cleanUrl = photoUrl;
+                            const driveMatch = photoUrl.match(/(?:\/d\/|id=)([\w-]+)/);
+                            if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w800`;
                             
-                            // Fuzzy First Name Matcher
+                            exactPhotoMap.set(fullName, cleanUrl);
                             const firstName = fullName.split(/\s+/)[0]; 
-                            if (firstName && !firstNamePhotoMap.has(firstName)) {
-                                firstNamePhotoMap.set(firstName, formattedUrl);
-                            }
+                            if (firstName && !firstNamePhotoMap.has(firstName)) firstNamePhotoMap.set(firstName, cleanUrl);
                         }
                     }
                 });
 
                 const mergedData = [];
                 
-                salesRaw.forEach((row, index) => {
+                salesRaw.forEach((row) => {
                     const name = (row[0] || '').toString().trim();
                     const rawSalesStr = (row[1] || '').toString().trim(); 
                     const tl = (row[2] || '').toString().trim() || 'N/A'; 
                     const rm = (row[3] || '').toString().trim() || 'N/A'; 
 
-                    // Aggressive Number Extraction (Strips commas, symbols, spaces)
-                    const cleanSalesStr = rawSalesStr.replace(/[^0-9.-]+/g, "");
+                    let cleanSalesStr = rawSalesStr.replace(/[^0-9.-]+/g, "");
                     const achieved = parseFloat(cleanSalesStr);
                     
-                    if (name && !isNaN(achieved) && achieved > 0) {
-                        // Skip if it looks like a header row
-                        if(name.toLowerCase().includes('employee name') || index === 0 && isNaN(parseFloat(rawSalesStr))) return;
-
+                    if (name && !isNaN(achieved) && name.toLowerCase() !== 'employee name') {
                         const searchNameLower = name.toLowerCase();
                         const searchFirstName = searchNameLower.split(/\s+/)[0];
-                        
-                        // 1. Try Exact Full Name. 2. Try Exact First Name. 3. Fallback to Null
                         const matchedPhoto = exactPhotoMap.get(searchNameLower) || firstNamePhotoMap.get(searchFirstName) || null;
-
+                        
                         mergedData.push({ name, sales: achieved, tl, rm, photo: matchedPhoto });
                     }
                 });
 
-                // Sort purely by the mathematical value
                 mergedData.sort((a, b) => b.sales - a.sales);
-                return mergedData.slice(0, 5); // STRICTLY TOP 5
+                return mergedData.slice(0, 5);
 
             } catch (error) {
                 console.error("Sync Error:", error);
                 throw error;
             }
-        }
-
-        function generateManagerTags(employee) {
-            const tlClean = (employee.tl || '').toLowerCase().trim();
-            const rmClean = (employee.rm || '').toLowerCase().trim();
-
-            if (tlClean === rmClean || tlClean === '' || tlClean === 'n/a') {
-                const displayName = employee.rm !== 'n/a' ? employee.rm : (employee.tl !== 'n/a' ? employee.tl : 'Unassigned');
-                return `
-                    <div class="inline-flex flex-col items-center justify-center bg-white/5 rounded-lg border border-white/10 px-3 py-1 md:py-1.5 w-full backdrop-blur-sm">
-                        <span class="fluid-tag text-slate-400 font-sans font-bold uppercase tracking-widest leading-none mb-1">Manager</span>
-                        <span class="text-[clamp(0.6rem,1.4vh,1rem)] text-slate-200 font-display font-medium truncate w-full text-center leading-none">${displayName}</span>
-                    </div>`;
-            } else {
-                return `
-                    <div class="flex flex-row items-center justify-center gap-2 w-full">
-                        <div class="inline-flex flex-col items-center justify-center bg-cyan-500/10 rounded-lg border border-cyan-500/20 px-2 py-1 md:py-1.5 flex-1 overflow-hidden backdrop-blur-sm">
-                            <span class="fluid-tag text-cyan-500/70 font-sans font-bold uppercase tracking-widest leading-none mb-1">Lead</span>
-                            <span class="text-[clamp(0.6rem,1.4vh,1rem)] text-cyan-100 font-display font-medium truncate w-full text-center leading-none">${employee.tl}</span>
-                        </div>
-                        <div class="inline-flex flex-col items-center justify-center bg-emerald-500/10 rounded-lg border border-emerald-500/20 px-2 py-1 md:py-1.5 flex-1 overflow-hidden backdrop-blur-sm">
-                            <span class="fluid-tag text-emerald-500/70 font-sans font-bold uppercase tracking-widest leading-none mb-1">Mgr</span>
-                            <span class="text-[clamp(0.6rem,1.4vh,1rem)] text-emerald-100 font-display font-medium truncate w-full text-center leading-none">${employee.rm}</span>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        function buildHeroCard(employee) {
-            const initial = employee.name.charAt(0).toUpperCase();
-            const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" alt="${employee.name}" class="w-full h-full object-cover">`
-                : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 font-display font-black text-[3rem]">${initial}</div>`;
-
-            return `
-                <div class="glass-panel h-full w-full p-4 md:p-8 animate-fade-in-up shadow-[0_0_80px_rgba(212,175,55,0.15)] border-[#D4AF37]/30 transform animate-float z-20">
-                    <div class="rank-watermark hero-watermark text-gold opacity-10">1</div>
-                    
-                    <div class="absolute top-4 left-4 md:top-8 md:left-8 flex flex-col items-start z-10">
-                        <span class="text-gold font-bold tracking-[0.3em] text-[clamp(0.7rem,1.5vh,1rem)] uppercase mb-1 drop-shadow-md">Rank 01</span>
-                        <div class="h-0.5 w-12 bg-gradient-to-r from-[#D4AF37] to-transparent"></div>
-                    </div>
-                    
-                    <div class="relative z-10 hero-avatar rounded-full overflow-hidden border-[3px] border-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.4)] bg-[#0a0a0c] p-1 mb-4 md:mb-6 shrink-0 mt-4">
-                        <!-- Crown -->
-                        <div class="absolute -top-[10%] left-1/2 transform -translate-x-1/2 z-20 animate-pulse-slow drop-shadow-[0_0_15px_rgba(212,175,55,1)]">
-                            <svg class="w-[clamp(2rem,6vh,4rem)] h-[clamp(2rem,6vh,4rem)] text-[#D4AF37]" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
-                            </svg>
-                        </div>
-                        <div class="w-full h-full rounded-full overflow-hidden relative z-10">
-                            ${photoHtml}
-                        </div>
-                    </div>
-                    
-                    <h2 class="relative z-10 font-display hero-name font-extrabold text-white text-center w-full tracking-tight truncate mb-4 drop-shadow-xl">
-                        ${employee.name}
-                    </h2>
-                    
-                    <div class="relative z-10 w-full mb-6 max-w-[80%] flex justify-center shrink-0">
-                        ${generateManagerTags(employee)}
-                    </div>
-                    
-                    <div class="relative z-10 flex flex-col items-center w-full mt-auto shrink-0">
-                        <div class="text-[#D4AF37] font-sans font-bold mb-1 uppercase tracking-[0.3em] text-[clamp(0.6rem,1.5vh,0.9rem)]">Revenue Achieved</div>
-                        <div class="font-display hero-num font-black text-gold drop-shadow-2xl numeric-counter" data-target-value="${employee.sales}">
-                            ₹0
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function buildContenderCard(employee, rank) {
-            let textColor = rank === 2 ? 'text-silver' : (rank === 3 ? 'text-bronze' : 'text-cyan-glow');
-            let borderColor = rank === 2 ? 'border-slate-300/40' : (rank === 3 ? 'border-[#D97706]/40' : 'border-cyan-400/30');
-            
-            const initial = employee.name.charAt(0).toUpperCase();
-            const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" alt="${employee.name}" class="w-full h-full object-cover">`
-                : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-slate-300 font-display font-black text-xl">${initial}</div>`;
-
-            return `
-                <div class="glass-panel h-full w-full p-3 md:p-5 animate-fade-in-up relative z-10" style="animation-delay: ${rank * 0.15}s;">
-                    <div class="rank-watermark contender-watermark ${textColor} opacity-10">${rank}</div>
-                    
-                    <div class="absolute top-3 left-3 flex flex-col items-start z-10">
-                        <span class="${textColor} font-bold tracking-[0.2em] text-[clamp(0.5rem,1.2vh,0.75rem)] uppercase mb-0.5">Rank 0${rank}</span>
-                    </div>
-
-                    <div class="relative z-10 contender-avatar rounded-full overflow-hidden border-2 ${borderColor} bg-[#0a0a0c] p-0.5 mb-2 md:mb-3 shrink-0 shadow-lg mt-2">
-                        <div class="w-full h-full rounded-full overflow-hidden">
-                            ${photoHtml}
-                        </div>
-                    </div>
-                    
-                    <h2 class="relative z-10 font-display contender-name font-bold text-white text-center w-full tracking-tight truncate mb-2">
-                        ${employee.name}
-                    </h2>
-                    
-                    <div class="relative z-10 w-full mb-3 flex justify-center shrink-0">
-                        ${generateManagerTags(employee)}
-                    </div>
-                    
-                    <div class="relative z-10 flex flex-col items-center w-full mt-auto shrink-0">
-                        <div class="text-slate-400 font-sans font-semibold mb-0.5 uppercase tracking-[0.2em] text-[clamp(0.5rem,1.1vh,0.7rem)]">Revenue</div>
-                        <div class="font-display contender-num font-extrabold ${textColor} numeric-counter" data-target-value="${employee.sales}">
-                            ₹0
-                        </div>
-                    </div>
-                </div>
-            `;
         }
 
         function renderLeaderboard(data) {
@@ -528,50 +391,42 @@
             if (newDataHash === previousDataHash) return; 
             previousDataHash = newDataHash;
             
+            maxSalesBenchmark = data[0].sales;
+
             const heroSlot = document.getElementById('hero-slot');
             const contendersSlot = document.getElementById('contenders-slot');
 
             heroSlot.innerHTML = ''; 
             contendersSlot.innerHTML = '';
 
-            // Inject #1 into Left Side
             if (data[0]) heroSlot.innerHTML = buildHeroCard(data[0]);
             
-            // Inject #2 - #5 into Right Side Grid
             for (let i = 1; i < 5; i++) {
-                if (data[i]) {
-                    contendersSlot.innerHTML += buildContenderCard(data[i], i + 1);
-                }
+                if (data[i]) contendersSlot.innerHTML += buildListCard(data[i], i + 1);
             }
 
-            // Animate Numbers
             setTimeout(() => {
                 document.querySelectorAll('.numeric-counter').forEach(counter => {
                     const targetValue = parseFloat(counter.getAttribute('data-target-value'));
                     animateValue(counter, 0, targetValue, 2500); 
                 });
-            }, 100);
 
-            // Hide Loader smoothly
+                document.querySelectorAll('.progress-line-fill').forEach(bar => {
+                    setTimeout(() => { bar.style.width = bar.getAttribute('data-target-width'); }, 300);
+                });
+            }, 50);
+
             if (!loader.classList.contains('hidden')) {
                 loader.classList.add('opacity-0');
-                setTimeout(() => {
-                    loader.classList.add('hidden');
-                    container.classList.remove('opacity-0');
-                }, 500);
+                setTimeout(() => { loader.classList.add('hidden'); }, 500);
             }
         }
 
         async function updateDashboard() {
-            try {
-                const data = await fetchAndMergeData();
-                renderLeaderboard(data);
-            } catch (err) {
-                console.warn("Sync Issue:", err.message);
-            }
+            try { renderLeaderboard(await fetchAndMergeData()); } 
+            catch (err) { console.warn("Sync Issue:", err.message); }
         }
 
-        // Initialization
         document.addEventListener('DOMContentLoaded', () => {
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
@@ -580,8 +435,10 @@
             fullscreenBtn.addEventListener('click', () => {
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(() => {});
+                    fullscreenBtn.classList.add('text-white', 'bg-white/5');
                 } else {
                     document.exitFullscreen();
+                    fullscreenBtn.classList.remove('text-white', 'bg-white/5');
                 }
             });
         });
