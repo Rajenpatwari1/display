@@ -297,8 +297,8 @@
                             <div class="w-2 h-2 bg-accent-gold rounded-full animate-pulse shadow-[0_0_8px_#F4D06F]"></div>
                         </div>
                         
-                        <!-- MASSIVE Holographic Avatar Array -->
-                        <div class="relative w-[30vh] h-[30vh] md:w-[35vh] md:h-[35vh] rounded-full p-2 mb-8 transition-transform hover:scale-105 duration-700">
+                        <!-- MASSIVE Holographic Avatar Array (Slightly larger to maintain hierarchy) -->
+                        <div class="relative w-[32vh] h-[32vh] md:w-[38vh] md:h-[38vh] rounded-full p-2 mb-8 transition-transform hover:scale-105 duration-700">
                             <div class="hero-ring-glow animate-spin-slow"></div>
                             <div class="hero-ring-dash animate-spin-slow-reverse"></div>
                             <div class="hero-ring-base"></div>
@@ -388,8 +388,8 @@
                             <!-- Metallic Number -->
                             <div class="font-mono text-5xl md:text-6xl font-bold w-16 md:w-20 shrink-0 bg-clip-text text-transparent ${rankNumberStyle} opacity-90 tracking-tighter">0${rank}</div>
                             
-                            <!-- Glowing Avatar -->
-                            <div class="w-[11vh] h-[11vh] md:w-[13vh] md:h-[13vh] min-w-[70px] min-h-[70px] rounded-full border-2 ${ringGlow} overflow-hidden shrink-0 relative p-1 bg-black/50">
+                            <!-- Glowing Avatar (Increased Size for more clarity and presence) -->
+                            <div class="w-[14vh] h-[14vh] md:w-[17vh] md:h-[17vh] min-w-[85px] min-h-[85px] rounded-full border-2 ${ringGlow} overflow-hidden shrink-0 relative p-1 bg-black/50">
                                 <div class="w-full h-full rounded-full overflow-hidden">
                                     ${photoHtml}
                                 </div>
@@ -442,8 +442,9 @@
                         const photoUrl = (row[6] || '').trim();
                         if (fullName && photoUrl) {
                             let cleanUrl = photoUrl;
+                            // Requesting w1200 instead of w800 for maximum clarity
                             const driveMatch = photoUrl.match(/(?:\/d\/|id=)([\w-]+)/);
-                            if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w800`;
+                            if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1200`;
                             
                             exactPhotoMap.set(fullName, cleanUrl);
                             const firstName = fullName.split(/\s+/)[0]; 
