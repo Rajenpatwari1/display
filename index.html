@@ -22,20 +22,34 @@
                     },
                     colors: {
                         'obsidian': '#030303',
-                        'glass-panel': 'rgba(255, 255, 255, 0.03)',
+                        'glass-panel': 'rgba(20, 20, 20, 0.4)',
                         'glass-border': 'rgba(255, 255, 255, 0.08)',
                         'accent-gold': '#F4D06F',
-                        'accent-blue': '#40C4FF',
+                        'accent-silver': '#E2E8F0',
+                        'accent-bronze': '#D97706',
+                        'accent-cyan': '#00E5FF',
                         'text-muted': '#8A8F98'
                     },
                     animation: {
-                        'fade-in': 'fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'slide-left': 'slideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'spin-slow': 'spin 12s linear infinite',
+                        'blur-fade': 'blurFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'slide-left': 'slideLeftBlur 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'spin-slow-reverse': 'spin 10s linear infinite reverse',
+                        'float': 'floating 6s ease-in-out infinite',
                     },
                     keyframes: {
-                        fadeIn: { '0%': { opacity: 0, transform: 'scale(0.95)' }, '100%': { opacity: 1, transform: 'scale(1)' } },
-                        slideLeft: { '0%': { opacity: 0, transform: 'translateX(40px)' }, '100%': { opacity: 1, transform: 'translateX(0)' } }
+                        blurFade: { 
+                            '0%': { opacity: 0, filter: 'blur(15px)', transform: 'scale(0.95) translateY(20px)' }, 
+                            '100%': { opacity: 1, filter: 'blur(0)', transform: 'scale(1) translateY(0)' } 
+                        },
+                        slideLeftBlur: { 
+                            '0%': { opacity: 0, filter: 'blur(10px)', transform: 'translateX(60px)' }, 
+                            '100%': { opacity: 1, filter: 'blur(0)', transform: 'translateX(0)' } 
+                        },
+                        floating: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
                     }
                 }
             }
@@ -45,7 +59,7 @@
     <style>
         /* ABSOLUTE 1-PAGE LOCK - NO SCROLLING */
         body, html {
-            background-color: #030303;
+            background-color: #000000;
             color: #ffffff;
             height: 100vh; height: 100dvh;
             width: 100%;
@@ -54,86 +68,101 @@
             overscroll-behavior: none;
         }
 
-        /* 7D Animated Aurora Background (Meta/Google Style) */
+        /* 7D Animated Aurora Background with Screen Blend Mode for extreme coolness */
         .aurora-bg {
             position: fixed; inset: 0; z-index: 0; overflow: hidden;
-            background: #030303;
+            background: #050505;
         }
         .aurora-blob {
             position: absolute; border-radius: 50%;
-            filter: blur(100px); opacity: 0.6;
+            filter: blur(120px); opacity: 0.5;
+            mix-blend-mode: screen;
             animation: float-aurora 25s infinite alternate ease-in-out;
             will-change: transform;
         }
-        .blob-1 { top: -15%; left: -10%; width: 55vw; height: 55vw; background: rgba(64, 196, 255, 0.4); animation-delay: 0s; } /* Google Blue */
-        .blob-2 { bottom: -20%; right: -10%; width: 65vw; height: 65vw; background: rgba(144, 97, 255, 0.35); animation-delay: -5s; } /* Meta Purple */
-        .blob-3 { top: 35%; left: 30%; width: 45vw; height: 45vw; background: rgba(244, 208, 111, 0.15); animation-delay: -10s; } /* Accent Gold */
+        .blob-1 { top: -15%; left: -10%; width: 60vw; height: 60vw; background: rgba(0, 229, 255, 0.25); animation-delay: 0s; } /* Cyan */
+        .blob-2 { bottom: -20%; right: -10%; width: 70vw; height: 70vw; background: rgba(144, 97, 255, 0.2); animation-delay: -5s; } /* Purple */
+        .blob-3 { top: 35%; left: 30%; width: 50vw; height: 50vw; background: rgba(244, 208, 111, 0.15); animation-delay: -10s; } /* Gold */
+        .blob-4 { bottom: 10%; left: 10%; width: 40vw; height: 40vw; background: rgba(0, 255, 128, 0.15); animation-delay: -15s; } /* Emerald */
 
         @keyframes float-aurora {
             0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            33% { transform: translate(8vw, -8vh) scale(1.15) rotate(45deg); }
-            66% { transform: translate(-8vw, 12vh) scale(0.9) rotate(-20deg); }
-            100% { transform: translate(4vw, 4vh) scale(1.1) rotate(10deg); }
+            33% { transform: translate(10vw, -10vh) scale(1.2) rotate(45deg); }
+            66% { transform: translate(-10vw, 15vh) scale(0.8) rotate(-20deg); }
+            100% { transform: translate(5vw, 5vh) scale(1.1) rotate(10deg); }
         }
 
-        /* Micro-noise texture for that expensive, matte finish */
-        .noise-overlay {
-            position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        /* Microscopic Dot Matrix Grid over the Aurora */
+        .cyber-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.15;
+            background-size: 30px 30px;
+            background-image: radial-gradient(circle at center, #ffffff 1px, transparent 1px);
         }
 
-        /* Premium Glass Panels */
+        /* Ultra-Premium Glass Panels */
         .glass-card {
-            background: var(--tw-colors-glass-panel);
-            border: 1px solid var(--tw-colors-glass-border);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255,255,255,0.2); /* Edge lighting */
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-radius: 24px;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), inset 0 1px 10px rgba(255,255,255,0.02);
             position: relative;
             overflow: hidden;
         }
 
-        /* The Hero Avatar Ring */
-        .hero-ring {
-            position: absolute; inset: -4px; border-radius: 50%;
-            background: conic-gradient(from 0deg, transparent 0%, transparent 40%, var(--tw-colors-accent-gold) 100%);
-            animation: spin-slow 8s linear infinite;
+        /* Holographic Hero Avatar Rings */
+        .hero-ring-base { position: absolute; inset: -4px; border-radius: 50%; border: 1px solid rgba(244, 208, 111, 0.2); }
+        .hero-ring-dash { position: absolute; inset: -12px; border-radius: 50%; border: 2px dashed rgba(244, 208, 111, 0.4); }
+        .hero-ring-glow {
+            position: absolute; inset: -20px; border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent 0%, transparent 70%, rgba(244,208,111,0.8) 100%);
+            -webkit-mask: radial-gradient(transparent 68%, black 70%);
+            mask: radial-gradient(transparent 68%, black 70%);
         }
 
-        /* Fluid Typography strictly locked to Viewport Height to prevent wrapping */
-        .title-text { font-size: clamp(1.2rem, 2.5vh, 2rem); letter-spacing: 0.15em; }
+        /* Fluid Typography */
+        .title-text { font-size: clamp(1.2rem, 2.5vh, 2rem); letter-spacing: 0.2em; }
         .hero-name { font-size: clamp(2.5rem, 5vh, 4.5rem); line-height: 1.1; letter-spacing: -0.02em; }
-        .hero-rev { font-size: clamp(4rem, 8vh, 7rem); line-height: 1; letter-spacing: -0.04em; }
+        .hero-rev { font-size: clamp(4rem, 8vh, 7.5rem); line-height: 1; letter-spacing: -0.04em; }
         
-        .list-name { font-size: clamp(1.2rem, 2.5vh, 1.8rem); line-height: 1.2; letter-spacing: -0.01em; }
-        .list-rev { font-size: clamp(1.8rem, 3.5vh, 2.8rem); line-height: 1; letter-spacing: -0.03em; }
+        .list-name { font-size: clamp(1.2rem, 2.5vh, 2rem); line-height: 1.2; letter-spacing: -0.01em; }
+        .list-rev { font-size: clamp(1.8rem, 3.5vh, 3rem); line-height: 1; letter-spacing: -0.03em; }
 
         .currency-symbol { font-family: 'Outfit', sans-serif; font-weight: 300; opacity: 0.5; margin-right: 4px; font-size: 0.6em; }
-        
         .avatar-img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* The thin, sleek progress line */
-        .progress-line { height: 2px; width: 100%; background: rgba(255,255,255,0.05); border-radius: 2px; margin-top: auto; }
-        .progress-line-fill { height: 100%; background: var(--tw-colors-accent-blue); border-radius: 2px; transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 0 10px var(--tw-colors-accent-blue); }
+        /* The Neon Laser Progress Line */
+        .progress-line { height: 3px; width: 100%; background: rgba(255,255,255,0.05); margin-top: auto; position: absolute; bottom: 0; left: 0;}
+        .progress-line-fill { 
+            height: 100%; border-radius: 0 4px 4px 0; 
+            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            position: relative;
+        }
+        /* The glowing "Comet Head" of the laser */
+        .progress-line-fill::after {
+            content: ''; position: absolute; right: 0; top: -2px; bottom: -2px; width: 15px;
+            background: #fff; border-radius: 50%; box-shadow: 0 0 15px 3px inherit;
+        }
     </style>
 </head>
-<body class="antialiased text-white selection:bg-accent-blue selection:text-black flex flex-col p-4 md:p-6 lg:p-8 gap-4 md:gap-6">
+<body class="antialiased text-white selection:bg-accent-cyan selection:text-black flex flex-col p-4 md:p-6 lg:p-8 gap-4 md:gap-6">
 
-    <!-- 7D Aurora Background -->
+    <!-- 7D Aurora Background & Cyber Grid -->
     <div class="aurora-bg">
         <div class="aurora-blob blob-1"></div>
         <div class="aurora-blob blob-2"></div>
         <div class="aurora-blob blob-3"></div>
+        <div class="aurora-blob blob-4"></div>
     </div>
-
-    <div class="noise-overlay"></div>
+    <div class="cyber-grid"></div>
 
     <!-- HEADER -->
     <header class="flex-none flex justify-between items-center z-10 h-[5vh] min-h-[40px]">
         <!-- Left: Logo -->
-        <div class="flex items-center">
-            <div class="bg-white/5 border border-white/10 px-5 py-2 rounded-lg flex items-center justify-center backdrop-blur-md">
+        <div class="flex items-center w-1/3">
+            <div class="bg-white/10 border border-white/20 px-5 py-2 rounded-xl flex items-center justify-center backdrop-blur-md shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                 <!-- Using Thumbnail API for reliable Google Drive loading -->
                 <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w400" 
                      alt="Logo" class="h-6 w-auto object-contain"
@@ -142,37 +171,40 @@
         </div>
 
         <!-- Center: Title -->
-        <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
-            <div class="w-2 h-2 rounded-full bg-accent-gold animate-pulse"></div>
-            <h1 class="font-sans title-text font-semibold uppercase text-white/90">Top 5 Performers</h1>
-            <div class="w-2 h-2 rounded-full bg-accent-gold animate-pulse"></div>
+        <div class="w-1/3 flex justify-center items-center gap-4">
+            <div class="w-2 h-2 rounded-full bg-accent-cyan animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.8)]"></div>
+            <h1 class="font-sans title-text font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 tracking-widest drop-shadow-lg">TOP 5 PERFORMERS</h1>
+            <div class="w-2 h-2 rounded-full bg-accent-cyan animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.8)]"></div>
         </div>
 
         <!-- Right: Time & Fullscreen -->
-        <div class="flex items-center gap-4">
-            <div id="live-clock" class="font-mono text-sm text-text-muted">00:00:00</div>
-            <button id="fullscreen-btn" class="text-text-muted hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5 border border-transparent">
+        <div class="flex items-center justify-end w-1/3 gap-4">
+            <div id="live-clock" class="font-mono text-sm text-text-muted bg-black/40 px-3 py-1 rounded-md border border-white/5">00:00:00</div>
+            <button id="fullscreen-btn" class="text-text-muted hover:text-white transition-all p-2 rounded-lg hover:bg-white/10 border border-transparent hover:border-white/20">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
             </button>
         </div>
     </header>
 
-    <!-- MAIN SPLIT SCREEN -->
+    <!-- MAIN SPLIT SCREEN (Guaranteed 1-Page Fit) -->
     <main class="flex-1 w-full relative z-10 flex flex-col lg:flex-row gap-6 lg:gap-8 h-[calc(100%-5vh-24px)]">
         
         <!-- Loading Overlay -->
-        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-obsidian/90 backdrop-blur-sm transition-opacity duration-500 rounded-3xl border border-white/5">
-            <div class="w-10 h-10 border-2 border-white/10 border-t-accent-gold rounded-full animate-spin mb-4"></div>
-            <p class="font-sans text-xs tracking-widest text-text-muted uppercase">Syncing Live Data...</p>
+        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-obsidian/80 backdrop-blur-md transition-opacity duration-500 rounded-3xl border border-white/10">
+            <div class="relative w-16 h-16 flex items-center justify-center mb-4">
+                <div class="absolute inset-0 border-2 border-white/10 border-t-accent-cyan rounded-full animate-spin"></div>
+                <div class="absolute inset-2 border-2 border-white/10 border-b-accent-gold rounded-full animate-spin-reverse" style="animation-direction: reverse;"></div>
+            </div>
+            <p class="font-sans text-[10px] tracking-[0.3em] text-accent-cyan uppercase drop-shadow-[0_0_5px_rgba(0,229,255,0.5)]">Establishing Data Link...</p>
         </div>
 
         <!-- LEFT PANEL: The Hero (#1) -->
-        <div class="w-full lg:w-5/12 h-full glass-card flex flex-col items-center justify-center p-8 text-center" id="hero-slot">
+        <div class="w-full lg:w-[45%] h-full glass-card flex flex-col items-center justify-center p-8 text-center animate-blur-fade shadow-[0_0_50px_rgba(244,208,111,0.05)]" id="hero-slot">
             <!-- Injected via JS -->
         </div>
 
-        <!-- RIGHT PANEL: The List (#2 to #5) -->
-        <div class="w-full lg:w-7/12 h-full flex flex-col gap-4" id="contenders-slot">
+        <!-- RIGHT PANEL: The List (#2 to #5) - Strictly stacked to fill height -->
+        <div class="w-full lg:w-[55%] h-full flex flex-col gap-4 lg:gap-5" id="contenders-slot">
             <!-- Injected via JS -->
         </div>
         
@@ -237,43 +269,51 @@
                 ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10 bg-obsidian">`
                 : `<div class="w-full h-full rounded-full relative z-10 bg-zinc-900 border border-white/10 flex items-center justify-center text-text-muted text-6xl font-sans">${initial}</div>`;
 
-            // Smart Manager Badge
-            let managerTag = '';
-            if (employee.tl === employee.rm) {
-                managerTag = `MANAGER: ${employee.tl}`;
-            } else {
-                managerTag = `TL: ${employee.tl} &nbsp;|&nbsp; RM: ${employee.rm}`;
-            }
+            let managerTag = employee.tl === employee.rm ? `MGR: ${employee.tl}` : `TL: ${employee.tl}  |  RM: ${employee.rm}`;
 
             return `
-                <div class="w-full h-full flex flex-col items-center justify-center animate-fade-in relative">
-                    <!-- Subtle Rank Background Watermark -->
-                    <div class="absolute inset-0 flex items-center justify-center z-0 opacity-[0.02] pointer-events-none">
-                        <span class="font-mono text-[40vh] font-bold leading-none">1</span>
+                <div class="w-full h-full flex flex-col items-center justify-center relative animate-float">
+                    <!-- Subtle Rank Watermark -->
+                    <div class="absolute inset-0 flex items-center justify-center z-0 opacity-[0.03] pointer-events-none">
+                        <span class="font-mono text-[50vh] font-bold leading-none bg-clip-text text-transparent bg-gradient-to-b from-white to-transparent">1</span>
                     </div>
 
                     <div class="z-10 flex flex-col items-center w-full">
-                        <!-- Attractive Visual MVP Badge instead of boring text -->
-                        <div class="flex items-center gap-2 border border-accent-gold/50 bg-accent-gold/10 px-5 py-2 rounded-full shadow-[0_0_30px_rgba(244,208,111,0.2)] backdrop-blur-md mb-6 md:mb-8">
-                            <svg class="w-4 h-4 text-accent-gold drop-shadow-[0_0_5px_rgba(244,208,111,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                            <span class="text-accent-gold font-sans text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">MVP // 01</span>
-                            <svg class="w-4 h-4 text-accent-gold drop-shadow-[0_0_5px_rgba(244,208,111,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                        
+                        <!-- Futuristic Holographic Badge -->
+                        <div class="flex items-center gap-3 border border-accent-gold/40 bg-accent-gold/5 px-6 py-2 rounded-full shadow-[0_0_20px_rgba(244,208,111,0.2)] backdrop-blur-xl mb-8">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full animate-pulse shadow-[0_0_8px_#F4D06F]"></div>
+                            <span class="text-accent-gold font-sans text-[11px] md:text-sm font-bold tracking-[0.4em] uppercase">MVP // 01</span>
+                            <div class="w-2 h-2 bg-accent-gold rounded-full animate-pulse shadow-[0_0_8px_#F4D06F]"></div>
                         </div>
                         
-                        <!-- INCREASED HERO AVATAR SIZE HERE (w-32vh / h-32vh) -->
-                        <div class="relative w-[25vh] h-[25vh] md:w-[32vh] md:h-[32vh] rounded-full p-1.5 mb-6 md:mb-8 shadow-[0_0_50px_rgba(244,208,111,0.15)] transition-transform hover:scale-105 duration-500">
-                            <div class="hero-ring"></div>
-                            ${photoHtml}
+                        <!-- MASSIVE Holographic Avatar Array -->
+                        <div class="relative w-[30vh] h-[30vh] md:w-[35vh] md:h-[35vh] rounded-full p-2 mb-8 transition-transform hover:scale-105 duration-700">
+                            <div class="hero-ring-glow animate-spin-slow"></div>
+                            <div class="hero-ring-dash animate-spin-slow-reverse"></div>
+                            <div class="hero-ring-base"></div>
+                            <div class="w-full h-full rounded-full overflow-hidden shadow-[0_0_40px_rgba(244,208,111,0.15)] relative z-20 border border-white/5">
+                                ${photoHtml}
+                            </div>
                         </div>
 
-                        <h2 class="font-sans font-semibold hero-name text-white mb-3 w-full px-4 truncate">${employee.name}</h2>
-                        <div class="font-mono text-xs md:text-sm text-text-muted tracking-widest uppercase mb-8 md:mb-12 bg-white/5 px-4 py-2 rounded-lg border border-white/5">${managerTag}</div>
+                        <!-- Name & Tags -->
+                        <h2 class="font-sans font-bold hero-name text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-400 mb-4 w-full px-4 truncate drop-shadow-md">${employee.name}</h2>
                         
-                        <div class="w-full">
-                            <div class="font-mono font-bold hero-rev text-white numeric-counter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" data-target-value="${employee.sales}">
-                                <span class="currency-symbol">₹</span>0
+                        <!-- Cyberpunk Style HUD Tag -->
+                        <div class="flex items-center gap-2 mb-10 md:mb-12">
+                            <div class="h-[1px] w-8 bg-white/20"></div>
+                            <div class="font-mono text-[10px] md:text-xs text-accent-cyan tracking-[0.2em] uppercase bg-accent-cyan/10 px-4 py-1.5 rounded border border-accent-cyan/20">${managerTag}</div>
+                            <div class="h-[1px] w-8 bg-white/20"></div>
+                        </div>
+                        
+                        <!-- Massive Golden Revenue -->
+                        <div class="w-full relative">
+                            <div class="absolute -inset-4 bg-accent-gold/20 blur-3xl rounded-full z-0 opacity-50"></div>
+                            <div class="font-mono font-bold hero-rev text-transparent bg-clip-text bg-gradient-to-b from-[#F4D06F] to-[#d4a83e] numeric-counter relative z-10 drop-shadow-[0_0_15px_rgba(244,208,111,0.4)]" data-target-value="${employee.sales}">
+                                <span class="currency-symbol text-[#F4D06F]">₹</span>0
                             </div>
-                            <div class="mt-2 text-text-muted font-sans text-sm tracking-widest uppercase">Revenue Achieved</div>
+                            <div class="mt-3 text-white/50 font-sans text-xs md:text-sm tracking-[0.3em] uppercase relative z-10">Total Revenue Generated</div>
                         </div>
                     </div>
                 </div>
@@ -284,65 +324,73 @@
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
                 ? `<img src="${employee.photo}" class="avatar-img rounded-full">`
-                : `<div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-text-muted text-xl font-sans">${initial}</div>`;
+                : `<div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-white/30 text-2xl font-sans">${initial}</div>`;
 
-            let managerTag = '';
-            if (employee.tl === employee.rm) {
-                managerTag = `MGR: ${employee.tl}`;
-            } else {
-                managerTag = `TL: ${employee.tl} &nbsp;&bull;&nbsp; RM: ${employee.rm}`;
-            }
+            let managerTag = employee.tl === employee.rm ? `MGR: ${employee.tl}` : `TL: ${employee.tl} &bull; RM: ${employee.rm}`;
+            const fillPercentage = Math.max(3, (employee.sales / maxSalesBenchmark) * 100);
 
-            const fillPercentage = Math.max(2, (employee.sales / maxSalesBenchmark) * 100);
-
-            // Stunning Metallic Gradient styling for the big numbers on the left
-            let rankNumberStyle = "text-white/10"; // Default styling for 4 and 5
-            let medalIcon = "";
+            // Conditional styling based on rank for ultimate coolness
+            let rankNumberStyle = ""; 
+            let laserGlow = "";
+            let ringGlow = "";
             
             if (rank === 2) {
-                rankNumberStyle = "bg-clip-text text-transparent bg-gradient-to-b from-gray-100 via-gray-400 to-gray-600 drop-shadow-[0_0_15px_rgba(209,213,219,0.3)]";
-                medalIcon = `<svg class="w-4 h-4 text-gray-300 inline-block ml-3 drop-shadow-[0_0_8px_rgba(209,213,219,0.6)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`;
-            }
-            if (rank === 3) {
-                rankNumberStyle = "bg-clip-text text-transparent bg-gradient-to-b from-orange-200 via-amber-600 to-amber-900 drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]";
-                medalIcon = `<svg class="w-4 h-4 text-amber-500 inline-block ml-3 drop-shadow-[0_0_8px_rgba(217,119,6,0.6)]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>`;
+                rankNumberStyle = "bg-gradient-to-b from-gray-100 via-gray-300 to-gray-600";
+                laserGlow = "background: linear-gradient(90deg, transparent, #E2E8F0); box-shadow: 0 0 15px #E2E8F0;";
+                ringGlow = "border-gray-300/50 shadow-[0_0_20px_rgba(226,232,240,0.2)]";
+            } else if (rank === 3) {
+                rankNumberStyle = "bg-gradient-to-b from-orange-200 via-amber-500 to-amber-800";
+                laserGlow = "background: linear-gradient(90deg, transparent, #D97706); box-shadow: 0 0 15px #D97706;";
+                ringGlow = "border-amber-500/50 shadow-[0_0_20px_rgba(217,119,6,0.2)]";
+            } else {
+                rankNumberStyle = "bg-gradient-to-b from-cyan-200 via-blue-400 to-indigo-600";
+                laserGlow = "background: linear-gradient(90deg, transparent, #00E5FF); box-shadow: 0 0 15px #00E5FF;";
+                ringGlow = "border-cyan-400/30 shadow-[0_0_20px_rgba(0,229,255,0.15)]";
             }
 
             return `
-                <div class="flex-1 w-full glass-card flex flex-col justify-center px-6 md:px-8 relative animate-slide-left" style="animation-delay: ${(rank-1) * 0.1}s;">
-                    <div class="flex items-center justify-between w-full z-10 mb-2">
+                <div class="flex-1 w-full glass-card flex flex-col justify-center px-6 md:px-8 relative animate-slide-left group" style="animation-delay: ${(rank-1) * 0.15}s;">
+                    
+                    <!-- Hover Light Sweep -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+
+                    <div class="flex items-center justify-between w-full z-10 relative">
                         
-                        <!-- Left Side: Rank, Avatar, Info -->
-                        <div class="flex items-center gap-4 md:gap-6 min-w-0 flex-1">
-                            <!-- Beautiful Metallic Numbers instead of text badges -->
-                            <div class="font-mono text-4xl md:text-5xl font-bold w-12 md:w-16 shrink-0 ${rankNumberStyle}">0${rank}</div>
+                        <!-- Left Side -->
+                        <div class="flex items-center gap-5 md:gap-8 min-w-0 flex-1">
                             
-                            <!-- MASSIVELY INCREASED LIST AVATAR SIZE HERE (w-15vh / h-15vh) -->
-                            <div class="w-[12vh] h-[12vh] md:w-[15vh] md:h-[15vh] min-w-[70px] min-h-[70px] rounded-full border border-white/10 overflow-hidden shrink-0 shadow-[0_0_15px_rgba(255,255,255,0.05)] relative">
-                                ${photoHtml}
+                            <!-- Metallic Number -->
+                            <div class="font-mono text-5xl md:text-6xl font-bold w-16 md:w-20 shrink-0 bg-clip-text text-transparent ${rankNumberStyle} opacity-90 tracking-tighter">0${rank}</div>
+                            
+                            <!-- Glowing Avatar -->
+                            <div class="w-[11vh] h-[11vh] md:w-[13vh] md:h-[13vh] min-w-[70px] min-h-[70px] rounded-full border-2 ${ringGlow} overflow-hidden shrink-0 relative p-1 bg-black/50">
+                                <div class="w-full h-full rounded-full overflow-hidden">
+                                    ${photoHtml}
+                                </div>
                             </div>
                             
+                            <!-- Name & Info -->
                             <div class="flex flex-col min-w-0 pr-4">
-                                <div class="flex items-center mb-1">
-                                    <h3 class="font-sans font-semibold list-name text-white/90 truncate">${employee.name}</h3>
-                                    ${medalIcon}
+                                <h3 class="font-sans font-bold list-name text-white drop-shadow-md truncate">${employee.name}</h3>
+                                <div class="flex items-center mt-2">
+                                    <div class="w-1 h-1 rounded-full bg-white/30 mr-2"></div>
+                                    <p class="font-mono text-[9px] md:text-[11px] text-white/50 uppercase tracking-[0.15em] truncate">${managerTag}</p>
                                 </div>
-                                <p class="font-mono text-[10px] md:text-xs text-text-muted uppercase tracking-wider truncate mt-1">${managerTag}</p>
                             </div>
                         </div>
 
                         <!-- Right Side: Revenue -->
                         <div class="flex flex-col items-end shrink-0 pl-4">
-                            <div class="font-mono font-bold list-rev text-white numeric-counter" data-target-value="${employee.sales}">
+                            <div class="font-mono font-bold list-rev text-white numeric-counter drop-shadow-lg" data-target-value="${employee.sales}">
                                 <span class="currency-symbol">₹</span>0
                             </div>
                         </div>
                         
                     </div>
 
-                    <!-- Bottom Progress Line -->
-                    <div class="progress-line w-full absolute bottom-0 left-0">
-                        <div class="progress-line-fill" style="width: 0%;" data-target-width="${fillPercentage}%"></div>
+                    <!-- Laser Progress Line -->
+                    <div class="progress-line">
+                        <div class="progress-line-fill" style="width: 0%; ${laserGlow}" data-target-width="${fillPercentage}%"></div>
                     </div>
                 </div>
             `;
@@ -429,16 +477,17 @@
                 if (data[i]) contendersSlot.innerHTML += buildListCard(data[i], i + 1);
             }
 
+            // Staggered Animations
             setTimeout(() => {
                 document.querySelectorAll('.numeric-counter').forEach(counter => {
                     const targetValue = parseFloat(counter.getAttribute('data-target-value'));
                     animateValue(counter, 0, targetValue, 2500); 
                 });
 
-                document.querySelectorAll('.progress-line-fill').forEach(bar => {
-                    setTimeout(() => { bar.style.width = bar.getAttribute('data-target-width'); }, 300);
+                document.querySelectorAll('.progress-line-fill').forEach((bar, index) => {
+                    setTimeout(() => { bar.style.width = bar.getAttribute('data-target-width'); }, 300 + (index * 150));
                 });
-            }, 50);
+            }, 100);
 
             if (!loader.classList.contains('hidden')) {
                 loader.classList.add('opacity-0');
@@ -459,10 +508,10 @@
             fullscreenBtn.addEventListener('click', () => {
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(() => {});
-                    fullscreenBtn.classList.add('text-white', 'bg-white/5');
+                    fullscreenBtn.classList.add('text-white', 'bg-white/10');
                 } else {
                     document.exitFullscreen();
-                    fullscreenBtn.classList.remove('text-white', 'bg-white/5');
+                    fullscreenBtn.classList.remove('text-white', 'bg-white/10');
                 }
             });
         });
