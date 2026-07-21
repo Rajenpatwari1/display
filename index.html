@@ -219,7 +219,7 @@
         const SHEET_ID = '1zm49yxiWzi8LCrazWa7VMTNQO0f5qPRmY3Sf0ILVyQw';
         const SHEET_NAME_PHOTOS = 'Employee Photo';
         const SHEET_NAME_SALES = 'Sheet2';
-        const REFRESH_INTERVAL_MS = 1500; 
+        const REFRESH_INTERVAL_MS = 15000; 
         let previousDataHash = "";
         let maxSalesBenchmark = 1; 
 
@@ -252,6 +252,7 @@
         function animateValue(element, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
+                if (!document.contains(element)) return; // Prevents memory leak crashes on TV
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
                 const easeOut = 1 - Math.pow(1 - progress, 5); 
@@ -526,9 +527,27 @@
             catch (err) { console.warn("Sync Issue:", err.message); }
         }
 
+        // Screen Wake Lock API to prevent TV/Laptop from sleeping
+        let wakeLock = null;
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                }
+            } catch (err) {
+                console.log("Wake Lock ignored by browser:", err.message);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
+            
+            // Keep TV screen active
+            requestWakeLock();
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'visible') requestWakeLock();
+            });
 
             const fullscreenBtn = document.getElementById('fullscreen-btn');
             fullscreenBtn.addEventListener('click', () => {
