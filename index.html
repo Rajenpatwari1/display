@@ -269,7 +269,17 @@
                 ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10 bg-obsidian">`
                 : `<div class="w-full h-full rounded-full relative z-10 bg-zinc-900 border border-white/10 flex items-center justify-center text-text-muted text-6xl font-sans">${initial}</div>`;
 
-            let managerTag = employee.tl === employee.rm ? `MGR: ${employee.tl}` : `TL: ${employee.tl}  |  RM: ${employee.rm}`;
+            const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
+            const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
+            
+            // Stack the tags so the Manager always comes down on a new line
+            let tagsHtml = "";
+            if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
+                tagsHtml += `<div class="font-mono text-[10px] md:text-xs text-accent-cyan tracking-[0.2em] uppercase bg-accent-cyan/10 px-4 py-1.5 rounded border border-accent-cyan/20">TL: ${tlFirst}</div>`;
+            }
+            if (rmFirst !== 'N/A') {
+                tagsHtml += `<div class="font-mono text-[10px] md:text-xs text-accent-gold tracking-[0.2em] uppercase bg-accent-gold/10 px-4 py-1.5 rounded border border-accent-gold/20">MGR: ${rmFirst}</div>`;
+            }
 
             return `
                 <div class="w-full h-full flex flex-col items-center justify-center relative animate-float">
@@ -300,11 +310,9 @@
                         <!-- Name & Tags -->
                         <h2 class="font-sans font-bold hero-name text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-400 mb-4 w-full px-4 truncate drop-shadow-md">${employee.name}</h2>
                         
-                        <!-- Cyberpunk Style HUD Tag -->
-                        <div class="flex items-center gap-2 mb-10 md:mb-12">
-                            <div class="h-[1px] w-8 bg-white/20"></div>
-                            <div class="font-mono text-[10px] md:text-xs text-accent-cyan tracking-[0.2em] uppercase bg-accent-cyan/10 px-4 py-1.5 rounded border border-accent-cyan/20">${managerTag}</div>
-                            <div class="h-[1px] w-8 bg-white/20"></div>
+                        <!-- Cyberpunk Style HUD Tags (Stacked vertically) -->
+                        <div class="flex flex-col items-center gap-2 mb-10 md:mb-12">
+                            ${tagsHtml}
                         </div>
                         
                         <!-- Massive Golden Revenue -->
@@ -313,7 +321,6 @@
                             <div class="font-mono font-bold hero-rev text-transparent bg-clip-text bg-gradient-to-b from-[#F4D06F] to-[#d4a83e] numeric-counter relative z-10 drop-shadow-[0_0_15px_rgba(244,208,111,0.4)]" data-target-value="${employee.sales}">
                                 <span class="currency-symbol text-[#F4D06F]">₹</span>0
                             </div>
-                            <div class="mt-3 text-white/50 font-sans text-xs md:text-sm tracking-[0.3em] uppercase relative z-10">Total Revenue Generated</div>
                         </div>
                     </div>
                 </div>
@@ -326,7 +333,26 @@
                 ? `<img src="${employee.photo}" class="avatar-img rounded-full">`
                 : `<div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-white/30 text-2xl font-sans">${initial}</div>`;
 
-            let managerTag = employee.tl === employee.rm ? `MGR: ${employee.tl}` : `TL: ${employee.tl} &bull; RM: ${employee.rm}`;
+            const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
+            const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
+            
+            // Stack the tags for list view so Manager name comes down below TL
+            let listTagsHtml = "";
+            if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
+                listTagsHtml += `
+                <div class="flex items-center">
+                    <div class="w-1 h-1 rounded-full bg-white/30 mr-2 shrink-0"></div>
+                    <p class="font-mono text-[9px] md:text-[11px] text-white/50 uppercase tracking-[0.15em] truncate">TL: ${tlFirst}</p>
+                </div>`;
+            }
+            if (rmFirst !== 'N/A') {
+                listTagsHtml += `
+                <div class="flex items-center">
+                    <div class="w-1 h-1 rounded-full bg-accent-gold/50 mr-2 shrink-0"></div>
+                    <p class="font-mono text-[9px] md:text-[11px] text-accent-gold/70 uppercase tracking-[0.15em] truncate">MGR: ${rmFirst}</p>
+                </div>`;
+            }
+                
             const fillPercentage = Math.max(3, (employee.sales / maxSalesBenchmark) * 100);
 
             // Conditional styling based on rank for ultimate coolness
@@ -372,9 +398,8 @@
                             <!-- Name & Info -->
                             <div class="flex flex-col min-w-0 pr-4">
                                 <h3 class="font-sans font-bold list-name text-white drop-shadow-md truncate">${employee.name}</h3>
-                                <div class="flex items-center mt-2">
-                                    <div class="w-1 h-1 rounded-full bg-white/30 mr-2"></div>
-                                    <p class="font-mono text-[9px] md:text-[11px] text-white/50 uppercase tracking-[0.15em] truncate">${managerTag}</p>
+                                <div class="flex flex-col gap-1 mt-1.5 min-w-0">
+                                    ${listTagsHtml}
                                 </div>
                             </div>
                         </div>
