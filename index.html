@@ -537,23 +537,45 @@
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
             
-            // Activate TV Keep-Alive Audio Heartbeat
-            initTvKeepAlive();
+            // 1. ATTEMPT AUTOMATIC FULLSCREEN & KEEP-ALIVE (For Digital Signage TVs)
+            setTimeout(() => {
+                // Try to force Wake Lock and Heartbeat immediately
+                requestWakeLock();
+                initTvKeepAlive();
+                
+                // Try to force Fullscreen without a click
+                try {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().then(() => {
+                            const fsBtn = document.getElementById('fullscreen-btn');
+                            if(fsBtn) fsBtn.classList.add('text-white', 'bg-white/10');
+                        }).catch((err) => {
+                            console.warn("Auto-fullscreen blocked by TV security. TV requires Kiosk mode or one initial click.", err.message);
+                        });
+                    }
+                } catch(e) {}
+            }, 2500); // 2.5 second delay allows the TV OS to finish loading the browser first
 
-            // Keep TV screen active
-            requestWakeLock();
+            // Keep TV screen active if it switches tabs and comes back
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') requestWakeLock();
             });
 
-            // Re-acquire wake lock on user touch/click
+            // 2. FALLBACK: Re-acquire wake lock and trigger FULLSCREEN on first remote click anywhere (if auto fails)
             document.body.addEventListener('click', () => {
                 requestWakeLock();
                 initTvKeepAlive();
-            }, { once: true });
+                
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(() => {});
+                    const fsBtn = document.getElementById('fullscreen-btn');
+                    if(fsBtn) fsBtn.classList.add('text-white', 'bg-white/10');
+                }
+            });
 
             const fullscreenBtn = document.getElementById('fullscreen-btn');
-            fullscreenBtn.addEventListener('click', () => {
+            fullscreenBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent double-triggering with body click
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(() => {});
                     fullscreenBtn.classList.add('text-white', 'bg-white/10');
