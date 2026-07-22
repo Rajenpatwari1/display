@@ -203,10 +203,39 @@
             document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-IN', { hour12: false });
         }, 1000);
 
+        // TV STABILITY ENGINE: Auto-Refresh Page every 5 minutes to clean TV RAM completely & avoid OS Crashes
+        const TV_AUTO_RELOAD_MINUTES = 5;
+        setTimeout(() => {
+            window.location.reload();
+        }, TV_AUTO_RELOAD_MINUTES * 60 * 1000);
+
+        // TV KEEP-ALIVE AUDIO HEARTBEAT (Prevents TV OS from auto-closing browser)
+        function initTvKeepAlive() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                
+                // Silent heartbeat tone every 25 seconds
+                setInterval(() => {
+                    if (ctx.state === 'suspended') ctx.resume();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    gain.gain.value = 0.0001; // Inaudible
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.1);
+                }, 25000);
+            } catch (e) {
+                console.log("Audio Heartbeat not supported, fallback active");
+            }
+        }
+
         const SHEET_ID = '1zm49yxiWzi8LCrazWa7VMTNQO0f5qPRmY3Sf0ILVyQw';
         const SHEET_NAME_PHOTOS = 'Employee Photo';
         const SHEET_NAME_SALES = 'Sheet2';
-        const REFRESH_INTERVAL_MS = 15000; 
+        const REFRESH_INTERVAL_MS = 20000; // Safe 20s interval for data polling
         let previousDataHash = "";
         let maxSalesBenchmark = 1; 
 
@@ -254,7 +283,7 @@
         function buildHeroCard(employee) {
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10 bg-black">`
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10 bg-black" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full relative z-10 bg-[#111] border border-white/10 flex items-center justify-center text-white/30 text-[10vh] font-sans\\'>${initial}</div>';">`
                 : `<div class="w-full h-full rounded-full relative z-10 bg-[#111] border border-white/10 flex items-center justify-center text-white/30 text-[10vh] font-sans">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
@@ -308,7 +337,7 @@
         function buildListCard(employee, rank) {
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full">`
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[6vh] font-sans\\'>${initial}</div>';">`
                 : `<div class="w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[6vh] font-sans">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
@@ -409,7 +438,6 @@
                         const photoUrl = (row[6] || '').trim();
                         if (fullName && photoUrl) {
                             let cleanUrl = photoUrl;
-                            // Requesting w1200 instead of w800 for maximum clarity
                             const driveMatch = photoUrl.match(/(?:\/d\/|id=)([\w-]+)/);
                             if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1200`;
                             
@@ -509,11 +537,20 @@
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
             
+            // Activate TV Keep-Alive Audio Heartbeat
+            initTvKeepAlive();
+
             // Keep TV screen active
             requestWakeLock();
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') requestWakeLock();
             });
+
+            // Re-acquire wake lock on user touch/click
+            document.body.addEventListener('click', () => {
+                requestWakeLock();
+                initTvKeepAlive();
+            }, { once: true });
 
             const fullscreenBtn = document.getElementById('fullscreen-btn');
             fullscreenBtn.addEventListener('click', () => {
