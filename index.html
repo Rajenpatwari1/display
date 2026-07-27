@@ -202,7 +202,12 @@
     <script>
         // Clock
         setInterval(() => {
-            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-IN', { hour12: false });
+            try {
+                // TV Fix: Fallback to system default if 'en-IN' locale crashes the TV OS
+                document.getElementById('live-clock').innerText = new Date().toLocaleTimeString(undefined, { hour12: false });
+            } catch (e) {
+                document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0];
+            }
         }, 1000);
 
         // TV STABILITY ENGINE: Auto-Refresh Page every 5 minutes to clean TV RAM completely & avoid OS Crashes
@@ -243,6 +248,22 @@
 
         const loader = document.getElementById('loader');
 
+        // TV DEBUGGER: Catch fatal TV browser errors and show them on screen
+        window.onerror = function(msg, url, line) {
+            if(loader) {
+                loader.classList.remove('opacity-0', 'hidden');
+                loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:2px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV BROWSER CRASH:</b><br>${msg}<br>Line: ${line}</div>`;
+            }
+        };
+
+        // TV NETWORK MONITOR: Catch promises that hang or fail silently on TVs
+        window.addEventListener('unhandledrejection', function(event) {
+            if(loader) {
+                loader.classList.remove('opacity-0', 'hidden');
+                loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:2px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV NETWORK BLOCKED:</b><br>${event.reason}</div>`;
+            }
+        });
+
         // Robust CSV Parser
         function parseCSV(text) {
             const result = []; let row = []; let inQuotes = false; let currentValue = "";
@@ -263,7 +284,14 @@
         }
 
         function formatRupees(num) {
-            const formatted = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(num);
+            let formatted = "0";
+            try {
+                // TV Fix: Remove strict locale to prevent TV engine crashes
+                formatted = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(num);
+            } catch(e) {
+                // Bulletproof math fallback for very old TVs
+                formatted = Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
             return `<span class="currency-symbol">₹</span>${formatted}`;
         }
 
@@ -417,7 +445,14 @@
             const salesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME_SALES)}&z=${cb}`;
 
             try {
-                const [photosRes, salesRes] = await Promise.all([ fetch(photosUrl), fetch(salesUrl) ]);
+                // TV FIX: Smart TVs often silently hang on fetch. This forces an error popup after 10 seconds.
+                const fetchTimeout = new Promise((_, reject) => setTimeout(() => reject(new Error("TV Network Timeout: TV firewall is blocking Google.")), 10000));
+                
+                const [photosRes, salesRes] = await Promise.race([
+                    Promise.all([ fetch(photosUrl), fetch(salesUrl) ]),
+                    fetchTimeout
+                ]);
+                
                 if (!photosRes.ok || !salesRes.ok) throw new Error("Data access denied.");
 
                 const photosRaw = parseCSV(await photosRes.text());
@@ -512,8 +547,17 @@
         }
 
         async function updateDashboard() {
-            try { renderLeaderboard(await fetchAndMergeData()); } 
-            catch (err) { console.warn("Sync Issue:", err.message); }
+            try { 
+                renderLeaderboard(await fetchAndMergeData()); 
+            } 
+            catch (err) { 
+                console.warn("Sync Issue:", err.message); 
+                const loader = document.getElementById('loader');
+                if(loader) {
+                    loader.classList.remove('opacity-0', 'hidden');
+                    loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:2px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV DATA BLOCKED:</b><br>The TV browser is refusing to download the Google Sheet.<br>Error: ${err.message}</div>`;
+                }
+            }
         }
 
         // Screen Wake Lock API to prevent TV/Laptop from sleeping
@@ -531,17 +575,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateDashboard();
             setInterval(updateDashboard, REFRESH_INTERVAL_MS);
-            
-            // ULTIMATE TV NO-SLEEP HACK: Stream a blank canvas to the hidden video
-            // TVs never go to sleep if they detect active media playback
-            try {
-                const dummyCanvas = document.createElement('canvas');
-                dummyCanvas.width = 1; dummyCanvas.height = 1;
-                dummyCanvas.getContext('2d').fillRect(0, 0, 1, 1);
-                const videoElement = document.getElementById('tv-keep-awake');
-                videoElement.srcObject = dummyCanvas.captureStream();
-                videoElement.play().catch(() => {});
-            } catch(e) {}
             
             // 1. ATTEMPT AUTOMATIC FULLSCREEN & KEEP-ALIVE (For Digital Signage TVs)
             setTimeout(() => {
