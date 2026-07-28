@@ -42,7 +42,7 @@
     <style>
         /* ABSOLUTE 1-PAGE LOCK & HARDWARE ACCELERATION FOR SMART TVs */
         body, html {
-            background-color: #010409; /* Deep Sapphire Black */
+            background-color: #0b0510; /* Deep space base */
             color: #ffffff;
             height: 100vh; height: 100dvh;
             width: 100vw;
@@ -53,101 +53,153 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* "Cool" Sapphire Gradient Background */
+        /* 🌟 ANIMATED PREMIUM MESH BACKGROUND 🌟 */
         .tv-bg {
             position: fixed; inset: 0; z-index: 0;
-            background: radial-gradient(circle at 50% 0%, #0a1738 0%, #020816 50%, #000000 100%);
-        }
-        
-        /* Subtle Grid Overlay for Tech Vibe */
-        .tv-bg::after {
-            content: ''; position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(0, 229, 255, 0.08) 1px, transparent 1px);
-            background-size: 3vh 3vh; opacity: 0.5;
-        }
-
-        /* Frosted Sapphire Panels */
-        .mnc-panel {
-            background: linear-gradient(145deg, rgba(16, 24, 39, 0.6) 0%, rgba(2, 6, 23, 0.8) 100%);
-            border: 1px solid rgba(0, 229, 255, 0.1);
-            border-top: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 4vh;
-            position: relative; 
-            overflow: hidden; 
-            transform: translateZ(0); 
-            box-shadow: 0 4vh 10vh rgba(0,0,0,0.8), inset 0 0 3vh rgba(0,229,255,0.02);
-        }
-        
-        .mnc-row {
-            background: linear-gradient(90deg, rgba(16, 24, 39, 0.4) 0%, rgba(2, 6, 23, 0.6) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-left: 0.6vh solid transparent;
-            border-radius: 2.5vh;
-            margin-bottom: 1vh;
-            position: relative; 
+            background-color: #0b0510;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 0, 102, 0.35), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(102, 0, 255, 0.35), transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(0, 229, 255, 0.3), transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.2), transparent 40%);
+            background-size: 150% 150%;
+            animation: bgShift 20s ease-in-out infinite alternate;
             transform: translateZ(0);
-            overflow: hidden;
-            box-shadow: 0 1vh 3vh rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
         }
 
-        /* High-Tech Spinning Ring for Hero */
-        .tech-ring {
-            position: absolute; inset: -2vh; border-radius: 50%;
-            border: 0.3vh dashed rgba(255,255,255,0.15);
-            border-top: 0.4vh solid #00E5FF;
-            animation: spinRing 12s linear infinite;
+        @keyframes bgShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 100%; }
         }
-        @keyframes spinRing { 100% { transform: rotate(360deg); } }
 
-        /* Exact TV Viewport Scaling */
-        .title-text { font-size: 2.5vh; letter-spacing: 0.8em; color: #FFFFFF; font-weight: 800; }
-        .hero-name { font-size: 5.5vh; line-height: 1.1; font-weight: 600; letter-spacing: -0.02em; text-shadow: 0 1vh 2vh rgba(0,0,0,0.8); }
-        .hero-rev { font-size: 8.5vh; line-height: 1; font-weight: 700; }
+        /* 🌟 FLOATING ANIMATIONS 🌟 */
+        .float-animate-hero { animation: floatHero 8s ease-in-out infinite alternate; }
+        .float-animate-list { animation: floatList 6s ease-in-out infinite alternate; }
         
-        .list-name { font-size: 3.5vh; line-height: 1.2; font-weight: 600; color: #FFFFFF; }
-        .list-rev { font-size: 4.5vh; line-height: 1; font-weight: 600; color: #FFFFFF; }
+        .mnc-row:nth-child(1) { animation-delay: 0s; }
+        .mnc-row:nth-child(2) { animation-delay: -2s; }
+        .mnc-row:nth-child(3) { animation-delay: -4s; }
+        .mnc-row:nth-child(4) { animation-delay: -1s; }
 
-        .currency-symbol { font-family: 'Outfit', sans-serif; font-weight: 300; opacity: 0.6; margin-right: 0.5vh; font-size: 0.7em; }
+        @keyframes floatHero { 0% { transform: translateY(0); } 100% { transform: translateY(-1.5vh); } }
+        @keyframes floatList { 0% { transform: translateY(0); } 100% { transform: translateY(-1vh); } }
+
+        /* ⚡ GAMING AESTHETIC: THUNDER & LIGHTNING BACKGROUND ⚡ */
+        .storm-bg {
+            position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse at bottom, #090914 0%, #020205 100%);
+        }
         
+        /* ⚡ CYBER-GAMING GLASS PANELS ⚡ */
+        .glass-card {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(4vh);
+            -webkit-backdrop-filter: blur(4vh);
+            border-top: 2px solid rgba(0, 229, 255, 0.3);
+            border-left: 1px solid rgba(0, 229, 255, 0.1);
+            border-right: 1px solid rgba(0, 229, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 229, 255, 0.05);
+            box-shadow: 0 4vh 6vh rgba(0,0,0,0.8), inset 0 0 3vh rgba(0, 229, 255, 0.05);
+            position: relative; overflow: hidden;
+        }
+
+        /* POSH TYPOGRAPHY SCALING */
+        .hero-name { font-size: 4.5vh; line-height: 1.1; font-weight: 800; letter-spacing: 0.05em; text-shadow: 0 0 1.5vh rgba(0, 229, 255, 0.6); } 
+        .hero-rev { font-size: 6.5vh; line-height: 1; font-weight: 800; letter-spacing: -0.02em; text-shadow: 0 0 2vh rgba(255, 255, 255, 0.5); } 
+        
+        .list-name { font-size: 3vh; line-height: 1.2; font-weight: 600; color: #ffffff; letter-spacing: 0.02em; }
+        .list-rev { font-size: 3.8vh; line-height: 1; font-weight: 700; color: #ffffff; text-shadow: 0 0 1.5vh rgba(0, 229, 255, 0.4); }
+
+        .currency-symbol { font-family: 'Outfit', sans-serif; font-weight: 400; opacity: 0.7; margin-right: 0.5vh; font-size: 0.8em; color: #00E5FF; }
+        
+        /* Hardware Accelerated Ultra-Crisp Avatars */
         .avatar-img { 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            image-rendering: -webkit-optimize-contrast; 
+            -webkit-transform: translateZ(0); 
+            transform: translateZ(0);
+            background-color: #000;
         }
 
-        /* Laser Progress Data Bars */
+        /* ⚡ GAMER WATERMARK RANKS ⚡ */
+        .rank-watermark {
+            -webkit-text-stroke: 2px rgba(0, 229, 255, 0.2);
+            color: transparent;
+            font-weight: 800;
+            font-size: 7.5vh;
+            text-shadow: 0 0 2vh rgba(0, 229, 255, 0.1);
+        }
+
+        /* ⚡ ELECTRIC LASER DATA LINE ⚡ */
         .progress-line-fill { 
             height: 100%; 
-            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
-            transform: translateZ(0);
-            border-radius: 0 1vh 1vh 0;
-            position: relative;
+            transition: width 2s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            background: linear-gradient(90deg, #0044FF, #B500FF, #00E5FF, #FFFFFF);
+            background-size: 300% 100%;
+            animation: laserShift 2s linear infinite;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 2vh rgba(0, 229, 255, 0.8), 0 0 1vh #FFFFFF;
         }
-        /* Laser tip glow */
-        .progress-line-fill::after {
-            content: ''; position: absolute; right: 0; top: -0.5vh; bottom: -0.5vh;
-            width: 1.5vh; background: #fff; border-radius: 50%; filter: blur(4px);
-        }
+
+        @keyframes laserShift { 0% { background-position: 100% 0; } 100% { background-position: -50% 0; } }
 
         /* Smooth Corporate Animations */
-        @keyframes tvFadeSlide { 0% { opacity: 0; transform: translateX(5vw) translateZ(0); } 100% { opacity: 1; transform: translateX(0) translateZ(0); } }
-        @keyframes tvSmoothScale { 0% { opacity: 0; transform: scale(0.92) translateZ(0); } 100% { opacity: 1; transform: scale(1) translateZ(0); } }
-        .animate-tv-slide { animation: tvFadeSlide 0.8s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
-        .animate-tv-pop { animation: tvSmoothScale 1s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
-
-        /* NEW: Continuous Premium Animations */
-        @keyframes floatPremium {
-            0%, 100% { transform: translateY(0) translateZ(0); }
-            50% { transform: translateY(-1.5vh) translateZ(0); }
-        }
-        .animate-float-premium { animation: floatPremium 6s ease-in-out infinite; }
+        @keyframes tvFadeSlide { 0% { opacity: 0; transform: translateX(2vw) scale(0.98); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+        @keyframes tvSmoothScale { 0% { opacity: 0; transform: scale(0.92); } 100% { opacity: 1; transform: scale(1); } }
+        .animate-tv-slide { animation: tvFadeSlide 1.2s cubic-bezier(0.16, 1, 0.3, 1) backwards; will-change: transform, opacity; }
+        .animate-tv-pop { animation: tvSmoothScale 1.5s cubic-bezier(0.16, 1, 0.3, 1) backwards; will-change: transform, opacity; }
         
-        @keyframes glowPulseText {
-            0%, 100% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), 0 0 1vh rgba(0,229,255,0.3); }
-            50% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), 0 0 4vh rgba(0,229,255,1); }
+        /* 🚀 TOP-NOTCH 360-DEGREE ORBITAL CARTOON ANIMATION 🚀 */
+        .mascot-orbit-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            z-index: 100;
+            pointer-events: none; /* TV Safety: Cannot be clicked */
         }
-        .animate-text-glow { animation: glowPulseText 3s ease-in-out infinite; }
+
+        .mascot-orbit-spinner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* Container spins in a massive circle around the avatar */
+            animation: spinCircle 12s linear infinite; 
+            will-change: transform;
+        }
+
+        .mascot-cartoon-img {
+            position: absolute;
+            /* Center the cartoon exactly on the orbit line */
+            top: -7.5vh; 
+            left: -7.5vh; 
+            width: 15vh; 
+            height: 15vh;
+            object-fit: contain;
+            transform-origin: center;
+            filter: drop-shadow(0 2vh 2vh rgba(0,0,0,0.8));
+            /* 1. Push it out 26vh to make a huge circle. 2. Counter-rotate so it stays upright. 3. Make it bounce! */
+            animation: counterSpinCircle 12s linear infinite, characterGroove 0.5s ease-in-out infinite alternate;
+            will-change: transform, margin-top;
+        }
+
+        @keyframes spinCircle {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes counterSpinCircle {
+            /* Pushes character out to the edge of the photo, then spins backwards to stay perfectly upright! */
+            0% { transform: translateY(-27vh) rotate(0deg); }
+            100% { transform: translateY(-27vh) rotate(-360deg); }
+        }
+
+        @keyframes characterGroove {
+            0% { margin-top: 0; }
+            100% { margin-top: -2.5vh; }
+        }
     </style>
 </head>
 <body class="antialiased text-white flex flex-col p-[3vh] gap-[3vh]">
@@ -155,58 +207,57 @@
     <!-- TV NO-SLEEP MEDIA HACK: Invisible playing video prevents TV OS from sleeping/dimming -->
     <video id="tv-keep-awake" loop muted playsinline style="position: absolute; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1;"></video>
 
-    <!-- PERFORMANCE TV BACKGROUND -->
-    <div class="tv-bg"></div>
+    <!-- ⚡ GAMING DARK BACKGROUND (NO LIGHTNING) ⚡ -->
+    <div class="storm-bg"></div>
 
-    <!-- HEADER: Sleek Corporate Minimalist -->
+    <!-- HEADER: Aesthetic & Premium -->
     <header class="flex-none flex justify-between items-center z-10 h-[6vh] pb-[1vh]">
         <!-- Left: Logo -->
         <div class="flex items-center w-1/3">
-            <div class="bg-black/40 border border-white/10 px-[2.5vh] py-[1.2vh] rounded-2xl backdrop-blur-md">
+            <div class="bg-[#05050A]/80 border border-[#00E5FF]/20 px-[2.5vh] py-[1.2vh] rounded-2xl backdrop-blur-md shadow-[0_0_2vh_rgba(0,229,255,0.15)]">
                 <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w400" 
                      alt="Logo" class="h-[3vh] w-auto object-contain"
                      onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-[2vh] font-bold text-white tracking-[0.3em] uppercase\\'>COMPANY LOGO</h2>';">
             </div>
         </div>
 
-        <!-- Center: Title -->
+        <!-- Center: Title (Cyber-Gamer Vibe) -->
         <div class="w-1/3 flex flex-col justify-center items-center relative">
-            <!-- Glowing High-Tech Aura Behind Title -->
-            <div class="absolute inset-0 bg-[#00E5FF]/15 blur-[4vh] rounded-[100%] w-[130%] -left-[15%] h-[150%] -top-[25%] pointer-events-none"></div>
-            
-            <!-- Massive MNC Title Design optimized for 55" TVs -->
-            <h1 class="font-sans text-[4vh] uppercase text-white font-black tracking-[0.35em] drop-shadow-[0_0_2vh_rgba(0,229,255,0.8)] relative z-10 flex items-center justify-center whitespace-nowrap">
-                <span class="opacity-90">TOP</span>
-                <span class="mx-[2vh] text-[6.5vh] text-transparent bg-clip-text bg-gradient-to-b from-[#00E5FF] to-blue-500 font-mono font-bold leading-none drop-shadow-[0_0_1.5vh_rgba(0,229,255,1)]">5</span> 
-                <span class="opacity-90">PERFORMERS</span>
+            <h1 class="font-sans text-[4vh] uppercase text-white font-bold tracking-[0.2em] whitespace-nowrap flex items-center justify-center drop-shadow-[0_0_2vh_rgba(0,0,0,0.8)]">
+                <span class="text-[#00E5FF] mr-[1vh]">⚡</span>
+                <span class="text-white">TOP</span>
+                <!-- Animated Electric Number -->
+                <span class="mx-[2vh] text-[6.5vh] text-transparent bg-clip-text bg-gradient-to-r from-[#00E5FF] via-[#B500FF] to-[#FFFFFF] font-mono font-black leading-none drop-shadow-[0_0_2vh_rgba(0,229,255,0.5)] animate-pulse">5</span> 
+                <span class="text-white">PERFORMERS</span>
+                <span class="text-[#00E5FF] ml-[1vh]">⚡</span>
             </h1>
         </div>
 
         <!-- Right: Time & Fullscreen -->
         <div class="flex items-center justify-end w-1/3 gap-[3vh]">
-            <div id="live-clock" class="font-mono text-[2.2vh] tracking-widest text-white/80 bg-black/40 border border-white/10 px-[2vh] py-[0.8vh] rounded-xl">00:00:00</div>
-            <button id="fullscreen-btn" class="text-white/60 hover:text-white transition-colors p-[1.5vh] bg-black/40 border border-white/10 rounded-xl">
+            <div id="live-clock" class="font-mono text-[2.2vh] font-bold tracking-widest text-[#00E5FF] bg-[#05050A]/80 backdrop-blur-md border border-[#00E5FF]/30 px-[2vh] py-[0.8vh] rounded-xl shadow-[0_0_2vh_rgba(0,229,255,0.2)]">00:00:00</div>
+            <button id="fullscreen-btn" class="text-[#00E5FF]/60 hover:text-[#00E5FF] transition-colors p-[1.5vh] bg-[#05050A]/80 backdrop-blur-md border border-[#00E5FF]/30 rounded-xl">
                 <svg class="w-[2.5vh] h-[2.5vh]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
             </button>
         </div>
     </header>
 
     <!-- MAIN SPLIT SCREEN -->
-    <main class="flex-1 w-full relative z-10 flex flex-row gap-[4vh] h-[calc(100%-9vh)]">
+    <main class="flex-1 w-full relative z-10 flex flex-row gap-[6vh] h-[calc(100%-9vh)] px-[2vh]">
         
         <!-- Loading Overlay -->
-        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#030108] transition-opacity duration-700 rounded-3xl">
-            <div class="w-[5vh] h-[5vh] border-[0.3vh] border-fuchsia-500 border-t-transparent rounded-full animate-spin mb-[3vh]"></div>
-            <p class="font-sans text-[2vh] tracking-[0.5em] text-fuchsia-400 uppercase font-bold">Retrieving Global Data</p>
+        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#030108]/80 backdrop-blur-xl transition-opacity duration-700 rounded-[4vh] border border-white/10">
+            <div class="w-[6vh] h-[6vh] border-[0.4vh] border-fuchsia-500 border-t-cyan-400 rounded-full animate-spin mb-[3vh] shadow-[0_0_3vh_rgba(219,39,119,0.8)]"></div>
+            <p class="font-sans text-[2.2vh] tracking-[0.5em] text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-cyan-400 uppercase font-bold animate-pulse">Establishing Link</p>
         </div>
 
         <!-- LEFT PANEL: The Hero (#1) -->
-        <div class="w-[45%] h-full mnc-panel flex flex-col items-center justify-center p-[5vh] text-center" id="hero-slot">
+        <div class="w-[45%] h-full mnc-panel flex flex-col items-center justify-center p-[4vh] text-center" id="hero-slot">
             <!-- Injected via JS -->
         </div>
 
         <!-- RIGHT PANEL: The List (#2 to #5) -->
-        <div class="w-[55%] h-full flex flex-col justify-center" id="contenders-slot">
+        <div class="w-[55%] h-full flex flex-col justify-between gap-[2vh] py-[1vh]" id="contenders-slot">
             <!-- Injected via JS -->
         </div>
         
@@ -216,10 +267,16 @@
         // Clock
         setInterval(() => {
             try {
-                // TV Fix: Fallback to system default if 'en-IN' locale crashes the TV OS
-                document.getElementById('live-clock').innerText = new Date().toLocaleTimeString(undefined, { hour12: false });
+                // TV Fix: 12-hour AM/PM format with seconds
+                document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit', second: '2-digit' });
             } catch (e) {
-                document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0];
+                // Bulletproof manual fallback for older TVs
+                let d = new Date();
+                let h = d.getHours();
+                let m = d.getMinutes().toString().padStart(2, '0');
+                let s = d.getSeconds().toString().padStart(2, '0');
+                let ampm = h >= 12 ? 'PM' : 'AM';
+                document.getElementById('live-clock').innerText = (h % 12 || 12) + ":" + m + ":" + s + " " + ampm;
             }
         }, 1000);
 
@@ -299,13 +356,17 @@
         function formatRupees(num) {
             let formatted = "0";
             try {
-                // TV Fix: Remove strict locale to prevent TV engine crashes
-                formatted = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(num);
+                // TV Fix: Strictly enforce Indian Locale for correct 6,12,155 formatting
+                formatted = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(num);
             } catch(e) {
-                // Bulletproof math fallback for very old TVs
-                formatted = Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                // Bulletproof mathematical fallback for the exact Indian numbering system on old TVs
+                let str = Math.floor(num).toString();
+                let lastThree = str.substring(str.length - 3);
+                let otherNumbers = str.substring(0, str.length - 3);
+                if (otherNumbers != '') { lastThree = ',' + lastThree; }
+                formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
             }
-            return `<span class="currency-symbol">₹</span>${formatted}`;
+            return `<span class="currency-symbol text-white/50">₹</span>${formatted}`;
         }
 
         function animateValue(element, start, end, duration) {
@@ -326,49 +387,63 @@
         function buildHeroCard(employee) {
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[12vh] font-sans font-light\\'>${initial}</div>';">`
-                : `<div class="w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[12vh] font-sans font-light">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full relative z-10" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#050505] flex items-center justify-center text-[#00E5FF]/30 text-[12vh] font-sans font-black relative z-10\\'>${initial}</div>';">`
+                : `<div class="w-full h-full rounded-full bg-[#050505] flex items-center justify-center text-[#00E5FF]/30 text-[12vh] font-sans font-black relative z-10">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
             
             let tagsHtml = "";
             if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
-                tagsHtml += `<span class="bg-[#00E5FF]/10 border border-[#00E5FF]/30 px-[2vh] py-[0.8vh] rounded-xl mx-[1vh] text-[#00E5FF]">TL <span class="text-white ml-[0.5vh]">${tlFirst}</span></span>`;
+                tagsHtml += `<span class="bg-[#B500FF]/20 border border-[#B500FF]/50 px-[2.5vh] py-[0.8vh] rounded-md mx-[0.5vh] text-[#FFFFFF] text-[1.4vh] tracking-[0.2em] uppercase font-bold shadow-[0_0_1.5vh_rgba(181,0,255,0.4)]"><span class="text-[#B500FF] font-black mr-[0.5vh]">TL</span> ${tlFirst}</span>`;
             }
             if (rmFirst !== 'N/A') {
-                tagsHtml += `<span class="bg-[#00E5FF]/10 border border-[#00E5FF]/30 px-[2vh] py-[0.8vh] rounded-xl mx-[1vh] text-[#00E5FF]">MGR <span class="text-white ml-[0.5vh]">${rmFirst}</span></span>`;
+                tagsHtml += `<span class="bg-[#00E5FF]/20 border border-[#00E5FF]/50 px-[2.5vh] py-[0.8vh] rounded-md mx-[0.5vh] text-[#FFFFFF] text-[1.4vh] tracking-[0.2em] uppercase font-bold shadow-[0_0_1.5vh_rgba(0,229,255,0.4)]"><span class="text-[#00E5FF] font-black mr-[0.5vh]">MGR</span> ${rmFirst}</span>`;
             }
 
             return `
-                <div class="w-full h-full flex flex-col items-center justify-center relative animate-tv-pop animate-float-premium">
+                <div class="relative w-full h-full p-[0.4vh] rounded-[2vh] overflow-hidden animate-tv-pop float-animate-hero group">
+                    <!-- ⚡ HIGH VOLTAGE SPINNING PLASMA BORDER ⚡ -->
+                    <div class="absolute inset-[-50%] bg-[conic-gradient(from_0deg,transparent_0%,transparent_40%,#00E5FF_50%,#FFFFFF_52%,#B500FF_60%,transparent_65%)] animate-spin-electric opacity-100 blur-[2px]"></div>
                     
-                    <!-- High Tech MVP Badge -->
-                    <div class="mb-[1.5vh] relative z-20">
-                        <span class="relative font-mono text-black text-[1.8vh] tracking-[0.4em] uppercase bg-[#00E5FF] shadow-[0_0_2vh_rgba(0,229,255,0.6)] px-[3vh] py-[1vh] rounded-full font-bold">TOP PERFORMER</span>
-                    </div>
+                    <!-- Inner Cyber Glass -->
+                    <div class="absolute inset-[0.4vh] bg-[#05050A]/90 backdrop-blur-[6vh] rounded-[1.6vh] z-10 border border-[#00E5FF]/20 shadow-[inset_0_0_10vh_rgba(0,229,255,0.05)]"></div>
                     
-                    <!-- MASSIVE AVATAR (Perfectly sized to 48vh so it doesn't push the name off the screen) -->
-                    <div class="relative w-[48vh] h-[48vh] mb-[1.5vh] rounded-full p-[0.8vh] bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_8vh_rgba(0,229,255,0.3)]">
-                        <div class="tech-ring"></div>
-                        <div class="w-full h-full rounded-full overflow-hidden bg-[#070314] border-[0.8vh] border-[#0a1738] relative z-10">
-                            ${photoHtml}
+                    <!-- Content Layer -->
+                    <div class="relative z-20 w-full h-full flex flex-col items-center justify-center px-[3vh]">
+                        
+                        <!-- Gamer MVP Badge -->
+                        <div class="mb-[2vh] bg-[#00E5FF]/10 border border-[#00E5FF]/40 px-[3vh] py-[1vh] rounded-sm shadow-[0_0_2vh_rgba(0,229,255,0.4)] backdrop-blur-md">
+                            <div class="flex items-center gap-[1vh] font-sans text-[1.6vh] font-black tracking-[0.4em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#FFFFFF] to-[#00E5FF] drop-shadow-[0_0_1vh_rgba(0,229,255,0.8)]">
+                                ⚡ TOP PERFORMER ⚡
+                            </div>
                         </div>
-                    </div>
+                        
+                        <!-- MASSIVE AVATAR WITH ELECTRIC GLOW -->
+                        <div class="relative w-[44vh] h-[44vh] mb-[2.5vh] rounded-full shadow-[0_2vh_6vh_rgba(0,0,0,0.9),_0_0_5vh_rgba(0,229,255,0.5)] border-[4px] border-[#00E5FF]/60 p-[0.8vh] bg-black/80 backdrop-blur-xl">
+                            <!-- Outer pulsing ring -->
+                            <div class="absolute inset-[-2vh] rounded-full border border-[#00E5FF]/30 animate-ping" style="animation-duration: 3s;"></div>
+                            <div class="w-full h-full rounded-full overflow-hidden bg-[#000000] relative z-10 flex items-center justify-center">
+                                ${photoHtml}
+                            </div>
+                        </div>
 
-                    <!-- Glowing Animated Name -->
-                    <h2 class="font-sans hero-name mb-[1vh] text-center w-full px-[2vh] text-white animate-text-glow leading-tight">${employee.name}</h2>
-                    
-                    <div class="font-mono text-[1.5vh] uppercase tracking-widest flex items-center justify-center mb-[1.5vh] flex-wrap font-bold">
-                        ${tagsHtml}
-                    </div>
-                    
-                    <!-- Ice Cool Revenue Text -->
-                    <div class="w-full text-center">
-                        <div class="font-mono hero-rev numeric-counter text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00E5FF] to-white drop-shadow-[0_0_2vh_rgba(0,229,255,0.4)]" data-target-value="${employee.sales}">
-                            <span class="currency-symbol text-[#00E5FF]/80">₹</span>0
+                        <!-- Employee Name -->
+                        <h2 class="font-sans hero-name mb-[1.5vh] text-center w-full px-[2vh] text-white truncate drop-shadow-[0_0_2vh_rgba(0,0,0,0.8)]">${employee.name}</h2>
+                        <!-- Brilliant Market Revenue -->
+                        <div class="w-full text-center mt-[1vh]">
+                            <div class="font-mono hero-rev numeric-counter text-white drop-shadow-[0_0_2vh_rgba(255,255,255,0.3)]" data-target-value="${employee.sales}">
+                                <span class="currency-symbol text-white/50">₹</span>0
+                            </div>
                         </div>
-                        <p class="text-[#00E5FF]/60 font-sans text-[1.8vh] tracking-[0.5em] uppercase mt-[0.5vh] font-bold">Total Revenue</p>
+
+                        <!-- 🚀 REAL 360-DEGREE ORBITING CARTOON 🚀 -->
+                        <div class="mascot-orbit-center">
+                            <div class="mascot-orbit-spinner">
+                                <!-- High Quality Transparent Animated Cartoon with full body movement -->
+                                <img src="https://media.giphy.com/media/26xBEb3FIfQkFpZza/giphy.gif" class="mascot-cartoon-img" alt="Dancing Cartoon">
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -377,80 +452,74 @@
         function buildListCard(employee, rank) {
             const initial = employee.name.charAt(0).toUpperCase();
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[6vh] font-sans font-light\\'>${initial}</div>';">`
-                : `<div class="w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/30 text-[6vh] font-sans font-light">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#050505] flex items-center justify-center text-[#00E5FF]/30 text-[6vh] font-sans font-black\\'>${initial}</div>';">`
+                : `<div class="w-full h-full rounded-full bg-[#050505] flex items-center justify-center text-[#00E5FF]/30 text-[6vh] font-sans font-black">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
             
             let listTagsHtml = "";
             if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
-                listTagsHtml += `<span class="text-[#00E5FF]/60 bg-[#00E5FF]/5 border border-[#00E5FF]/10 px-[1.2vh] py-[0.4vh] rounded-md">TL <span class="text-white/90">${tlFirst}</span></span>`;
+                listTagsHtml += `<span class="bg-[#B500FF]/10 px-[1.2vh] py-[0.3vh] rounded-sm text-white/90 font-bold tracking-widest border border-[#B500FF]/30 shadow-[0_0_1vh_rgba(181,0,255,0.2)]"><span class="text-[#B500FF] mr-[0.5vh]">TL</span>${tlFirst}</span>`;
             }
             if (rmFirst !== 'N/A') {
-                if(listTagsHtml !== "") listTagsHtml += `<span class="text-white/10 mx-[0.5vh]">-</span>`;
-                listTagsHtml += `<span class="text-[#00E5FF]/60 bg-[#00E5FF]/5 border border-[#00E5FF]/10 px-[1.2vh] py-[0.4vh] rounded-md">MGR <span class="text-white/90">${rmFirst}</span></span>`;
+                listTagsHtml += `<span class="bg-[#00E5FF]/10 px-[1.2vh] py-[0.3vh] rounded-sm text-white/90 font-bold tracking-widest border border-[#00E5FF]/30 shadow-[0_0_1vh_rgba(0,229,255,0.2)]"><span class="text-[#00E5FF] mr-[0.5vh]">MGR</span>${rmFirst}</span>`;
             }
                 
             const fillPercentage = Math.max(2, (employee.sales / maxSalesBenchmark) * 100);
 
-            // "Cool" theme gradients for ranks
-            let rankGradient = "from-cyan-400 to-blue-600";
-            let rankColor = "#00E5FF";
-            let borderColor = "border-cyan-500";
-            
-            if(rank === 2) { 
-                rankGradient = "from-gray-100 to-gray-400"; 
-                rankColor = "#f3f4f6";
-                borderColor = "border-gray-300";
-            } else if (rank === 3) { 
-                rankGradient = "from-indigo-300 to-purple-500"; 
-                rankColor = "#a5b4fc";
-                borderColor = "border-indigo-400";
-            } else {
-                rankGradient = "from-blue-400 to-blue-800";
-                rankColor = "#60a5fa";
-                borderColor = "border-blue-500";
-            }
-
             return `
-                <div class="flex-1 w-full mnc-row flex flex-col justify-center animate-tv-slide group px-[3vh]" style="border-left-color: ${rankColor}; animation-delay: ${(rank-1) * 0.1}s;">
+                <div class="flex-1 w-full mnc-row glass-card flex flex-col justify-center animate-tv-slide float-animate-list rounded-[1.5vh] px-[3vh]">
                     
-                    <div class="flex items-center justify-between w-full h-full relative z-10 py-[0.5vh]">
+                    <div class="flex items-center justify-between w-full h-full relative z-10 py-[1.5vh]">
                         
-                        <div class="flex items-center gap-[3vh] min-w-0 flex-1">
-                            <!-- Clean Tech Rank Number -->
-                            <div class="font-mono text-[4.5vh] font-bold w-[6vh] text-center text-transparent bg-clip-text bg-gradient-to-b ${rankGradient}">0${rank}</div>
+                        <div class="flex items-center gap-[2vh] min-w-0 flex-1">
                             
-                            <!-- MAXIMIZED LIST AVATAR (19vh) -->
-                            <div class="w-[19vh] h-[19vh] rounded-full p-[0.4vh] shrink-0 bg-gradient-to-b ${rankGradient} shadow-[0_0_2vh_rgba(0,0,0,0.5)]">
-                                <div class="w-full h-full rounded-full overflow-hidden bg-[#070314] border-[0.4vh] ${borderColor}">
+                            <!-- ELECTRIC WATERMARK NUMBER (Fixed Width to prevent overlap) -->
+                            <div class="font-mono w-[10vh] shrink-0 text-center rank-watermark">0${rank}</div>
+                            
+                            <!-- LIST AVATAR (16vh - Perfectly Aligned) -->
+                            <div class="w-[16vh] h-[16vh] rounded-full p-[0.4vh] shrink-0 bg-[#00E5FF]/20 border border-[#00E5FF]/40 shadow-[0_0_2vh_rgba(0,229,255,0.3)] flex items-center justify-center">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-[#000] flex items-center justify-center">
                                     ${photoHtml}
                                 </div>
                             </div>
                             
-                            <div class="flex flex-col min-w-0 pr-[2vh] gap-[1vh]">
-                                <h3 class="font-sans list-name truncate drop-shadow-md tracking-wide">${employee.name}</h3>
-                                <div class="font-mono text-[1.4vh] uppercase tracking-wider flex items-center flex-wrap gap-[0.5vh]">
+                            <div class="flex flex-col min-w-0 px-[2vh] gap-[1vh] flex-1 justify-center">
+                                <h3 class="font-sans list-name truncate drop-shadow-[0_0_1vh_rgba(0,229,255,0.5)]">${employee.name}</h3>
+                                <div class="font-sans text-[1.2vh] uppercase flex items-center flex-wrap gap-[1vh]">
                                     ${listTagsHtml}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- TV Sized List Revenue -->
-                        <div class="flex flex-col items-end shrink-0 pl-[2vh]">
-                            <div class="font-mono list-rev numeric-counter text-white drop-shadow-[0_1vh_1vh_rgba(0,0,0,0.8)]" data-target-value="${employee.sales}">
+                        <!-- Crisp Gaming Revenue -->
+                        <div class="flex flex-col items-end justify-center shrink-0 pl-[2vh]">
+                            <div class="font-mono list-rev numeric-counter drop-shadow-[0_0_2vh_rgba(0,229,255,0.6)]" data-target-value="${employee.sales}">
                                 <span class="currency-symbol">₹</span>0
                             </div>
                         </div>
                     </div>
 
-                    <!-- Glowing Laser Data Line -->
-                    <div class="absolute bottom-0 left-0 right-0 h-[0.6vh] bg-white/5">
-                        <div class="progress-line-fill bg-gradient-to-r ${rankGradient} shadow-[0_0_2vh_${rankColor}]" style="width: 0%;" data-target-width="${fillPercentage}%"></div>
+                    <!-- ⚡ CYBER LASER DATA TRACK ⚡ -->
+                    <div class="absolute bottom-0 left-0 right-0 h-[5px] bg-black/60 border-t border-[#00E5FF]/10">
+                        <div class="progress-line-fill" style="width: 0%;" data-target-width="${fillPercentage}%"></div>
                     </div>
                 </div>
             `;
+        }
+
+        // TV-SAFE NETWORK FETCHER: Replaces modern 'fetch' with ultra-compatible XMLHttpRequest for older TV Browsers
+        function fetchSafe(url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onload = () => resolve({ ok: xhr.status === 200, text: () => Promise.resolve(xhr.responseText) });
+                xhr.onerror = () => reject(new Error("TV blocked connection (Check if Sheet is Public)"));
+                xhr.timeout = 10000;
+                xhr.ontimeout = () => reject(new Error("TV Network Timeout. Wi-Fi too slow."));
+                xhr.send();
+            });
         }
 
         async function fetchAndMergeData() {
@@ -459,15 +528,10 @@
             const salesUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME_SALES)}&z=${cb}`;
 
             try {
-                // TV FIX: Smart TVs often silently hang on fetch. This forces an error popup after 10 seconds.
-                const fetchTimeout = new Promise((_, reject) => setTimeout(() => reject(new Error("TV Network Timeout: TV firewall is blocking Google.")), 10000));
+                // Using the TV-Safe XHR fallback instead of modern fetch
+                const [photosRes, salesRes] = await Promise.all([ fetchSafe(photosUrl), fetchSafe(salesUrl) ]);
                 
-                const [photosRes, salesRes] = await Promise.race([
-                    Promise.all([ fetch(photosUrl), fetch(salesUrl) ]),
-                    fetchTimeout
-                ]);
-                
-                if (!photosRes.ok || !salesRes.ok) throw new Error("Data access denied.");
+                if (!photosRes.ok || !salesRes.ok) throw new Error("Google denied access. Sheet MUST be set to 'Anyone with the link'.");
 
                 const photosRaw = parseCSV(await photosRes.text());
                 const salesRaw = parseCSV(await salesRes.text());
@@ -482,8 +546,8 @@
                         if (fullName && photoUrl) {
                             let cleanUrl = photoUrl;
                             const driveMatch = photoUrl.match(/(?:\/d\/|id=)([\w-]+)/);
-                            // HIGH-RES UPGRADE: Requesting sz=s1200-c (1200px Square Crop) for crystal clear TV avatars
-                            if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=s1200-c`;
+                            // HIGH-RES UPGRADE: Requesting sz=s2048-c (2048px Square Crop) for crystal clear Ultra-HD TV avatars
+                            if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=s2048-c`;
                             
                             exactPhotoMap.set(fullName, cleanUrl);
                             const firstName = fullName.split(/\s+/)[0]; 
