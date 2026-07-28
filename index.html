@@ -135,6 +135,19 @@
         @keyframes tvSmoothScale { 0% { opacity: 0; transform: scale(0.92) translateZ(0); } 100% { opacity: 1; transform: scale(1) translateZ(0); } }
         .animate-tv-slide { animation: tvFadeSlide 0.8s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
         .animate-tv-pop { animation: tvSmoothScale 1s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
+
+        /* NEW: Continuous Premium Animations */
+        @keyframes floatPremium {
+            0%, 100% { transform: translateY(0) translateZ(0); }
+            50% { transform: translateY(-1.5vh) translateZ(0); }
+        }
+        .animate-float-premium { animation: floatPremium 6s ease-in-out infinite; }
+        
+        @keyframes glowPulseText {
+            0%, 100% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), 0 0 1vh rgba(0,229,255,0.3); }
+            50% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.8), 0 0 4vh rgba(0,229,255,1); }
+        }
+        .animate-text-glow { animation: glowPulseText 3s ease-in-out infinite; }
     </style>
 </head>
 <body class="antialiased text-white flex flex-col p-[3vh] gap-[3vh]">
@@ -328,24 +341,25 @@
             }
 
             return `
-                <div class="w-full h-full flex flex-col items-center justify-center relative animate-tv-pop">
+                <div class="w-full h-full flex flex-col items-center justify-center relative animate-tv-pop animate-float-premium">
                     
                     <!-- High Tech MVP Badge -->
-                    <div class="mb-[2vh] relative z-20">
+                    <div class="mb-[1.5vh] relative z-20">
                         <span class="relative font-mono text-black text-[1.8vh] tracking-[0.4em] uppercase bg-[#00E5FF] shadow-[0_0_2vh_rgba(0,229,255,0.6)] px-[3vh] py-[1vh] rounded-full font-bold">TOP PERFORMER</span>
                     </div>
                     
-                    <!-- EXTREME MASSIVE AVATAR (55vh) with Cool Glowing tech rings -->
-                    <div class="relative w-[55vh] h-[55vh] mb-[2vh] rounded-full p-[0.8vh] bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_8vh_rgba(0,229,255,0.3)]">
+                    <!-- MASSIVE AVATAR (Perfectly sized to 48vh so it doesn't push the name off the screen) -->
+                    <div class="relative w-[48vh] h-[48vh] mb-[1.5vh] rounded-full p-[0.8vh] bg-gradient-to-b from-[#00E5FF] to-transparent shadow-[0_0_8vh_rgba(0,229,255,0.3)]">
                         <div class="tech-ring"></div>
                         <div class="w-full h-full rounded-full overflow-hidden bg-[#070314] border-[0.8vh] border-[#0a1738] relative z-10">
                             ${photoHtml}
                         </div>
                     </div>
 
-                    <h2 class="font-sans hero-name mb-[1vh] text-center w-full px-[2vh] truncate text-white">${employee.name}</h2>
+                    <!-- Glowing Animated Name -->
+                    <h2 class="font-sans hero-name mb-[1vh] text-center w-full px-[2vh] text-white animate-text-glow leading-tight">${employee.name}</h2>
                     
-                    <div class="font-mono text-[1.5vh] uppercase tracking-widest flex items-center justify-center mb-[2vh] flex-wrap font-bold">
+                    <div class="font-mono text-[1.5vh] uppercase tracking-widest flex items-center justify-center mb-[1.5vh] flex-wrap font-bold">
                         ${tagsHtml}
                     </div>
                     
@@ -354,7 +368,7 @@
                         <div class="font-mono hero-rev numeric-counter text-transparent bg-clip-text bg-gradient-to-r from-white via-[#00E5FF] to-white drop-shadow-[0_0_2vh_rgba(0,229,255,0.4)]" data-target-value="${employee.sales}">
                             <span class="currency-symbol text-[#00E5FF]/80">₹</span>0
                         </div>
-                        <p class="text-[#00E5FF]/60 font-sans text-[2vh] tracking-[0.5em] uppercase mt-[1vh] font-bold">Total Revenue</p>
+                        <p class="text-[#00E5FF]/60 font-sans text-[1.8vh] tracking-[0.5em] uppercase mt-[0.5vh] font-bold">Total Revenue</p>
                     </div>
                 </div>
             `;
