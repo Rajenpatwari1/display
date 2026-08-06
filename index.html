@@ -13,23 +13,25 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Premium Silicon Valley Typography: Outfit for UI, Space Grotesk for Data/Numbers -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Professional Financial Typography: Outfit for headers, Space Grotesk for strict data grids -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Outfit"', 'sans-serif'],
-                        mono: ['"Space Grotesk"', 'monospace'],
+                        'sans': ['"Outfit"', 'sans-serif'],
+                        'mono': ['"Space Grotesk"', 'monospace'],
                     },
                     colors: {
-                        'obsidian': '#050505',
-                        'accent-cyan': '#00E5FF',
-                        'accent-purple': '#8A2BE2',
-                        'accent-pink': '#FF007A',
-                        'text-muted': '#8A8F98'
+                        'fin-dark': '#06080F',       // Deep terminal background
+                        'fin-panel': '#0C111A',      // Slightly lighter panel
+                        'fin-border': '#1C2433',     // Clean panel borders
+                        'fin-green': '#00E676',      // Bull market green
+                        'fin-gold': '#FFB300',       // Wealth gold
+                        'fin-silver': '#90A4AE',     // Silver
+                        'fin-bronze': '#D84315'      // Bronze
                     }
                 }
             }
@@ -39,7 +41,7 @@
     <style>
         /* ABSOLUTE 1-PAGE LOCK & HARDWARE ACCELERATION FOR SMART TVs */
         body, html {
-            background-color: #04020a; /* Deep Cyber Black */
+            background-color: #060A14;
             color: #ffffff;
             height: 100vh; height: 100dvh;
             width: 100vw;
@@ -50,181 +52,296 @@
             text-rendering: optimizeLegibility;
         }
 
-        /* "Cyber Tech" Background */
-        .tv-bg {
-            position: fixed; inset: 0; z-index: 0;
-            background: radial-gradient(circle at 50% -20%, #1a0b2e 0%, #090514 50%, #000000 100%);
+        /* 
+         * TV-SAFE STOCK MARKET BACKGROUND ANIMATION
+         * Hardware accelerated linear translation for smooth scrolling
+         */
+        @keyframes stockScroll {
+            0% { transform: translateX(0) translateZ(0); }
+            100% { transform: translateX(-50vw) translateZ(0); } /* Moves exactly one SVG width */
         }
-        
-        /* Subtle digital grid overlay */
-        .tv-bg::after {
-            content: ''; position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px);
-            background-size: 3vh 3vh; opacity: 0.7;
+        .animate-stock-wave {
+            animation: stockScroll 40s linear infinite;
+            will-change: transform;
         }
 
-        /* Holographic Glass Panels */
-        .mnc-panel {
-            background: linear-gradient(145deg, rgba(20, 10, 40, 0.6) 0%, rgba(5, 5, 15, 0.9) 100%);
-            border: 1px solid rgba(0, 229, 255, 0.15);
-            border-top: 1px solid rgba(0, 229, 255, 0.4); 
-            border-radius: 4vh;
-            position: relative; 
-            overflow: hidden; 
-            transform: translateZ(0); 
-            box-shadow: 0 4vh 10vh rgba(0,0,0,0.95), inset 0 0 4vh rgba(0,229,255,0.05);
+        /* NEW: Hardware Accelerated Aurora Background Orbs */
+        @keyframes aurora-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-8vw, 8vh) scale(1.15); }
         }
-        
-        .mnc-row {
-            background: linear-gradient(90deg, rgba(20, 10, 40, 0.5) 0%, rgba(5, 5, 15, 0.8) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-left: 0.6vh solid transparent;
-            border-radius: 2.5vh;
-            margin-bottom: 1vh;
-            position: relative; 
-            transform: translateZ(0);
-            overflow: hidden;
-            box-shadow: 0 1vh 3vh rgba(0,0,0,0.6);
+        @keyframes aurora-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(8vw, -8vh) scale(1.15); }
+        }
+
+        /* 
+         * FINANCIAL PANELS: Premium Frosted Aurora Glass
+         */
+        .fin-card {
+            background: linear-gradient(145deg, rgba(16, 24, 40, 0.5) 0%, rgba(10, 15, 30, 0.7) 100%);
+            backdrop-filter: blur(2vh);
+            -webkit-backdrop-filter: blur(2vh);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-top: 1px solid rgba(255,255,255,0.25);
+            border-radius: 2vh;
+            box-shadow: 0 2.5vh 5vh rgba(0,0,0,0.6), inset 0 1vh 2vh rgba(255,255,255,0.03);
+        }
+
+        .hero-card {
+            border-top: 0.4vh solid #FFB300;
+            background: linear-gradient(180deg, rgba(255, 179, 0, 0.12) 0%, rgba(16, 24, 40, 0.5) 100%);
+            box-shadow: 0 2.5vh 5vh rgba(0,0,0,0.6), 0 0 5vh rgba(255,179,0,0.15);
+        }
+
+        .list-row {
+            background: linear-gradient(90deg, rgba(16, 24, 40, 0.4) 0%, rgba(10, 15, 30, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5vh;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(1.5vh);
+            -webkit-backdrop-filter: blur(1.5vh);
         }
 
-        /* High-Tech HUD Spinning Ring */
-        .tech-ring {
-            position: absolute; inset: -2vh; border-radius: 50%;
-            border: 0.2vh dashed rgba(255,255,255,0.1);
-            border-top: 0.3vh solid #00E5FF; /* Cyan accent */
-            border-bottom: 0.3vh solid #FF007A; /* Pink accent */
-            animation: spinRing 12s linear infinite;
+        /* Stock Market Volume Bar (Progress) */
+        .volume-track {
+            position: absolute; bottom: 0; left: 0; right: 0; height: 0.3vh;
+            background: rgba(255,255,255,0.05);
         }
-        @keyframes spinRing { 100% { transform: rotate(360deg); } }
+        .volume-fill {
+            height: 100%;
+            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            box-shadow: 0 0 1vh currentColor;
+        }
 
-        /* Exact TV Viewport Scaling */
-        .title-text { font-size: 2.5vh; letter-spacing: 0.8em; color: #FFFFFF; font-weight: 800; }
-        .hero-name { font-size: 4.5vh; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em; text-shadow: 0 1vh 2vh rgba(0,0,0,0.9); }
-        .hero-rev { font-size: 6.5vh; line-height: 1; font-weight: 700; letter-spacing: -0.02em; }
+        /* TV Scaling Typography (Fixed constraints) */
+        .header-title { font-size: 2.8vh; letter-spacing: 0.3em; font-weight: 800; }
+        .hero-name { font-size: 4.0vh; line-height: 1.1; font-weight: 700; letter-spacing: 0.02em; }
+        .hero-rev { font-size: 6.5vh; line-height: 1; font-weight: 700; }
         
-        .list-name { font-size: 3vh; line-height: 1.2; font-weight: 600; color: #FFFFFF; letter-spacing: 0.01em; }
-        .list-rev { font-size: 4vh; line-height: 1; font-weight: 700; color: #FFFFFF; }
+        .list-name { font-size: 3vh; line-height: 1.2; font-weight: 600; }
+        .list-rev { font-size: 4vh; line-height: 1; font-weight: 700; }
 
-        .currency-symbol { font-family: 'Outfit', sans-serif; font-weight: 300; opacity: 0.6; margin-right: 0.5vh; font-size: 0.7em; }
+        .currency-symbol { font-weight: 400; opacity: 0.5; margin-right: 0.5vh; font-size: 0.7em; }
         
         .avatar-img { 
             width: 100%; height: 100%; 
             object-fit: cover; 
-            image-rendering: -webkit-optimize-contrast; 
+            border-radius: 1vh; 
         }
 
-        /* Laser Progress Lines */
-        .progress-line-fill { 
-            height: 100%; 
-            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
-            transform: translateZ(0);
-            border-radius: 0 1vh 1vh 0;
-            position: relative;
+        /* Clean Entrance Animations */
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(2vh); } 100% { opacity: 1; transform: translateY(0); } }
+        .anim-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+        /* NEW: Footer Stock Ticker Animation */
+        @keyframes tickerScroll {
+            0% { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
         }
-        /* Laser tip glow */
-        .progress-line-fill::after {
-            content: ''; position: absolute; right: 0; top: -0.5vh; bottom: -0.5vh;
-            width: 1.5vh; background: #fff; border-radius: 50%; filter: blur(4px);
+        .animate-ticker {
+            animation: tickerScroll 25s linear infinite;
+            will-change: transform;
+            white-space: nowrap;
         }
 
-        /* Smooth Corporate Animations */
-        @keyframes tvFadeSlide { 0% { opacity: 0; transform: translateX(5vw) translateZ(0); } 100% { opacity: 1; transform: translateX(0) translateZ(0); } }
-        @keyframes tvSmoothScale { 0% { opacity: 0; transform: scale(0.92) translateZ(0); } 100% { opacity: 1; transform: scale(1) translateZ(0); } }
-        .animate-tv-slide { animation: tvFadeSlide 0.8s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
-        .animate-tv-pop { animation: tvSmoothScale 1s cubic-bezier(0.2, 0, 0, 1) backwards; will-change: transform, opacity; }
-
-        /* Continuous Premium Animations */
-        @keyframes floatPremium {
-            0%, 100% { transform: translateY(0) translateZ(0); }
-            50% { transform: translateY(-1vh) translateZ(0); }
+        /* NEW: Cool Holographic Aesthetics */
+        @keyframes spinRing { 100% { transform: rotate(360deg); } }
+        .holo-ring { 
+            position: absolute; inset: -1.5vh; border-radius: 50%;
+            border: 0.3vh dashed rgba(255, 179, 0, 0.4);
+            border-top: 0.4vh solid #FFB300;
+            animation: spinRing 12s linear infinite;
+            z-index: 0;
         }
-        .animate-float-premium { animation: floatPremium 6s ease-in-out infinite; }
-        
-        @keyframes glowPulseText {
-            0%, 100% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.9), 0 0 1vh rgba(0, 229, 255, 0.3); }
-            50% { text-shadow: 0 0.5vh 1vh rgba(0,0,0,0.9), 0 0 3vh rgba(0, 229, 255, 0.8); }
+        .name-glow-hero {
+            background: linear-gradient(90deg, #FFFFFF 0%, #FFD54F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0.5vh 1vh rgba(255,179,0,0.5));
         }
-        .animate-text-glow { animation: glowPulseText 4s ease-in-out infinite; }
+        .name-glow-list {
+            text-shadow: 0 0.2vh 1vh rgba(255,255,255,0.4);
+        }
     </style>
 </head>
-<body class="antialiased text-white flex flex-col p-[3vh] gap-[3vh]">
+<body class="antialiased text-white flex flex-col h-screen w-screen overflow-hidden bg-[#040812]">
 
-    <!-- TV NO-SLEEP MEDIA HACK: Invisible playing video prevents TV OS from sleeping/dimming -->
+    <!-- TV NO-SLEEP HACK -->
     <video id="tv-keep-awake" loop muted playsinline style="position: absolute; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1;"></video>
 
-    <!-- PERFORMANCE TV BACKGROUND -->
-    <div class="tv-bg"></div>
+    <!-- ANIMATED STOCK MARKET BACKGROUND -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" style="background: #040812;">
+        
+        <!-- TV-Safe Aurora Orbs -->
+        <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[70vh] rounded-full blur-[15vh] mix-blend-screen" style="background: rgba(88, 28, 135, 0.35); animation: aurora-1 15s ease-in-out infinite alternate; will-change: transform;"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[80vh] rounded-full blur-[15vh] mix-blend-screen" style="background: rgba(17, 94, 89, 0.25); animation: aurora-2 18s ease-in-out infinite alternate; will-change: transform;"></div>
+        <div class="absolute top-[20%] right-[20%] w-[40vw] h-[50vh] rounded-full blur-[12vh] mix-blend-screen" style="background: rgba(30, 58, 138, 0.25); animation: aurora-1 20s ease-in-out infinite alternate-reverse; will-change: transform;"></div>
 
-    <!-- HEADER: Refined Executive Minimalist -->
-    <header class="flex-none flex justify-between items-center z-10 h-[6vh] pb-[1vh]">
-        <!-- Left: Logo -->
-        <div class="flex items-center w-1/3">
-            <div class="bg-black/50 border border-white/5 px-[2.5vh] py-[1.2vh] rounded-2xl backdrop-blur-md shadow-lg">
-                <img src="https://drive.google.com/thumbnail?id=16K2KHrjf4Rl9ZY2OTaeS0YSZK9klqwH4&sz=w400" 
-                     alt="Logo" class="h-[3vh] w-auto object-contain"
-                     onerror="this.onerror=null; this.outerHTML='<h2 class=\\'text-[2vh] font-bold text-white/90 tracking-[0.3em] uppercase\\'>COMPANY LOGO</h2>';">
-            </div>
+        <!-- Financial Grid Overlay -->
+        <div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 4vh 4vh;"></div>
+        
+        <!-- Scrolling Stock Trend Line (TV Safe) -->
+        <div class="absolute bottom-[2vh] left-0 h-[45vh] w-[200vw] flex animate-stock-wave opacity-[0.25]">
+            <!-- SVG Block 1 -->
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-[50vw] h-full fill-none stroke-fin-green">
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30" stroke-width="3" style="filter: drop-shadow(0 0 5px #00E676);" />
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30 L1000,300 L0,300 Z" fill="url(#stockGrad)" stroke="none" />
+                <defs>
+                    <linearGradient id="stockGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#00E676" stop-opacity="0.4"/>
+                        <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <!-- SVG Block 2 (Seamless clone) -->
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-[50vw] h-full fill-none stroke-fin-green">
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30" stroke-width="3" style="filter: drop-shadow(0 0 5px #00E676);" />
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30 L1000,300 L0,300 Z" fill="url(#stockGrad)" stroke="none" />
+            </svg>
+            <!-- SVG Block 3 (Seamless clone) -->
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-[50vw] h-full fill-none stroke-fin-green">
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30" stroke-width="3" style="filter: drop-shadow(0 0 5px #00E676);" />
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30 L1000,300 L0,300 Z" fill="url(#stockGrad)" stroke="none" />
+            </svg>
+            <!-- SVG Block 4 (Seamless clone) -->
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-[50vw] h-full fill-none stroke-fin-green">
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30" stroke-width="3" style="filter: drop-shadow(0 0 5px #00E676);" />
+                <path d="M0,250 L50,220 L100,240 L150,180 L200,190 L250,120 L300,150 L350,80 L400,110 L450,50 L500,90 L550,40 L600,70 L650,20 L700,60 L750,10 L800,40 L850,20 L900,50 L950,10 L1000,30 L1000,300 L0,300 Z" fill="url(#stockGrad)" stroke="none" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- HEADER: Distinct Midnight Sapphire Background -->
+    <header class="flex-none flex justify-between items-center z-10 h-[9vh] px-[4vh] bg-gradient-to-r from-[#091225] via-[#101A30] to-[#091225] border-b border-[rgba(255,255,255,0.1)] shadow-[0_1vh_2vh_rgba(0,0,0,0.5)] relative">
+        <!-- Accent Glow Line -->
+        <div class="absolute bottom-0 left-0 right-0 h-[0.2vh] bg-gradient-to-r from-transparent via-[#FFB300] to-transparent opacity-70"></div>
+        
+        <!-- Left: Branding -->
+        <div class="flex items-center w-1/3 h-full py-[1.5vh]">
+            <img src="https://lh3.googleusercontent.com/d/1OLed4fFngR-yUPNwI-CRtMVh6EuZ9lC8" 
+                 alt="Company Logo" 
+                 class="h-full w-auto object-contain drop-shadow-[0_0_1vh_rgba(255,255,255,0.2)]"
+                 onerror="this.onerror=null; this.outerHTML='<div class=&quot;text-[1.5vh] font-bold text-[#ff3333] tracking-[0.1em] uppercase border border-[#ff3333] p-[1vh] rounded&quot;>LOGO BLOCKED - CHECK DRIVE PERMISSION</div>';">
         </div>
 
-        <!-- Center: Title -->
-        <div class="w-1/3 flex flex-col justify-center items-center relative">
-            <!-- Glowing High-Tech Aura Behind Title -->
-            <div class="absolute inset-0 bg-accent-cyan/15 blur-[4vh] rounded-[100%] w-[130%] -left-[15%] h-[150%] -top-[25%] pointer-events-none"></div>
-            
-            <!-- Cyber Title Design -->
-            <h1 class="font-sans text-[3.5vh] uppercase text-white font-black tracking-[0.4em] drop-shadow-[0_0_2vh_rgba(0,229,255,0.6)] relative z-10 flex items-center justify-center whitespace-nowrap">
-                <span class="opacity-90 font-light">TOP</span>
-                <span class="mx-[2vh] text-[6vh] text-transparent bg-clip-text bg-gradient-to-br from-accent-cyan via-blue-400 to-accent-purple font-mono font-bold leading-none drop-shadow-[0_0_1.5vh_rgba(0,229,255,0.8)]">5</span> 
-                <span class="opacity-90 font-light">PERFORMERS</span>
+        <!-- Center: Terminal Status -->
+        <div class="w-1/3 flex flex-col justify-center items-center">
+            <div class="flex items-center gap-[1vh] mb-[0.5vh]">
+                <div class="w-[0.8vh] h-[0.8vh] rounded-full bg-fin-green shadow-[0_0_1vh_#00E676] animate-pulse"></div>
+                <span class="font-mono text-[1.2vh] tracking-widest text-fin-green uppercase">Live Market Data</span>
+            </div>
+            <h1 class="font-sans header-title text-white uppercase flex items-center gap-[2vh] drop-shadow-md">
+                TOP 5 PERFORMERS
             </h1>
         </div>
 
-        <!-- Right: Time & Fullscreen -->
-        <div class="flex items-center justify-end w-1/3 gap-[3vh]">
-            <div id="live-clock" class="font-mono text-[2.2vh] tracking-[0.2em] text-white/60 bg-black/50 border border-white/5 px-[2vh] py-[0.8vh] rounded-xl shadow-lg font-light">00:00:00</div>
-            <button id="fullscreen-btn" class="text-white/40 hover:text-white/90 transition-colors p-[1.5vh] bg-black/50 border border-white/5 rounded-xl shadow-lg">
-                <svg class="w-[2.5vh] h-[2.5vh]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+        <!-- Right: Telemetry & Time -->
+        <div class="flex items-center justify-end w-1/3 gap-[2vh]">
+            <div class="font-mono text-right flex flex-col items-end justify-center bg-black/40 border border-white/10 px-[2vh] py-[0.8vh] rounded-md backdrop-blur-sm">
+                <!-- 12-Hour AM/PM Format -->
+                <div id="live-clock" class="text-[2.2vh] font-bold text-white tracking-wider">00:00 AM</div>
+                <div id="live-date" class="text-[1.2vh] tracking-widest text-white/50 uppercase mt-[0.2vh]">Loading Date...</div>
+            </div>
+            <button id="fullscreen-btn" class="text-white/40 hover:text-white transition-all duration-300 p-[1.5vh] rounded-md border border-white/10 bg-black/40 backdrop-blur-sm">
+                <svg class="w-[2.5vh] h-[2.5vh]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
             </button>
         </div>
     </header>
 
-    <!-- MAIN SPLIT SCREEN -->
-    <main class="flex-1 w-full relative z-10 flex flex-row gap-[4vh] min-h-0">
+    <!-- MAIN DASHBOARD DATA GRID -->
+    <!-- flex-1 dynamically takes remaining height between header and footer -->
+    <main class="flex-1 w-full relative z-10 flex gap-[3vh] min-h-0 p-[4vh]">
         
-        <!-- Loading Overlay (Matched to dark theme) -->
-        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#050505] transition-opacity duration-700 rounded-3xl">
-            <div class="w-[5vh] h-[5vh] border-[0.2vh] border-accent-gold border-t-transparent rounded-full animate-spin mb-[3vh]"></div>
-            <p class="font-sans text-[1.8vh] tracking-[0.6em] text-accent-gold/70 uppercase font-light">Retrieving Global Data</p>
+        <!-- Data Loader -->
+        <div id="loader" class="absolute inset-0 flex flex-col items-center justify-center z-50 bg-[#06080F] transition-opacity duration-700">
+            <div class="flex gap-[1vh] mb-[2vh]">
+                <div class="w-[1vh] h-[4vh] bg-fin-green animate-[pulse_1s_infinite]"></div>
+                <div class="w-[1vh] h-[6vh] bg-fin-green animate-[pulse_1s_infinite_0.2s]"></div>
+                <div class="w-[1vh] h-[3vh] bg-fin-green animate-[pulse_1s_infinite_0.4s]"></div>
+            </div>
+            <p class="font-mono text-[1.5vh] tracking-widest text-fin-green uppercase">Fetching Market Data...</p>
         </div>
 
-        <!-- LEFT PANEL: The Hero (#1) -->
-        <div class="w-[45%] h-full mnc-panel flex flex-col items-center justify-center p-[5vh] text-center" id="hero-slot">
-            <!-- Injected via JS -->
+        <!-- LEFT: TOP PERFORMER (Rank 1) -->
+        <div class="w-[40%] h-full flex flex-col anim-fade-up min-h-0">
+            <div class="fin-card hero-card h-full flex flex-col items-center justify-center p-[4vh] relative overflow-hidden" id="hero-slot">
+                <!-- Injected via JS -->
+            </div>
         </div>
 
-        <!-- RIGHT PANEL: The List (#2 to #5) -->
-        <div class="w-[55%] h-full flex flex-col justify-center gap-[0.5vh]" id="contenders-slot">
+        <!-- RIGHT: LEADERBOARD LIST (Ranks 2-5) -->
+        <div class="w-[60%] h-full flex flex-col justify-between gap-[2vh] min-h-0" id="contenders-slot">
             <!-- Injected via JS -->
         </div>
         
     </main>
 
+    <!-- FOOTER: Distinct Dark Carbon with Stock Ticker -->
+    <footer class="flex-none z-10 h-[6vh] bg-gradient-to-b from-[#111621] to-[#040810] border-t border-[rgba(255,255,255,0.08)] flex items-center overflow-hidden relative shadow-[0_-1vh_2vh_rgba(0,0,0,0.5)]">
+        <div class="absolute top-0 left-0 right-0 h-[0.1vh] bg-gradient-to-r from-transparent via-[#00E676] to-transparent opacity-50"></div>
+        
+        <div class="flex items-center w-full relative z-10 font-mono text-[1.8vh] uppercase tracking-widest text-white/60">
+            <!-- Ticker Animation -->
+            <div id="footer-ticker" class="animate-ticker flex items-center gap-[4vh]">
+                <!-- Dynamically injected via JavaScript to show exact date -->
+                <span class="flex items-center gap-[1vh]">LOADING LIVE DATA...</span>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Clock (Unchanged Logic)
+        // 12-HOUR CLOCK & DATE LOGIC
         setInterval(() => {
+            const now = new Date();
             try {
-                document.getElementById('live-clock').innerText = new Date().toLocaleTimeString(undefined, { hour12: false });
+                // Time (e.g., 1:00 PM)
+                document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+                
+                // Date (e.g., WED, AUG 5)
+                const options = { weekday: 'short', month: 'short', day: 'numeric' };
+                document.getElementById('live-date').innerText = now.toLocaleDateString('en-US', options);
+
+                // Dynamic Footer Ticker (e.g. AS OF AUGUST 5TH - TOP FIVE PERFORMERS)
+                const month = now.toLocaleString('en-US', { month: 'long' }).toUpperCase();
+                const date = now.getDate();
+                
+                // Get Ordinal (ST, ND, RD, TH)
+                let ordinal = "TH";
+                if (date > 3 && date < 21) ordinal = "TH";
+                else {
+                    const lastDigit = date % 10;
+                    if(lastDigit === 1) ordinal = "ST";
+                    else if(lastDigit === 2) ordinal = "ND";
+                    else if(lastDigit === 3) ordinal = "RD";
+                }
+
+                const ticker = document.getElementById('footer-ticker');
+                if (ticker && ticker.dataset.updatedForDay != date) {
+                    const dateStr = `AS OF ${month} ${date}${ordinal}`;
+                    const repeatingText = `
+                        <span class="flex items-center gap-[1vh]"><span class="text-[#FFB300]">★</span> ${dateStr}</span>
+                        <span>|</span>
+                        <span class="flex items-center gap-[1vh] text-[#00E676]">TOP FIVE PERFORMERS</span>
+                        <span>|</span>
+                    `;
+                    // Repeat it 8 times so it loops seamlessly on massive TVs
+                    ticker.innerHTML = repeatingText.repeat(8);
+                    ticker.dataset.updatedForDay = date; 
+                }
+
             } catch (e) {
-                document.getElementById('live-clock').innerText = new Date().toTimeString().split(' ')[0];
+                // TV Fallback
+                document.getElementById('live-clock').innerText = now.toTimeString().split(' ')[0];
             }
         }, 1000);
 
-        // TV STABILITY ENGINE (Unchanged Logic)
+        // TV NO-SLEEP & AUTO-RELOAD
         const TV_AUTO_RELOAD_MINUTES = 5;
         setTimeout(() => { window.location.reload(); }, TV_AUTO_RELOAD_MINUTES * 60 * 1000);
 
-        // TV KEEP-ALIVE AUDIO HEARTBEAT (Unchanged Logic)
         function initTvKeepAlive() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -250,21 +367,14 @@
 
         const loader = document.getElementById('loader');
 
-        // TV DEBUGGER
+        // TV DEBUGGERS
         window.onerror = function(msg, url, line) {
             if(loader) {
                 loader.classList.remove('opacity-0', 'hidden');
-                loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:1px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV BROWSER CRASH:</b><br>${msg}<br>Line: ${line}</div>`;
+                loader.innerHTML = `<div style="color:#ff3333; font-family:monospace; text-align:center; padding:4vh;">SYS_ERR: ${msg} (Line ${line})</div>`;
             }
         };
-        window.addEventListener('unhandledrejection', function(event) {
-            if(loader) {
-                loader.classList.remove('opacity-0', 'hidden');
-                loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:1px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV NETWORK BLOCKED:</b><br>${event.reason}</div>`;
-            }
-        });
 
-        // Robust CSV Parser (Unchanged Logic)
         function parseCSV(text) {
             const result = []; let row = []; let inQuotes = false; let currentValue = "";
             for (let i = 0; i < text.length; i++) {
@@ -285,7 +395,7 @@
 
         function formatRupees(num) {
             let formatted = "0";
-            try { formatted = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(num); } 
+            try { formatted = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(num); } 
             catch(e) { formatted = Math.floor(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
             return `<span class="currency-symbol">₹</span>${formatted}`;
         }
@@ -305,136 +415,133 @@
             window.requestAnimationFrame(step);
         }
 
-        // CYBER DESIGN: Hero Card Template
+        // FINANCIAL HERO CARD (Rank 1 - Perfectly Centered)
         function buildHeroCard(employee) {
             const initial = employee.name.charAt(0).toUpperCase();
+            
+            // Fixed avatar rounding to perfectly match the spinning holographic ring
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/20 text-[9vh] font-sans font-light\\'>${initial}</div>';">`
-                : `<div class="w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/20 text-[9vh] font-sans font-light">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full shadow-[0_1vh_3vh_rgba(0,0,0,0.5)]" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[9vh] font-sans font-medium&quot;>${initial}</div>';">`
+                : `<div class="w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[9vh] font-sans font-medium">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
             
             let tagsHtml = "";
             if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
-                tagsHtml += `<span class="bg-accent-cyan/10 border border-accent-cyan/30 px-[2vh] py-[0.8vh] rounded-xl mx-[0.5vh] text-accent-cyan shadow-[0_0_1vh_rgba(0,229,255,0.2)]">TL <span class="text-white ml-[0.5vh]">${tlFirst}</span></span>`;
+                tagsHtml += `<div class="bg-[#FFB300]/10 border border-[#FFB300]/30 px-[2vh] py-[0.8vh] rounded-full text-[#FFB300] shadow-[0_0_1vh_rgba(255,179,0,0.2)]">TL: <span class="text-white ml-[0.5vh]">${tlFirst}</span></div>`;
             }
             if (rmFirst !== 'N/A') {
-                tagsHtml += `<span class="bg-accent-cyan/10 border border-accent-cyan/30 px-[2vh] py-[0.8vh] rounded-xl mx-[0.5vh] text-accent-cyan shadow-[0_0_1vh_rgba(0,229,255,0.2)]">MGR <span class="text-white ml-[0.5vh]">${rmFirst}</span></span>`;
+                tagsHtml += `<div class="bg-[#FFB300]/10 border border-[#FFB300]/30 px-[2vh] py-[0.8vh] rounded-full text-[#FFB300] shadow-[0_0_1vh_rgba(255,179,0,0.2)]">MGR: <span class="text-white ml-[0.5vh]">${rmFirst}</span></div>`;
             }
 
             return `
-                <div class="w-full h-full flex flex-col items-center justify-center relative animate-tv-pop animate-float-premium">
+                <div class="w-full h-full flex flex-col items-center justify-center text-center">
                     
-                    <!-- Cyber MVP Badge -->
-                    <div class="mb-[1.5vh] relative z-20">
-                        <span class="relative font-sans text-white text-[1.6vh] tracking-[0.5em] uppercase bg-gradient-to-r from-accent-purple to-accent-pink shadow-[0_0_2vh_rgba(255,0,122,0.6)] px-[3vh] py-[0.8vh] rounded-full font-bold border border-white/20">TOP PERFORMER</span>
+                    <!-- Rank 1 Badge (Cyber Gold) -->
+                    <div class="mb-[4vh] relative z-20">
+                        <span class="font-mono text-[#06080F] bg-gradient-to-r from-[#FFB300] to-[#FFD54F] px-[3vh] py-[1vh] text-[1.8vh] tracking-[0.4em] uppercase font-extrabold rounded-full shadow-[0_0_3vh_rgba(255,179,0,0.6)]">
+                            TOP PERFORMER
+                        </span>
                     </div>
-                    
-                    <!-- Glowing Avatar Shell (Scaled correctly to 34vh) -->
-                    <div class="relative w-[34vh] h-[34vh] mb-[2vh] rounded-full p-[0.4vh] bg-gradient-to-b from-accent-cyan via-accent-purple to-transparent shadow-[0_1vh_4vh_rgba(0,229,255,0.3)]">
-                        <div class="tech-ring"></div>
-                        <div class="w-full h-full rounded-full overflow-hidden bg-[#05030a] border-[0.6vh] border-[#100b1f] relative z-10">
+
+                    <!-- Holographic Circular Avatar -->
+                    <div class="relative w-[32vh] h-[32vh] mb-[4vh] p-[0.6vh] bg-gradient-to-b from-[#FFB300] to-transparent rounded-full shadow-[0_0_5vh_rgba(255,179,0,0.2)]">
+                        <div class="holo-ring"></div>
+                        <div class="w-full h-full bg-[#06080F] rounded-full overflow-hidden relative z-10">
                             ${photoHtml}
                         </div>
                     </div>
 
-                    <!-- Clean Elegant Name -->
-                    <h2 class="font-sans hero-name mb-[1.5vh] text-center w-full px-[2vh] text-white/95 animate-text-glow leading-tight">${employee.name}</h2>
+                    <!-- Name & Tags (BUG FIX: Removed truncate, added text wrap and neon glow) -->
+                    <h2 class="font-sans hero-name name-glow-hero mb-[2vh] tracking-wide w-full px-[2vh] leading-tight break-words whitespace-normal">${employee.name}</h2>
                     
-                    <div class="font-mono text-[1.3vh] uppercase tracking-[0.2em] flex items-center justify-center mb-[2vh] flex-wrap font-medium">
+                    <div class="font-mono text-[1.4vh] tracking-wider flex items-center justify-center gap-[1.5vh] mb-[4vh] w-full uppercase font-bold">
                         ${tagsHtml}
                     </div>
-                    
-                    <!-- Cyan Highlighted Revenue -->
-                    <div class="w-full text-center">
-                        <div class="font-mono hero-rev numeric-counter text-transparent bg-clip-text bg-gradient-to-br from-white via-accent-cyan to-blue-500 drop-shadow-[0_0.5vh_1vh_rgba(0,0,0,1)]" data-target-value="${employee.sales}">
-                            <span class="currency-symbol text-accent-cyan/80">₹</span>0
+
+                    <!-- Stock Market Revenue Display -->
+                    <div class="flex flex-col items-center w-full bg-gradient-to-b from-[#06080F]/80 to-[#06080F]/40 py-[2vh] rounded-xl border border-[#00E676]/30 shadow-[0_0_3vh_rgba(0,230,118,0.15)]">
+                        <p class="font-mono text-[1.5vh] text-[#00E676]/80 tracking-[0.3em] uppercase mb-[0.5vh] font-bold">Total Generated</p>
+                        <div class="flex items-center justify-center gap-[1.5vh]">
+                            <svg class="w-[4.5vh] h-[4.5vh] text-[#00E676] drop-shadow-[0_0_1vh_rgba(0,230,118,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            <div class="font-mono hero-rev numeric-counter text-[#00E676] drop-shadow-[0_0_2vh_rgba(0,230,118,0.6)]" data-target-value="${employee.sales}">
+                                <span class="currency-symbol text-[#00E676]/60">₹</span>0
+                            </div>
                         </div>
-                        <p class="text-accent-cyan/60 font-sans text-[1.6vh] tracking-[0.6em] uppercase mt-[1vh] font-medium">Total Revenue</p>
                     </div>
                 </div>
             `;
         }
 
-        // CYBER DESIGN: List Card Template
+        // FINANCIAL LIST CARD (Strict Row Alignment)
         function buildListCard(employee, rank) {
             const initial = employee.name.charAt(0).toUpperCase();
+            
+            // Enhanced Financial Colors for ranks with glowing accents
+            let rankColor, glowColor, borderGlow;
+            if (rank === 2) { rankColor = "#E0E0E0"; glowColor = "rgba(224, 224, 224, 0.8)"; borderGlow = "border-[#E0E0E0]/50"; }      // Silver
+            else if (rank === 3) { rankColor = "#FF8A65"; glowColor = "rgba(255, 138, 101, 0.8)"; borderGlow = "border-[#FF8A65]/50"; }   // Bronze
+            else { rankColor = "#00B0FF"; glowColor = "rgba(0, 176, 255, 0.8)"; borderGlow = "border-[#00B0FF]/40"; }                              // Cyber Blue for 4 & 5
+
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=\\'w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/20 text-[4vh] font-sans font-light\\'>${initial}</div>';">`
-                : `<div class="w-full h-full rounded-full bg-[#111] flex items-center justify-center text-white/20 text-[4vh] font-sans font-light">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-[1vh]" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-[#1C2433] rounded-[1vh] flex items-center justify-center text-white/30 text-[5vh] font-sans font-medium&quot;>${initial}</div>';">`
+                : `<div class="w-full h-full bg-[#1C2433] rounded-[1vh] flex items-center justify-center text-white/30 text-[5vh] font-sans font-medium">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
             
-            // Cyberpunk Theme Colors for Ranks
-            let rankGradient, rankColor, borderColor, numColor;
-            
-            if(rank === 2) { 
-                // DEEP PURPLE
-                rankGradient = "from-purple-400 to-purple-700"; 
-                rankColor = "#a855f7";
-                borderColor = "border-purple-600";
-                numColor = "text-transparent bg-clip-text bg-gradient-to-b from-purple-300 to-purple-600";
-            } else if (rank === 3) { 
-                // NEON PINK
-                rankGradient = "from-pink-400 to-pink-700"; 
-                rankColor = "#ec4899";
-                borderColor = "border-pink-600";
-                numColor = "text-transparent bg-clip-text bg-gradient-to-b from-pink-300 to-pink-600";
-            } else {
-                // COOL BLUE (Ranks 4 & 5)
-                rankGradient = "from-blue-400 to-blue-700";
-                rankColor = "#3b82f6";
-                borderColor = "border-blue-600";
-                numColor = "text-transparent bg-clip-text bg-gradient-to-b from-blue-300 to-blue-600";
-            }
-
             let listTagsHtml = "";
             if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
-                listTagsHtml += `<span class="text-[${rankColor}]/90 bg-[${rankColor}]/10 border border-[${rankColor}]/20 px-[1.2vh] py-[0.4vh] rounded-md shadow-sm">TL <span class="text-white/90">${tlFirst}</span></span>`;
+                listTagsHtml += `<span class="text-white/50 bg-white/5 px-[1vh] py-[0.3vh] rounded">TL: <span class="text-white/90">${tlFirst}</span></span>`;
             }
             if (rmFirst !== 'N/A') {
-                if(listTagsHtml !== "") listTagsHtml += `<span class="text-white/10 mx-[0.5vh]">-</span>`;
-                listTagsHtml += `<span class="text-[${rankColor}]/90 bg-[${rankColor}]/10 border border-[${rankColor}]/20 px-[1.2vh] py-[0.4vh] rounded-md shadow-sm">MGR <span class="text-white/90">${rmFirst}</span></span>`;
+                listTagsHtml += `<span class="text-white/50 bg-white/5 px-[1vh] py-[0.3vh] rounded">MGR: <span class="text-white/90">${rmFirst}</span></span>`;
             }
                 
             const fillPercentage = Math.max(2, (employee.sales / maxSalesBenchmark) * 100);
 
             return `
-                <div class="flex-1 w-full mnc-row flex flex-col justify-center animate-tv-slide group px-[3vh]" style="border-left-color: ${rankColor}; animation-delay: ${(rank-1) * 0.1}s;">
+                <div class="flex-1 w-full list-row flex flex-col justify-center anim-fade-up px-[3vh] border-l-[0.5vh] ${borderGlow} shadow-[0_1vh_2vh_rgba(0,0,0,0.5)]" style="animation-delay: ${(rank-1) * 0.15}s; border-left-color: ${rankColor};">
                     
-                    <div class="flex items-center justify-between w-full h-full relative z-10 py-[0.5vh]">
+                    <div class="flex items-center justify-between w-full h-full py-[1vh] relative z-10">
                         
-                        <div class="flex items-center gap-[2.5vh] min-w-0 flex-1">
-                            <!-- Glowing Number -->
-                            <div class="font-mono text-[3.5vh] font-bold w-[5vh] text-center ${numColor}">0${rank}</div>
+                        <!-- Rank, Avatar & Name (Left Aligned) -->
+                        <div class="flex items-center gap-[3vh] min-w-0 flex-1">
                             
-                            <!-- Glowing Avatar Border (Scaled correctly to 14vh) -->
-                            <div class="w-[14vh] h-[14vh] rounded-full p-[0.3vh] shrink-0 bg-gradient-to-b ${rankGradient} shadow-[0_0_1.5vh_${rankColor}40]">
-                                <div class="w-full h-full rounded-full overflow-hidden bg-[#070314] border-[0.4vh] ${borderColor}">
+                            <!-- Glowing Cyber Rank Block -->
+                            <div class="font-mono text-[4vh] font-black w-[5vh] text-center drop-shadow-[0_0_1.5vh_${glowColor}]" style="color: ${rankColor};">0${rank}</div>
+                            
+                            <!-- Square Avatar with Colored Border -->
+                            <div class="w-[13vh] h-[13vh] shrink-0 p-[0.3vh] rounded-[1.2vh] shadow-[0_0_2vh_${glowColor.replace('0.8', '0.2')}]" style="background-color: ${rankColor};">
+                                <div class="w-full h-full bg-[#06080F] rounded-[1vh] overflow-hidden">
                                     ${photoHtml}
                                 </div>
                             </div>
                             
-                            <div class="flex flex-col min-w-0 pr-[2vh] gap-[0.5vh]">
-                                <h3 class="font-sans list-name truncate drop-shadow-[0_0.2vh_0.5vh_rgba(0,0,0,1)] text-white">${employee.name}</h3>
-                                <div class="font-mono text-[1.3vh] uppercase tracking-wider flex items-center flex-wrap gap-[0.5vh] font-medium">
+                            <!-- Info Column (BUG FIX: Removed truncate, allowed name to wrap safely) -->
+                            <div class="flex flex-col min-w-0 pr-[2vh] gap-[0.8vh]">
+                                <h3 class="font-sans list-name name-glow-list text-white leading-tight break-words whitespace-normal">${employee.name}</h3>
+                                <div class="font-mono text-[1.3vh] tracking-wider flex items-center flex-wrap uppercase gap-[1vh]">
                                     ${listTagsHtml}
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Revenue & Trend (Right Aligned) -->
                         <div class="flex flex-col items-end shrink-0 pl-[2vh]">
-                            <div class="font-mono list-rev numeric-counter text-white/95 drop-shadow-[0_0.5vh_1vh_rgba(0,0,0,1)]" data-target-value="${employee.sales}">
-                                <span class="currency-symbol text-[${rankColor}]/80">₹</span>0
+                            <div class="flex items-center gap-[1vh]">
+                                <svg class="w-[2.5vh] h-[2.5vh] text-[#00E676] drop-shadow-[0_0_1vh_rgba(0,230,118,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                <div class="font-mono list-rev numeric-counter text-white drop-shadow-[0_0_1vh_rgba(255,255,255,0.3)]" data-target-value="${employee.sales}">
+                                    <span class="currency-symbol text-white/40">₹</span>0
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Glowing Data Line -->
-                    <div class="absolute bottom-0 left-0 right-0 h-[0.4vh] bg-white/5">
-                        <div class="progress-line-fill bg-gradient-to-r ${rankGradient} shadow-[0_0_2vh_${rankColor}]" style="width: 0%;" data-target-width="${fillPercentage}%"></div>
+                    <!-- Volume Bar Track (Laser effect) -->
+                    <div class="volume-track bg-white/5">
+                        <div class="volume-fill shadow-[0_0_1.5vh_${glowColor}]" style="width: 0%; background-color: ${rankColor};" data-target-width="${fillPercentage}%"></div>
                     </div>
                 </div>
             `;
@@ -469,7 +576,6 @@
                             let cleanUrl = photoUrl;
                             const driveMatch = photoUrl.match(/(?:\/d\/|id=)([\w-]+)/);
                             if (driveMatch && driveMatch[1]) cleanUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=s1200-c`;
-                            
                             exactPhotoMap.set(fullName, cleanUrl);
                             const firstName = fullName.split(/\s+/)[0]; 
                             if (firstName && !firstNamePhotoMap.has(firstName)) firstNamePhotoMap.set(firstName, cleanUrl);
@@ -492,7 +598,6 @@
                         const searchNameLower = name.toLowerCase();
                         const searchFirstName = searchNameLower.split(/\s+/)[0];
                         const matchedPhoto = exactPhotoMap.get(searchNameLower) || firstNamePhotoMap.get(searchFirstName) || null;
-                        
                         mergedData.push({ name, sales: achieved, tl, rm, photo: matchedPhoto });
                     }
                 });
@@ -530,27 +635,26 @@
             setTimeout(() => {
                 document.querySelectorAll('.numeric-counter').forEach(counter => {
                     const targetValue = parseFloat(counter.getAttribute('data-target-value'));
-                    animateValue(counter, 0, targetValue, 2500); 
+                    animateValue(counter, 0, targetValue, 2000); 
                 });
 
-                document.querySelectorAll('.progress-line-fill').forEach((bar, index) => {
-                    setTimeout(() => { bar.style.width = bar.getAttribute('data-target-width'); }, 300 + (index * 150));
+                document.querySelectorAll('.volume-fill').forEach((bar, index) => {
+                    setTimeout(() => { bar.style.width = bar.getAttribute('data-target-width'); }, 200 + (index * 150));
                 });
             }, 100);
 
             if (!loader.classList.contains('hidden')) {
                 loader.classList.add('opacity-0');
-                setTimeout(() => { loader.classList.add('hidden'); }, 500);
+                setTimeout(() => { loader.classList.add('hidden'); }, 700);
             }
         }
 
         async function updateDashboard() {
             try { renderLeaderboard(await fetchAndMergeData()); } 
             catch (err) { 
-                const loader = document.getElementById('loader');
                 if(loader) {
                     loader.classList.remove('opacity-0', 'hidden');
-                    loader.innerHTML = `<div style="color:#ff3333; font-size:3vh; text-align:center; padding:4vh; background:#000; border:1px solid #ff3333; border-radius:2vh; z-index:9999;"><b>TV DATA BLOCKED:</b><br>${err.message}</div>`;
+                    loader.innerHTML = `<div style="color:#ff3333; font-family:monospace; text-align:center; padding:4vh; background:#06080F;">DATA OFFLINE<br>${err.message}</div>`;
                 }
             }
         }
@@ -572,7 +676,7 @@
                     if (!document.fullscreenElement) {
                         document.documentElement.requestFullscreen().then(() => {
                             const fsBtn = document.getElementById('fullscreen-btn');
-                            if(fsBtn) fsBtn.classList.add('text-white/90', 'bg-white/10');
+                            if(fsBtn) fsBtn.classList.add('text-white', 'bg-white/10');
                         }).catch(() => {});
                     }
                 } catch(e) {}
@@ -588,7 +692,7 @@
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(() => {});
                     const fsBtn = document.getElementById('fullscreen-btn');
-                    if(fsBtn) fsBtn.classList.add('text-white/90', 'bg-white/10');
+                    if(fsBtn) fsBtn.classList.add('text-white', 'bg-white/10');
                 }
             });
 
@@ -597,10 +701,10 @@
                 e.stopPropagation();
                 if (!document.fullscreenElement) {
                     document.documentElement.requestFullscreen().catch(() => {});
-                    fullscreenBtn.classList.add('text-white/90', 'bg-white/10');
+                    fullscreenBtn.classList.add('text-white', 'bg-white/10');
                 } else {
                     document.exitFullscreen();
-                    fullscreenBtn.classList.remove('text-white/90', 'bg-white/10');
+                    fullscreenBtn.classList.remove('text-white', 'bg-white/10');
                 }
             });
         });
