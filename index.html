@@ -188,22 +188,22 @@
         }
 
         @keyframes float-badge {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-1vh) rotate(2deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-1vh); }
         }
 
         /* NEW: PREMIUM FIRST-CLASS AVATAR RINGS & FLIGHT ANIMATION */
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         .gold-ring-outer {
-            position: absolute; inset: -1vh; border-radius: 50%;
-            border: 0.3vh dashed rgba(255, 215, 0, 0.4);
-            animation: spin-slow 15s linear infinite;
+            position: absolute; inset: -1.5vh; border-radius: 50%;
+            border: 0.2vh dashed rgba(255, 215, 0, 0.3);
+            animation: spin-slow 20s linear infinite;
         }
         .gold-ring-inner {
-            position: absolute; inset: -0.2vh; border-radius: 50%;
-            border: 0.3vh solid rgba(255, 215, 0, 0.8);
+            position: absolute; inset: -0.4vh; border-radius: 50%;
+            border: 0.2vh solid rgba(255, 215, 0, 0.6);
             border-right-color: transparent;
-            animation: spin-slow 8s linear infinite reverse;
+            animation: spin-slow 10s linear infinite reverse;
         }
         
         @keyframes flight-progress {
@@ -217,16 +217,6 @@
             top: 50%;
             transform: translateY(-50%);
             animation: flight-progress 4s ease-in-out infinite;
-        }
-
-        /* NEW: Digital Barcode Scanner Animation */
-        @keyframes scan-laser {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(4vh); }
-            100% { transform: translateX(0); }
-        }
-        .animate-scan {
-            animation: scan-laser 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
     </style>
 </head>
@@ -508,31 +498,43 @@
             return `
                 <div class="w-full h-full flex flex-col items-center justify-between text-center relative z-10 py-[1vh]">
                     
-                    <!-- Elegant Animated Premium Goa Badge -->
-                    <div class="w-full flex justify-center items-center mb-[2.5vh] relative z-20">
-                        <!-- Focused Glowing Aura Behind the Pill -->
-                        <div class="absolute w-[22vh] h-[3.5vh] bg-[#FFD700] blur-[1.5vh] opacity-30 animate-[pulse_2s_ease-in-out_infinite]"></div>
+                    <!-- SLEEK LEVITATING BADGE (UPSCALED WITH SPARK) -->
+                    <div class="w-full flex justify-center items-center mb-[3vh] relative z-20">
+                        <!-- Massive glowing aura behind the pill to grab attention -->
+                        <div class="absolute w-[45vh] h-[8vh] bg-[#FFD700] blur-[3vh] opacity-40 animate-[pulse_2s_ease-in-out_infinite]"></div>
                         
-                        <!-- The Obsidian Pill -->
-                        <div class="relative bg-[#030408]/90 backdrop-blur-xl border border-[#FFD700]/50 px-[4vh] py-[0.8vh] rounded-full flex items-center gap-[2vh] shadow-[0_1vh_2vh_rgba(0,0,0,0.8),inset_0_0_1vh_rgba(255,215,0,0.3)] overflow-hidden">
+                        <div class="relative bg-[#030408]/95 backdrop-blur-xl border-[0.3vh] border-[#FFD700]/70 px-[5vh] py-[1.5vh] rounded-full flex items-center gap-[2vh] shadow-[0_2vh_4vh_rgba(0,0,0,0.9),_0_0_4vh_rgba(255,215,0,0.4)] overflow-hidden animate-[float-badge_4s_ease-in-out_infinite]">
+                            <!-- High-speed intense light sweep -->
+                            <div class="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#FFFFFF]/30 to-transparent animate-[shimmer-sweep_2s_infinite]"></div>
                             
-                            <!-- Sweeping Shimmer Light -->
-                            <div class="animate-shimmer" style="background: linear-gradient(90deg, transparent, rgba(255,215,0,0.4), transparent); width: 100%;"></div>
+                            <span class="text-[2.5vh] relative z-10 drop-shadow-[0_0_1.5vh_rgba(255,215,0,1)]">✈️</span>
                             
-                            <span class="text-[1.5vh] relative z-10 opacity-90">✈️</span>
-                            <span class="relative z-10 font-mono font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FFF3E0] to-[#FFD700] text-[1.4vh] tracking-[0.4em] uppercase drop-shadow-[0_0_1.5vh_rgba(255,215,0,0.5)]">
+                            <!-- Attention-Grabbing Sparks -->
+                            <span class="text-[#FFD700] text-[3vh] relative z-10 animate-[pulse_1s_infinite] drop-shadow-[0_0_1.5vh_rgba(255,255,255,1)]">✦</span>
+
+                            <!-- Doubled Text Size and Thicker Font -->
+                            <span class="relative z-10 font-sans font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FFFFFF] to-[#FFD700] text-[3vh] tracking-[0.2em] uppercase" style="filter: drop-shadow(0 0 1vh rgba(255,215,0,0.8));">
                                 Next Stop Goa
                             </span>
-                            <span class="text-[1.5vh] relative z-10 opacity-90">🌴</span>
+                            
+                            <!-- Attention-Grabbing Sparks -->
+                            <span class="text-[#FFD700] text-[3vh] relative z-10 animate-[pulse_1s_infinite_0.5s] drop-shadow-[0_0_1.5vh_rgba(255,255,255,1)]">✦</span>
+
+                            <span class="text-[2.5vh] relative z-10 drop-shadow-[0_0_1.5vh_rgba(255,215,0,1)]">🌴</span>
                         </div>
                     </div>
 
-                    <!-- AVATAR (High-Tech / Professional Sonar Ring) -->
-                    <div class="relative w-[28vh] h-[28vh] mb-[2.5vh] flex-shrink-0">
-                        <!-- Professional Animated Rings (Replaced Crown) -->
+                    <!-- AVATAR (CLEAN LUXURY ORBITS) -->
+                    <div class="relative w-[28vh] h-[28vh] mb-[2.5vh] flex-shrink-0 flex items-center justify-center animate-[float-badge_5s_ease-in-out_infinite_0.5s]">
+                        <!-- Subtle core glow -->
+                        <div class="absolute inset-[2vh] bg-[#FFD700] blur-[3vh] opacity-20"></div>
+                        
+                        <!-- Crisp Sci-Fi / Luxury Orbits -->
                         <div class="gold-ring-outer"></div>
                         <div class="gold-ring-inner"></div>
-                        <div class="w-full h-full bg-[#06080F] rounded-full overflow-hidden relative z-10 border-[0.4vh] border-[#1A1A1A] shadow-[0_0_5vh_rgba(0,0,0,0.8)]">
+                        
+                        <!-- The Avatar Core -->
+                        <div class="w-[26vh] h-[26vh] bg-[#06080F] rounded-full overflow-hidden relative z-10 border-[0.3vh] border-[#1A1A1A] shadow-[0_1vh_3vh_rgba(0,0,0,0.9)]">
                             ${photoHtml}
                         </div>
                     </div>
