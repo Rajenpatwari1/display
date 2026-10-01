@@ -7,7 +7,7 @@
     <!-- HARDWARE-LEVEL TV AUTO-REFRESH: Forces browser to reload every 300 seconds (5 mins) natively -->
     <meta http-equiv="refresh" content="300">
     
-    <title>Enterprise Sales Terminal</title>
+    <title>Enterprise Sales Terminal - Race to Goa</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -89,9 +89,9 @@
         }
 
         .hero-card {
-            border-top: 0.4vh solid #FFB300;
-            background: linear-gradient(180deg, rgba(255, 179, 0, 0.12) 0%, rgba(16, 24, 40, 0.5) 100%);
-            box-shadow: 0 2.5vh 5vh rgba(0,0,0,0.6), 0 0 5vh rgba(255,179,0,0.15);
+            border-top: 0.6vh solid #FFD700;
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.15) 0%, rgba(10, 15, 30, 0.8) 100%);
+            box-shadow: 0 3vh 6vh rgba(0,0,0,0.8), 0 0 10vh rgba(255,215,0,0.2), inset 0 1vh 4vh rgba(255,215,0,0.1);
         }
 
         .list-row {
@@ -479,107 +479,101 @@
         function buildHeroCard(employee) {
             const initial = employee.name.charAt(0).toUpperCase();
             
-            // Professional Portrait Frame
+            // Ultra-Premium Portrait Frame (Scaled down slightly to fit screen)
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full shadow-[inset_0_0_2vh_rgba(0,0,0,0.8)]" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[9vh] font-sans font-medium&quot;>${initial}</div>';">`
-                : `<div class="w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[9vh] font-sans font-medium">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full shadow-[inset_0_0_4vh_rgba(255,215,0,0.5)]" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-gradient-to-br from-[#FFD700]/20 to-[#1C2433] rounded-full flex items-center justify-center text-[#FFD700]/50 text-[10vh] font-sans font-medium&quot;>${initial}</div>';">`
+                : `<div class="w-full h-full bg-gradient-to-br from-[#FFD700]/20 to-[#1C2433] rounded-full flex items-center justify-center text-[#FFD700]/50 text-[10vh] font-sans font-medium">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
             
             let tagsHtml = "";
             if (employee.tl.toLowerCase() !== employee.name.toLowerCase() && employee.tl.toLowerCase() !== employee.rm.toLowerCase() && tlFirst !== 'N/A') {
-                tagsHtml += `<div class="bg-black/40 border border-white/20 px-[1.5vh] py-[0.5vh] rounded text-white/70 tracking-widest text-[1.1vh]">TL // <span class="text-white ml-[0.5vh] font-bold">${tlFirst}</span></div>`;
+                tagsHtml += `<div class="bg-[#0A0D14]/80 border border-[#FFD700]/40 px-[1.5vh] py-[0.5vh] rounded-lg text-[#FFD700]/90 tracking-widest text-[1.2vh] shadow-[0_0_1.5vh_rgba(255,215,0,0.2)]">TL // <span class="text-white ml-[0.5vh] font-bold">${tlFirst}</span></div>`;
             }
             if (rmFirst !== 'N/A') {
-                tagsHtml += `<div class="bg-black/40 border border-white/20 px-[1.5vh] py-[0.5vh] rounded text-white/70 tracking-widest text-[1.1vh]">MGR // <span class="text-white ml-[0.5vh] font-bold">${rmFirst}</span></div>`;
+                tagsHtml += `<div class="bg-[#0A0D14]/80 border border-[#FFD700]/40 px-[1.5vh] py-[0.5vh] rounded-lg text-[#FFD700]/90 tracking-widest text-[1.2vh] shadow-[0_0_1.5vh_rgba(255,215,0,0.2)]">MGR // <span class="text-white ml-[0.5vh] font-bold">${rmFirst}</span></div>`;
             }
 
             return `
                 <div class="w-full h-full flex flex-col items-center justify-between text-center relative z-10 py-[0.5vh]">
                     
-                    <!-- ULTRA-SLIM LUXURY BADGE ("STICK" SHAPE WITH FLIGHT & COCONUT) -->
-                    <div class="w-full flex justify-center items-center mb-[1.5vh] relative z-20">
-                        <!-- Very subtle soft glow -->
-                        <div class="absolute w-[30vh] h-[3vh] bg-[#FFD700] blur-[1.5vh] opacity-20"></div>
+                    <!-- ABSOLUTE LUXURY BADGE (Scaled for safe view) -->
+                    <div class="w-full flex justify-center items-center mb-[1.5vh] relative z-30 shrink-0">
+                        <div class="absolute w-[35vh] h-[4vh] bg-[#FFD700] blur-[2vh] opacity-60 animate-pulse"></div>
                         
-                        <!-- Slim "Stick" Pill -->
-                        <div class="relative bg-[#0A0D14]/90 backdrop-blur-md border border-[#FFD700]/30 px-[3.5vh] py-[1vh] rounded-full flex items-center gap-[1.5vh] shadow-[0_1vh_2vh_rgba(0,0,0,0.6)] overflow-hidden animate-[float-badge_5s_ease-in-out_infinite]">
-                            <!-- Delicate light sweep -->
-                            <div class="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#FFFFFF]/10 to-transparent animate-[shimmer-sweep_4s_infinite]"></div>
-                            
-                            <span class="text-[2.2vh] relative z-10 drop-shadow-[0_0_0.5vh_rgba(255,215,0,0.5)]">✈️</span>
-                            
-                            <!-- Smaller, sleek luxury typography -->
-                            <span class="relative z-10 font-sans font-semibold text-[#FFD700] text-[2vh] tracking-[0.25em] uppercase drop-shadow-sm">
-                                NEXT STOP: GOA
+                        <div class="relative bg-gradient-to-r from-[#FFD700]/80 via-[#FFF8DC] to-[#FFD700]/80 backdrop-blur-xl border-[0.3vh] border-[#FFD700] px-[3vh] py-[1vh] rounded-full flex items-center gap-[1.5vh] shadow-[0_1vh_3vh_rgba(255,215,0,0.6),_inset_0_0_1vh_rgba(255,255,255,0.8)] overflow-hidden animate-[float-badge_4s_ease-in-out_infinite]">
+                            <div class="absolute inset-0 w-[200%] bg-gradient-to-r from-transparent via-[#FFFFFF]/80 to-transparent animate-[shimmer-sweep_2.5s_infinite]"></div>
+                            <span class="text-[2.5vh] relative z-10 drop-shadow-[0_0_1vh_rgba(255,215,0,1)]">🏆</span>
+                            <span class="relative z-10 font-sans font-black text-[#040812] text-[2.2vh] tracking-[0.2em] uppercase drop-shadow-[0_0.2vh_0.5vh_rgba(255,255,255,0.8)]">
+                                GOA TRIP SECURED
                             </span>
-                            
-                            <span class="text-[2.2vh] relative z-10 drop-shadow-[0_0_0.5vh_rgba(255,215,0,0.5)]">🥥</span>
+                            <span class="text-[2.5vh] relative z-10 drop-shadow-[0_0_1vh_rgba(255,215,0,1)]">🌴</span>
                         </div>
                     </div>
 
-                    <!-- AVATAR (CLEAN LUXURY ORBITS - SCALED DOWN FOR TV HEIGHT) -->
-                    <div class="relative w-[28vh] h-[28vh] mb-[1.5vh] flex-shrink-0 flex items-center justify-center animate-[float-badge_5s_ease-in-out_infinite_0.5s]">
-                        <!-- Subtle core glow -->
-                        <div class="absolute inset-[1.5vh] bg-[#FFD700] blur-[2.5vh] opacity-20"></div>
+                    <!-- MASSIVE LUXURY AVATAR (Reduced from 34vh to 26vh to prevent overflow) -->
+                    <div class="relative w-[30vh] h-[30vh] mb-[1vh] shrink-0 flex items-center justify-center animate-[float-badge_6s_ease-in-out_infinite_0.5s]">
+                        <!-- Floating Crown 👑 -->
+                        <div class="absolute -top-[3.5vh] z-40 text-[5vh] drop-shadow-[0_1vh_2vh_rgba(255,215,0,1)] animate-bounce" style="animation-duration: 2s;">👑</div>
                         
-                        <!-- Crisp Sci-Fi / Luxury Orbits -->
-                        <div class="gold-ring-outer"></div>
-                        <div class="gold-ring-inner"></div>
+                        <div class="absolute inset-[0vh] bg-[#FFD700] blur-[3vh] opacity-40 rounded-full"></div>
+                        <div class="absolute inset-[-3vh] bg-gradient-to-br from-[#FFD700]/30 to-transparent blur-[2vh] rounded-full animate-spin-slow"></div>
+                        
+                        <!-- Amplified Sci-Fi / Luxury Orbits -->
+                        <div class="gold-ring-outer" style="inset: -2vh; border-width: 0.3vh;"></div>
+                        <div class="gold-ring-inner" style="inset: -0.6vh; border-width: 0.4vh;"></div>
                         
                         <!-- The Avatar Core -->
-                        <div class="w-[25vh] h-[25vh] bg-[#06080F] rounded-full overflow-hidden relative z-10 border-[0.3vh] border-[#1A1A1A] shadow-[0_1vh_3vh_rgba(0,0,0,0.9)]">
+                        <div class="w-[26vh] h-[26vh] bg-[#06080F] rounded-full overflow-hidden relative z-10 border-[0.5vh] border-[#FFD700] shadow-[0_2vh_4vh_rgba(0,0,0,0.9),_inset_0_0_3vh_rgba(255,215,0,0.6)]">
                             ${photoHtml}
                         </div>
                     </div>
 
-                    <!-- NAME & TAGS -->
-                    <div class="flex flex-col items-center w-full mb-[1.5vh]">
-                        <!-- Professional Crisp Typography (Reduced size for safe zones) -->
-                        <h2 class="font-sans text-white text-[4vh] font-black uppercase tracking-wide leading-tight px-[2vh] break-words whitespace-normal drop-shadow-lg text-shadow-sm">
+                    <!-- AMPLIFIED NAME & TAGS -->
+                    <div class="flex flex-col items-center w-full mb-[1vh] shrink-0">
+                        <h2 class="font-sans text-transparent bg-clip-text bg-gradient-to-b from-white to-[#FFD700] text-[4vh] font-black uppercase tracking-wide leading-tight px-[2vh] break-words whitespace-normal drop-shadow-[0_0.5vh_1vh_rgba(255,215,0,0.6)]">
                             ${employee.name}
                         </h2>
-                        <div class="font-mono flex items-center justify-center gap-[1vh] mt-[1vh] w-full">
+                        <div class="font-mono flex items-center justify-center gap-[1.5vh] mt-[1vh] w-full">
                             ${tagsHtml}
                         </div>
                     </div>
 
                     <!-- ANIMATED FLIGHT VECTOR & REVENUE PANEL -->
-                    <div class="w-full flex-1 flex flex-col justify-end mx-auto">
+                    <div class="w-full flex-1 flex flex-col justify-end mx-auto min-h-0">
                         
                         <!-- Real-time Flight Path -->
                         <div class="flex items-end justify-between w-full mb-[1vh] px-[1vh]">
                             <div class="flex flex-col items-start leading-none shrink-0">
-                                <span class="font-mono text-[1vh] tracking-[0.2em] text-white/50 font-bold mb-[0.6vh]">DEPART</span>
+                                <span class="font-mono text-[1vh] tracking-[0.2em] text-white/60 font-bold mb-[0.5vh]">DEPART</span>
                                 <span class="font-sans text-[2vh] font-black text-white tracking-wider">OFFICE</span>
                             </div>
                             
-                            <!-- Animated Plane Path -->
                             <div class="flex-1 mx-[2vh] relative h-[2vh] flex items-center">
-                                <div class="absolute w-full border-t-[0.2vh] border-dashed border-[#FFD700]/30"></div>
-                                
-                                <!-- The Flying Plane -->
+                                <div class="absolute w-full border-t-[0.3vh] border-dashed border-[#FFD700]/40"></div>
                                 <div class="absolute w-full h-full">
-                                    <div class="animate-flight flex items-center text-[#FFD700]">
+                                    <div class="animate-flight flex items-center text-[#FFD700] scale-110">
                                         <svg class="w-[3vh] h-[3vh] transform rotate-45 drop-shadow-[0_0_1.5vh_rgba(255,215,0,1)]" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="flex flex-col items-end leading-none shrink-0">
-                                <span class="font-mono text-[1vh] tracking-[0.2em] text-[#FFD700]/80 font-bold mb-[0.6vh]">ARRIVE</span>
-                                <span class="font-sans text-[2vh] font-black text-[#FFD700] tracking-wider drop-shadow-[0_0_1vh_rgba(255,215,0,0.4)]">GOA</span>
+                                <span class="font-mono text-[1vh] tracking-[0.2em] text-[#FFD700] font-bold mb-[0.5vh]">ARRIVE</span>
+                                <span class="font-sans text-[2vh] font-black text-[#FFD700] tracking-wider drop-shadow-[0_0_1vh_rgba(255,215,0,0.8)]">GOA</span>
                             </div>
                         </div>
 
-                        <!-- REVENUE PANEL (Sleek dark obsidian glass - tightened padding) -->
-                        <div class="w-full bg-[#030408]/90 backdrop-blur-xl py-[1.5vh] px-[2.5vh] rounded-[1.5vh] border border-white/10 shadow-[inset_0_1vh_3vh_rgba(0,0,0,0.8)] flex items-center justify-between">
-                            <span class="font-mono text-[1.2vh] text-white/50 tracking-[0.2em] uppercase shrink-0 text-left">CAMPAIGN<br>REVENUE</span>
+                        <!-- REVENUE PANEL -->
+                        <div class="w-full shrink-0 bg-gradient-to-r from-[#101520] via-[#05070A] to-[#101520] backdrop-blur-3xl py-[1.5vh] px-[2.5vh] rounded-[1.5vh] border-[0.2vh] border-[#FFD700]/40 shadow-[0_1.5vh_3vh_rgba(0,0,0,0.8),_inset_0_0_2vh_rgba(255,215,0,0.15)] flex items-center justify-between relative overflow-hidden">
+                            <div class="absolute top-0 left-0 right-0 h-[0.2vh] bg-gradient-to-r from-transparent via-[#FFD700] to-transparent opacity-60"></div>
                             
-                            <div class="flex items-baseline justify-end flex-1 whitespace-nowrap pl-[1vh]">
-                                <span class="font-mono hero-rev numeric-counter text-white text-[4.5vh] leading-none drop-shadow-[0_0_2vh_rgba(255,255,255,0.3)]" data-target-value="${employee.sales}">
-                                    <span class="currency-symbol text-[#FFD700] text-[2.5vh] mr-[0.5vh]">₹</span>0
+                            <span class="font-mono text-[1.2vh] text-[#FFD700]/70 tracking-[0.2em] uppercase shrink-0 text-left font-bold z-10">TOTAL<br>REVENUE</span>
+                            
+                            <div class="flex items-baseline justify-end flex-1 whitespace-nowrap pl-[1vh] z-10">
+                                <span class="font-mono hero-rev numeric-counter text-white text-[4.5vh] font-black leading-none drop-shadow-[0_0_2vh_rgba(255,215,0,0.4)]" data-target-value="${employee.sales}">
+                                    <span class="currency-symbol text-[#FFD700] text-[2.5vh] mr-[0.5vh] font-normal">₹</span>0
                                 </span>
                             </div>
                         </div>
@@ -596,11 +590,12 @@
             let rankColor, glowColor, borderGlow;
             if (rank === 2) { rankColor = "#E0E0E0"; glowColor = "rgba(224, 224, 224, 0.8)"; borderGlow = "border-[#E0E0E0]/50"; }      // Silver
             else if (rank === 3) { rankColor = "#FF8A65"; glowColor = "rgba(255, 138, 101, 0.8)"; borderGlow = "border-[#FF8A65]/50"; }   // Bronze
-            else { rankColor = "#00B0FF"; glowColor = "rgba(0, 176, 255, 0.8)"; borderGlow = "border-[#00B0FF]/40"; }                              // Cyber Blue for 4 & 5
+            else { rankColor = "#00B0FF"; glowColor = "rgba(0, 176, 255, 0.8)"; borderGlow = "border-[#00B0FF]/40"; }                    // Cyber Blue for 4 & 5
 
+            // Reduced Avatar sizes to give more breathing room
             const photoHtml = employee.photo 
-                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[4vh] font-sans font-medium&quot;>${initial}</div>';">`
-                : `<div class="w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[4vh] font-sans font-medium">${initial}</div>`;
+                ? `<img src="${employee.photo}" class="avatar-img rounded-full" onerror="this.onerror=null; this.outerHTML='<div class=&quot;w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[3vh] font-sans font-medium&quot;>${initial}</div>';">`
+                : `<div class="w-full h-full bg-[#1C2433] rounded-full flex items-center justify-center text-white/30 text-[3vh] font-sans font-medium">${initial}</div>`;
 
             const tlFirst = employee.tl.split(/\s+/)[0] || 'N/A';
             const rmFirst = employee.rm.split(/\s+/)[0] || 'N/A';
@@ -615,7 +610,6 @@
                 
             const fillPercentage = Math.max(2, (employee.sales / maxSalesBenchmark) * 100);
 
-            // NEW: Fun, sportive messages to replace "CHASING #1"
             let sportiveMessage = "";
             let sportiveIcon = "";
             if (rank === 2) { sportiveMessage = "ALMOST THERE!"; sportiveIcon = "🔥"; }
@@ -625,46 +619,42 @@
             return `
                 <div class="flex-1 w-full list-row flex flex-col justify-center anim-fade-up px-[2vh] border-l-[0.5vh] ${borderGlow} shadow-[0_1vh_2vh_rgba(0,0,0,0.5)]" style="animation-delay: ${(rank-1) * 0.15}s; border-left-color: ${rankColor};">
                     
-                    <div class="flex items-center justify-between w-full h-full py-[0.5vh] relative z-10">
+                    <div class="flex items-center justify-between w-full h-full py-[0.2vh] relative z-10">
                         
-                        <!-- Rank, Avatar & Name (Left Aligned - tighter gaps for TV) -->
-                        <div class="flex items-center gap-[2vh] min-w-0 flex-1">
+                        <div class="flex items-center gap-[1.5vh] min-w-0 flex-1">
+                            <!-- Slightly smaller Rank -->
+                            <div class="font-mono text-[3.5vh] font-black w-[4vh] shrink-0 text-center drop-shadow-[0_0_1vh_${glowColor}]" style="color: ${rankColor};">#${rank}</div>
                             
-                            <!-- RESTORED: Rank Number -->
-                            <div class="font-mono text-[4vh] font-black w-[5vh] shrink-0 text-center drop-shadow-[0_0_1.5vh_${glowColor}]" style="color: ${rankColor};">#${rank}</div>
-                            
-                            <!-- MADE PERFECTLY ROUND & SLIGHTLY SMALLER: Circular Avatar -->
-                            <div class="w-[12vh] h-[12vh] shrink-0 p-[0.3vh] rounded-full shadow-[0_0_2vh_${glowColor.replace('0.8', '0.2')}]" style="background-color: ${rankColor};">
+                            <!-- Slightly smaller Avatar (9vh down from 12vh) -->
+                            <div class="w-[9vh] h-[9vh] shrink-0 p-[0.3vh] rounded-full shadow-[0_0_1.5vh_${glowColor.replace('0.8', '0.2')}]" style="background-color: ${rankColor};">
                                 <div class="w-full h-full bg-[#06080F] rounded-full overflow-hidden">
                                     ${photoHtml}
                                 </div>
                             </div>
                             
                             <!-- Info Column -->
-                            <div class="flex flex-col min-w-0 pr-[1vh] gap-[0.5vh]">
-                                <h3 class="font-sans list-name name-glow-list text-white leading-tight break-words whitespace-normal">${employee.name}</h3>
-                                <div class="font-mono text-[1.1vh] tracking-wider flex items-center flex-wrap uppercase gap-[0.5vh]">
+                            <div class="flex flex-col min-w-0 pr-[1vh] gap-[0.2vh]">
+                                <h3 class="font-sans text-[2.5vh] font-semibold name-glow-list text-white leading-tight break-words whitespace-normal">${employee.name}</h3>
+                                <div class="font-mono text-[1vh] tracking-wider flex items-center flex-wrap uppercase gap-[0.5vh]">
                                     ${listTagsHtml}
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Revenue & Target (Right Aligned - protected from overflow) -->
+                        <!-- Revenue & Target -->
                         <div class="flex flex-col items-end justify-center shrink-0 pl-[1vh] whitespace-nowrap">
                             <div class="flex items-center gap-[1vh] mb-[0.5vh]">
-                                <div class="font-mono list-rev numeric-counter text-white drop-shadow-[0_0_1vh_rgba(255,255,255,0.3)]" data-target-value="${employee.sales}">
+                                <div class="font-mono text-[3.5vh] font-bold numeric-counter text-white drop-shadow-[0_0_1vh_rgba(255,255,255,0.3)]" data-target-value="${employee.sales}">
                                     <span class="currency-symbol text-white/40">₹</span>0
                                 </div>
                             </div>
-                            <!-- Fun, Sportive Tag (Replaces Chasing #1) -->
-                            <div class="bg-white/5 border border-white/10 px-[1.2vh] py-[0.3vh] rounded-full shadow-sm flex items-center gap-[0.8vh]">
-                                <span class="animate-pulse text-[1.5vh]">${sportiveIcon}</span>
+                            <div class="bg-white/5 border border-white/10 px-[1vh] py-[0.2vh] rounded-full shadow-sm flex items-center gap-[0.8vh]">
+                                <span class="animate-pulse text-[1.2vh]">${sportiveIcon}</span>
                                 <span class="font-sans text-[1vh] tracking-[0.1em] uppercase font-bold" style="color: ${rankColor};">${sportiveMessage}</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Volume Bar Track (Laser effect) -->
                     <div class="volume-track bg-white/5">
                         <div class="volume-fill shadow-[0_0_1.5vh_${glowColor}]" style="width: 0%; background-color: ${rankColor};" data-target-width="${fillPercentage}%"></div>
                     </div>
